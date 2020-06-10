@@ -55,7 +55,7 @@ namespace Bacchus
             FenetrePrinciaple.ListSousFamilles1 = SsListFamille;
             FenetrePrinciaple.ListMarques1 = listMarques;
             FenetrePrinciaple.ListArticles1 = listArticles;
-            //Console.WriteLine(ListeSousFamilles[i].Nom1);
+            //Console.WriteLine(Leslie);
 
             Application.Run(FenetrePrinciaple);
 
