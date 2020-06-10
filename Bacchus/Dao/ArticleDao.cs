@@ -10,7 +10,7 @@ namespace Bacchus.Dao
 {
     public class ArticleDao
     {
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
 
         public int AjouterArticle(String RefArticle, String Description, String RefSousFamille, String RefMarque, float Prix)
         {
