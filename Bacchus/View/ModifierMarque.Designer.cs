@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textMarque = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -46,11 +46,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(241, 70);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 36);
-            this.textBox1.TabIndex = 15;
+            this.textMarque.Location = new System.Drawing.Point(241, 70);
+            this.textMarque.Multiline = true;
+            this.textMarque.Name = "textBox1";
+            this.textMarque.Size = new System.Drawing.Size(170, 36);
+            this.textMarque.TabIndex = 15;
             // 
             // label1
             // 
@@ -63,11 +63,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(181, 165);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(230, 36);
-            this.textBox2.TabIndex = 17;
+            this.textNom.Location = new System.Drawing.Point(181, 165);
+            this.textNom.Multiline = true;
+            this.textNom.Name = "textBox2";
+            this.textNom.Size = new System.Drawing.Size(230, 36);
+            this.textNom.TabIndex = 17;
             // 
             // button1
             // 
@@ -77,7 +77,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "Modifier";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.bouttonModifier_Click);
             // 
             // ModifierMarque
             // 
@@ -85,23 +85,24 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 299);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textMarque);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierMarque";
             this.Text = "ModifierMarque";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textMarque;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;
     }
 }

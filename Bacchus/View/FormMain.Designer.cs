@@ -171,21 +171,21 @@
             this.ajouterToolStripMenuItem.Name = "ajouterToolStripMenuItem";
             this.ajouterToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.ajouterToolStripMenuItem.Text = "Ajouter";
-            this.ajouterToolStripMenuItem.Click += new System.EventHandler(this.ajouterToolStripMenuItem_Click);
+            this.ajouterToolStripMenuItem.Click += new System.EventHandler(this.ArticleAjouter_Click);
             // 
             // modifierToolStripMenuItem
             // 
             this.modifierToolStripMenuItem.Name = "modifierToolStripMenuItem";
             this.modifierToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.modifierToolStripMenuItem.Text = "Modifier";
-            this.modifierToolStripMenuItem.Click += new System.EventHandler(this.modifierToolStripMenuItem_Click);
+            this.modifierToolStripMenuItem.Click += new System.EventHandler(this.ArticleModifier_Click);
             // 
             // supprimerToolStripMenuItem
             // 
             this.supprimerToolStripMenuItem.Name = "supprimerToolStripMenuItem";
             this.supprimerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.supprimerToolStripMenuItem.Text = "Supprimer";
-            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.supprimerToolStripMenuItem_Click);
+            this.supprimerToolStripMenuItem.Click += new System.EventHandler(this.ArticleSupprimer_Click);
             // 
             // familleToolStripMenuItem
             // 
@@ -202,21 +202,21 @@
             this.ajouterToolStripMenuItem1.Name = "ajouterToolStripMenuItem1";
             this.ajouterToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.ajouterToolStripMenuItem1.Text = "Ajouter";
-            this.ajouterToolStripMenuItem1.Click += new System.EventHandler(this.ajouterToolStripMenuItem1_Click);
+            this.ajouterToolStripMenuItem1.Click += new System.EventHandler(this.FamilleAjouter_Click);
             // 
             // modifierToolStripMenuItem1
             // 
             this.modifierToolStripMenuItem1.Name = "modifierToolStripMenuItem1";
             this.modifierToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.modifierToolStripMenuItem1.Text = "Modifier";
-            this.modifierToolStripMenuItem1.Click += new System.EventHandler(this.modifierToolStripMenuItem1_Click);
+            this.modifierToolStripMenuItem1.Click += new System.EventHandler(this.FamilleModifier_Click);
             // 
             // supprimerToolStripMenuItem1
             // 
             this.supprimerToolStripMenuItem1.Name = "supprimerToolStripMenuItem1";
             this.supprimerToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.supprimerToolStripMenuItem1.Text = "Supprimer";
-            this.supprimerToolStripMenuItem1.Click += new System.EventHandler(this.supprimerToolStripMenuItem1_Click);
+            this.supprimerToolStripMenuItem1.Click += new System.EventHandler(this.FamilleSupprimer_Click);
             // 
             // sousFamilleToolStripMenuItem
             // 
@@ -233,21 +233,21 @@
             this.ajouterToolStripMenuItem2.Name = "ajouterToolStripMenuItem2";
             this.ajouterToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.ajouterToolStripMenuItem2.Text = "Ajouter";
-            this.ajouterToolStripMenuItem2.Click += new System.EventHandler(this.ajouterToolStripMenuItem2_Click);
+            this.ajouterToolStripMenuItem2.Click += new System.EventHandler(this.SousFamilleAjouter_Click);
             // 
             // modifierToolStripMenuItem2
             // 
             this.modifierToolStripMenuItem2.Name = "modifierToolStripMenuItem2";
             this.modifierToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.modifierToolStripMenuItem2.Text = "Modifier";
-            this.modifierToolStripMenuItem2.Click += new System.EventHandler(this.modifierToolStripMenuItem2_Click);
+            this.modifierToolStripMenuItem2.Click += new System.EventHandler(this.SousFamilleModifier_Click);
             // 
             // supprimerToolStripMenuItem2
             // 
             this.supprimerToolStripMenuItem2.Name = "supprimerToolStripMenuItem2";
             this.supprimerToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
             this.supprimerToolStripMenuItem2.Text = "Supprimer";
-            this.supprimerToolStripMenuItem2.Click += new System.EventHandler(this.supprimerToolStripMenuItem2_Click);
+            this.supprimerToolStripMenuItem2.Click += new System.EventHandler(this.SousFamilleSupprimer_Click);
             // 
             // marqueToolStripMenuItem
             // 
@@ -264,21 +264,21 @@
             this.ajouterToolStripMenuItem3.Name = "ajouterToolStripMenuItem3";
             this.ajouterToolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
             this.ajouterToolStripMenuItem3.Text = "Ajouter";
-            this.ajouterToolStripMenuItem3.Click += new System.EventHandler(this.ajouterToolStripMenuItem3_Click);
+            this.ajouterToolStripMenuItem3.Click += new System.EventHandler(this.MarqueAjouter_Click);
             // 
             // modifierToolStripMenuItem3
             // 
             this.modifierToolStripMenuItem3.Name = "modifierToolStripMenuItem3";
             this.modifierToolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
             this.modifierToolStripMenuItem3.Text = "Modifier";
-            this.modifierToolStripMenuItem3.Click += new System.EventHandler(this.modifierToolStripMenuItem3_Click);
+            this.modifierToolStripMenuItem3.Click += new System.EventHandler(this.MarqueModifier_Click);
             // 
             // supprimerToolStripMenuItem3
             // 
             this.supprimerToolStripMenuItem3.Name = "supprimerToolStripMenuItem3";
             this.supprimerToolStripMenuItem3.Size = new System.Drawing.Size(216, 26);
             this.supprimerToolStripMenuItem3.Text = "Supprimer";
-            this.supprimerToolStripMenuItem3.Click += new System.EventHandler(this.supprimerToolStripMenuItem3_Click);
+            this.supprimerToolStripMenuItem3.Click += new System.EventHandler(this.MarqueSupprimer_Click);
             // 
             // FormMain
             // 

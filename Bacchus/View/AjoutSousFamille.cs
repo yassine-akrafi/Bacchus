@@ -11,18 +11,31 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe de la vue d'ajout de sous famille
+    /// </summary>
     public partial class AjoutSousFamille : Form
     {
+        /// <summary>
+        /// Listes des familles dans la base de données
+        /// </summary>
         private List<Famille> ListFamilles1;
+
+        /// <summary>
+        /// Constructeur par défaut de la classe AjoutSousFamille
+        /// </summary>
         public AjoutSousFamille()
         {
             InitializeComponent();
+
+            // On recupere toutes les familles de la base de données
             FamilleDAO DaoFamille = new FamilleDAO();
             this.ListFamilles1 = DaoFamille.GetFamilles();
 
+            //On ajoute dans le comboBox la liste des familles
             foreach (Famille famille in ListFamilles1)
             {
-                this.comboBox2.Items.Add(famille.Nom1);
+                this.comboBoxFamille.Items.Add(famille.Nom1);
 
             }
         }
@@ -32,16 +45,25 @@ namespace Bacchus.View
            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void boutonAjout_Click(object sender, EventArgs e)
         {
+            //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             FamilleDAO DaoFamille = new FamilleDAO();
+
+            //On initialise la Reference de la famille
             int RefFamille = -1;
-            if (this.comboBox2.Text != null) {
-                 RefFamille = DaoFamille.GetRefFamille(this.comboBox2.Text);
+
+            //Si famille selectionnée dans le comboBox on affecte a RefFamille sa reference
+            if (this.comboBoxFamille.Text != null) {
+                 RefFamille = DaoFamille.GetRefFamille(this.comboBoxFamille.Text);
             }
-            string Nom = this.textBox2.Text;
-            if (Nom != "" && RefFamille!=-1)
+
+            //On recupere le nom de la sous famille à ajouter
+            string Nom = this.textNom.Text;
+
+            //Si parametre correcte on effectue l'ajout
+            if (Nom != "" && Nom != null && RefFamille!=-1)
             {
                 DaoSousFamille.AjouterSousFamille(RefFamille.ToString(), Nom);
             }

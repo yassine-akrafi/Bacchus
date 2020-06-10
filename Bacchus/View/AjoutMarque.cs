@@ -11,18 +11,29 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe de la vue d'ajout de marque
+    /// </summary>
     public partial class AjoutMarque : Form
     {
+        /// <summary>
+        /// Constructeur par défaut de la classe AjoutMarque
+        /// </summary>
         public AjoutMarque()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void boutonAjout_Click(object sender, EventArgs e)
         {
+            //On initialise le Dao
             MarqueDao DaoMarque = new MarqueDao();
+
+            //On recupere le nom de la marque a ajouter
             string Nom = this.textBox2.Text;
-            if (Nom != "")
+
+            //Si le nom existe on ajoute la marque
+            if (Nom != "" && Nom != null)
             {
                 DaoMarque.AjouterMarque(Nom);
             }

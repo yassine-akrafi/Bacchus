@@ -11,20 +11,32 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe de la vue de suppression de marque
+    /// </summary>
     public partial class SupprimerMarque : Form
     {
+        /// <summary>
+        /// Constructeur par défaut de la classe SupprimerMarque
+        /// </summary>
         public SupprimerMarque()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fonction appelé lorsque le bouton Supprimer est cliqué
+        /// </summary>
+        private void bouttonSuppriemr_Click(object sender, EventArgs e)
         {
+            //On initialise le Dao
             MarqueDao DaoMarque = new MarqueDao();
 
-            string Refmarque = this.textBox1.Text;
+            //On recupere la reference de la famille si elle existe
+            string Refmarque = this.textRefMarque.Text;
 
-            if (Refmarque != "")
+            //Si la reference d'une famille a été recuperé on effectue la suppression
+            if (Refmarque != "" && Refmarque!= null)
             {
                 DaoMarque.SupprimerMarque(Refmarque);
             }

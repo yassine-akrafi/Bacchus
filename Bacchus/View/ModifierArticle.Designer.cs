@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textRefArticle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.DescriptionText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxSousFamille = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxMarque = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textPrix = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -52,11 +52,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(247, 48);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 36);
-            this.textBox1.TabIndex = 12;
+            this.textRefArticle.Location = new System.Drawing.Point(247, 48);
+            this.textRefArticle.Multiline = true;
+            this.textRefArticle.Name = "textBox1";
+            this.textRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.textRefArticle.TabIndex = 12;
             // 
             // label1
             // 
@@ -86,11 +86,11 @@
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(237, 200);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(160, 24);
-            this.comboBox2.TabIndex = 16;
+            this.comboBoxSousFamille.FormattingEnabled = true;
+            this.comboBoxSousFamille.Location = new System.Drawing.Point(237, 200);
+            this.comboBoxSousFamille.Name = "comboBox2";
+            this.comboBoxSousFamille.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxSousFamille.TabIndex = 16;
             // 
             // label3
             // 
@@ -103,11 +103,11 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(247, 267);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 24);
-            this.comboBox1.TabIndex = 18;
+            this.comboBoxMarque.FormattingEnabled = true;
+            this.comboBoxMarque.Location = new System.Drawing.Point(247, 267);
+            this.comboBoxMarque.Name = "comboBox1";
+            this.comboBoxMarque.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxMarque.TabIndex = 18;
             // 
             // label4
             // 
@@ -120,11 +120,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(237, 328);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 36);
-            this.textBox2.TabIndex = 20;
+            this.textPrix.Location = new System.Drawing.Point(237, 328);
+            this.textPrix.Multiline = true;
+            this.textPrix.Name = "textBox2";
+            this.textPrix.Size = new System.Drawing.Size(170, 36);
+            this.textPrix.TabIndex = 20;
             // 
             // button1
             // 
@@ -134,7 +134,7 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Modifier";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.bouttonModifier_Click);
             // 
             // ModifierArticle
             // 
@@ -142,35 +142,36 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 472);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textPrix);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxMarque);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBoxSousFamille);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.DescriptionText);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textRefArticle);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierArticle";
             this.Text = "ModifierArticle";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textRefArticle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox DescriptionText;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxSousFamille;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxMarque;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textPrix;
         private System.Windows.Forms.Button button1;
     }
 }

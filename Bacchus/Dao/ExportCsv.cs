@@ -31,10 +31,10 @@ namespace Bacchus.Dao
         /// <summary>
         /// Cette fonction permet de faire l'export CSV
         /// </summary>
-        /// <param name="Path">Le chemin du dossier dans lequel on exporte les informations contenues dans la base de donne</param>
-        public void ExporterCsv(String Path)
+        /// <param name="Path">Le chemin du dossier dans lequel on exporte les informations contenues dans la base de données</param>
+        public int ExporterCsv(String Path)
         {
-            //On declare et initialise les dao
+            //On declare et initialise les Dao
             MarqueDao DaoMarque = new MarqueDao();
             FamilleDAO DaoFamille = new FamilleDAO();
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
@@ -44,23 +44,29 @@ namespace Bacchus.Dao
             List<Article> ListesArticles = new List<Article>();
             ListesArticles = DaoArticle.GetArticles();
 
+            //On ajoute la liste des articles au Format Csv
             List<ExportCsv> ListeAExporter = new List<ExportCsv>();
             foreach (Article article in ListesArticles)
             {
+                //On recupere l'article a importer
                 ExportCsv LigneAAjouter = new ExportCsv();
                 LigneAAjouter.Descritpion = article.Description1;
                 LigneAAjouter.Ref = article.RefArticle1;
                 LigneAAjouter.Marque = DaoMarque.GetMarque(article.RefMarque1).Nom1;
                 LigneAAjouter.Famille = DaoFamille.GetFamille(DaoSousFamille.GetSousFamille(article.RefSousFamille1).RefFamille1).Nom1;
                 LigneAAjouter.SousFamille = DaoSousFamille.GetSousFamille(article.RefSousFamille1).Nom1;
-                LigneAAjouter.Prix = ""+article.PrixHT1;
+                LigneAAjouter.Prix = article.PrixHT1.ToString();
 
+                //On ajoute L'article a importer
                 ListeAExporter.Add(LigneAAjouter);
             }
          
+            //Path de l'emplacement de la création de notre Csv
             String path = Path + "\\DonnesExporter.csv";
 
             WriteFile<ExportCsv>(path, ListeAExporter);
+
+            return 0;
 
         }
 
@@ -79,9 +85,7 @@ namespace Bacchus.Dao
             {
                 using (TextWriter tr = new StreamWriter(_path, true, Encoding.GetEncoding(1252)))
                 {
-
                     var csv = new CsvWriter(tr, CsvConf);
-
                     csv.WriteRecords(_ListeAExporter);
                 }
                 return false;

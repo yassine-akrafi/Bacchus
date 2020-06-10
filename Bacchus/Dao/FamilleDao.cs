@@ -18,7 +18,8 @@ namespace Bacchus.Dao
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        // private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        String Connexion = "Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
 
         /// <summary>
         /// Ajoute une famille à la base de données
@@ -31,32 +32,29 @@ namespace Bacchus.Dao
             // Si la famille existe on ne le crée pas
             if (GetRefFamille(Nom) != -1)
             {
-                Connexion.Close();
                 return -1;
             }
 
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
+            // On execute la commande Sql pour ajouter la famille à la base de données
+            String sql = "INSERT INTO Familles(Nom) Values('"+Nom+"')";
+            Console.Write("J'ajoute une famille avec les parametres "  + Nom);
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
             }
 
-            try
-            {
-                // On execute la commande Sql pour ajouter la famille à la base de données
-                SQLiteCommand CommandInsert = Connexion.CreateCommand();
-                CommandInsert.CommandText = "INSERT INTO Familles(Nom) Values(:Nom)";
-                CommandInsert.Parameters.Add(new SQLiteParameter(":Nom", Nom));
-                CommandInsert.ExecuteNonQuery();
-
-                Connexion.Close();
-                return 0;
-            }
-            catch (Exception)
-            {
-                Connexion.Close();
-                return -1;
-            }
+            return -1;
+          
         }
 
         /// <summary>
@@ -66,27 +64,24 @@ namespace Bacchus.Dao
         /// <returns>Retourne la famille</returns>
         public Famille GetFamille(int RefFamille)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
+            Famille Famille;
             // On met en place la commande Sql pour récuperer la famille
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Familles WHERE RefFamille = :RefFamille", Connexion);
-            Command.Parameters.AddWithValue(":RefFamille", RefFamille);
-
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on crée la famille à retourner et on la retourne
-            if (Reader.Read())
+            String sql = "SELECT * FROM Familles WHERE RefFamille = '" + RefFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Famille Famille = new Famille(Reader.GetInt32(0), Reader.GetString(1));
-                Connexion.Close();
-                return Famille;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            Famille = new Famille(rdr.GetInt32(0), rdr.GetString(1));
+                            return Famille;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
             return null;
         }
 
@@ -99,27 +94,23 @@ namespace Bacchus.Dao
         /// <returns>-1 si la famille existe, la reference de la famille sinon</returns>
         public int GetRefFamille(String Nom)
         {
-
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
             // On met en place la commande Sql pour récuperer la famille 
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefFamille FROM Familles WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
+            String sql = "SELECT RefFamille FROM Familles WHERE Nom ='" + Nom + "'";
 
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on retourne la reference de la famille
-            if (Reader.Read())
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                int Ref = Reader.GetInt32(0);
-                Reader.Close();
-                Connexion.Close();
-                return Ref;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            int Ref = rdr.GetInt32(0);
+                            return Ref;
+                        }
+                    }
+                }
             }
             return -1;
         }
@@ -131,28 +122,33 @@ namespace Bacchus.Dao
         /// <returns>Une liste de famille</returns>
         public List<Famille> GetFamilles()
         {
-
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
+            List<Famille> ListeFamille = new List<Famille>();
 
             // On met en place la commande Sql pour récuperer toutes les familles 
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Familles", Connexion);
-
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On crée une listes de familles et on lui ajoute toutes les familles recupérés à partir de la commande sql
-            List<Famille> ListeFamille = new List<Famille>();
-            while (Reader.Read())
+            String sql = "SELECT * FROM Familles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                ListeFamille.Add(new Famille(Reader.GetInt32(0), Reader.GetString(1)));
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                       if(rdr.Read())
+                        {
+                            ListeFamille.Add(new Famille(rdr.GetInt32(0), rdr.GetString(1)));
+                            while (rdr.Read())
+                            {
+                                ListeFamille.Add(new Famille(rdr.GetInt32(0), rdr.GetString(1)));
+                            }
+                            return ListeFamille;
+                        }
+                        else
+                        {
+                            return null;
+                        }                   
+                    }
+                }
             }
-
-            Connexion.Close();
-            return ListeFamille;
         }
 
         /// <summary>
@@ -162,34 +158,32 @@ namespace Bacchus.Dao
         /// <param name="RefFamille">Reference de la famille a supprimer</param>
         /// <returns>Retourne true si succés</returns>
         public Boolean SupprimerFamille(string RefFamille)
-        {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
+        { 
 
             // On verfie si la famille n'existe pas 
-            if (GetFamille(int.Parse(RefFamille)) == null)
+            if (RefFamille == null || GetFamille(int.Parse(RefFamille)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
             // On execute la commande Sql pour supprimer l'article de la base de données
-            SQLiteCommand Command = new SQLiteCommand("DELETE FROM Familles WHERE RefFamille = :RefFamille", Connexion);
-            Command.Parameters.AddWithValue(":RefFamille", RefFamille);
-            Command.ExecuteNonQuery();
+            String sql = "DELETE FROM Familles WHERE RefFamille ='" + RefFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             // Si l'article n'existe plus, on retourne vrai
             if (GetFamille(int.Parse(RefFamille)) == null)
             {
-                Connexion.Close();
                 return true;
             }
             else
             {
-                Connexion.Close();
                 return false;
             }
         }
@@ -202,34 +196,29 @@ namespace Bacchus.Dao
         /// <returns>Retourne true si succés</returns>
         public Boolean ModifierFamille(string RefFamille, string Nom)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
 
             // On verfie si la famille n'existe pas 
-            if (GetFamille(int.Parse(RefFamille)) == null)
+            if (RefFamille == null || GetFamille(int.Parse(RefFamille)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
             // Si un nom est passé en paramètre on modifie le nom de la famille
             if (Nom != null)
             {
-                SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Nom = :Nom WHERE RefFamille = :RefFamille", Connexion);
-                Command.Parameters.AddWithValue(":RefFamille", RefFamille);
-                Command.Parameters.AddWithValue(":Nom", Nom);
-                Command.ExecuteNonQuery();
+                String sql = "UPDATE Familles SET Nom ='" + Nom + "' WHERE RefFamille ='" + RefFamille + "'";
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
-
-            Connexion.Close();
-            return true;
-            
+            return true;   
         }
 
     }
-
 
 }

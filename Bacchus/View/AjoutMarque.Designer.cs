@@ -58,7 +58,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.boutonAjout_Click);
             // 
             // AjoutMarque
             // 
@@ -72,6 +72,7 @@
             this.Text = "AjoutMarque";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

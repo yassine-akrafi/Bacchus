@@ -32,6 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button2 = new System.Windows.Forms.Button();
+            this.Status_Label = new System.Windows.Forms.Label();
+            this.textStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -42,7 +44,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Sélectionner un dossier";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.button1.Click += new System.EventHandler(this.SelectionDossier_Click);
             // 
             // label1
             // 
@@ -55,26 +57,45 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(37, 181);
+            this.progressBar1.Location = new System.Drawing.Point(88, 189);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(301, 26);
             this.progressBar1.TabIndex = 4;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(246, 142);
+            this.button2.Location = new System.Drawing.Point(191, 134);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 33);
             this.button2.TabIndex = 5;
             this.button2.Text = "Exporter";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Exporter_Click);
+            // 
+            // Status_Label
+            // 
+            this.Status_Label.AutoSize = true;
+            this.Status_Label.Location = new System.Drawing.Point(207, 218);
+            this.Status_Label.Name = "Status_Label";
+            this.Status_Label.Size = new System.Drawing.Size(48, 17);
+            this.Status_Label.TabIndex = 8;
+            this.Status_Label.Text = "Status";
+            // 
+            // textStatus
+            // 
+            this.textStatus.Location = new System.Drawing.Point(102, 248);
+            this.textStatus.Multiline = true;
+            this.textStatus.Name = "textStatus";
+            this.textStatus.Size = new System.Drawing.Size(255, 112);
+            this.textStatus.TabIndex = 9;
             // 
             // FormExporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 241);
+            this.ClientSize = new System.Drawing.Size(486, 386);
+            this.Controls.Add(this.textStatus);
+            this.Controls.Add(this.Status_Label);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
@@ -94,5 +115,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label Status_Label;
+        private System.Windows.Forms.TextBox textStatus;
     }
 }

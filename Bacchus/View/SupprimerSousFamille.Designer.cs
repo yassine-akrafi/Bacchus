@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textRefSousFamille = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(275, 108);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(170, 36);
-            this.textBox1.TabIndex = 13;
+            this.textRefSousFamille.Location = new System.Drawing.Point(275, 108);
+            this.textRefSousFamille.Multiline = true;
+            this.textRefSousFamille.Name = "textBox1";
+            this.textRefSousFamille.Size = new System.Drawing.Size(170, 36);
+            this.textRefSousFamille.TabIndex = 13;
             // 
             // button1
             // 
@@ -58,7 +58,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "Supprimer";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.bouttonSupprimer_Click);
             // 
             // SupprimerSousFamille
             // 
@@ -66,19 +66,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 309);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textRefSousFamille);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerSousFamille";
             this.Text = "SupprimerSousFamille";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textRefSousFamille;
         private System.Windows.Forms.Button button1;
     }
 }
