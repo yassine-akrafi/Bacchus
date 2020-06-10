@@ -65,32 +65,50 @@ namespace Bacchus.View
             ArticleDao DaoArticle = new ArticleDao();
 
             //On initialise la Reference de la sous famille et de la marque 
-            int RefSousFamille = -1;
-            int RefMarque = -1;
+            Boolean Executer = true;
+
 
             //Si sous famille existe on affecte a RefSousFamille sa reference
-            if (this.comboBoxSousFamille.Text != null)
+            if (this.comboBoxSousFamille.SelectedItem == null)
             {
-                RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBoxSousFamille.Text);
-            }
-            //Si marque existe on affecte a RefMarque sa reference
-            if (this.comboBoxMarque.Text != null)
-            {
-                RefMarque = DaoMarque.GetRefMarque(this.comboBoxMarque.Text);
+                Executer = false;
             }
 
+
+
+            //Si marque existe on affecte a RefMarque sa reference
+            if (this.comboBoxMarque.SelectedItem == null)
+            {
+                Executer = false;
+            }
+
+
+
             string RefArticle = this.textRefArticle.Text;
+            if (RefArticle == "" || RefArticle == null)
+            {
+                Executer = false;
+            }
+
+
             string Prix = this.textPrix.Text;
-            string Description = this.DescriptionText.Text;
+            if (Prix == "" || Prix == null)
+            {
+                Executer = false;
+            }
+
+                string Description = this.DescriptionText.Text;
             if(Description == "" || Description == null)
             {
                 Description = "Sans Description";
             }
-            
+
+            Console.WriteLine("voila ce qu'il y a dans la combobox : " + this.comboBoxSousFamille.SelectedItem + " et " + this.comboBoxSousFamille.SelectedItem.ToString());
+
             //Si parametre correcte on effectue l'ajout
-            if (RefArticle != "" && Prix!="" && RefSousFamille != -1 && RefMarque!=-1)
+            if (Executer == true)
             {
-                DaoArticle.AjouterArticle(RefArticle, Description, RefSousFamille.ToString(), RefMarque.ToString(), float.Parse(Prix));
+                DaoArticle.AjouterArticle(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));
             }
         }
 

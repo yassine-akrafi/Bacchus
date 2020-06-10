@@ -132,7 +132,7 @@ namespace Bacchus.Dao
 
             // On met en place la commande Sql pour récuperer la sous famille 
             String sql = "SELECT RefSousFamille FROM SousFamilles WHERE Nom = '" + Nom + "'";
-
+            Console.WriteLine("Commande Sql suivante effectuer :" + sql);
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
@@ -145,10 +145,14 @@ namespace Bacchus.Dao
                             int Ref = rdr.GetInt32(0);
                             return Ref;
                         }
+                        else
+                        {
+                            return -1;
+                        }
                     }
                 }
             }
-            return -1;
+            
         }
 
         /// <summary>

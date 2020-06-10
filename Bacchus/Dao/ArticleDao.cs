@@ -148,7 +148,10 @@ namespace Bacchus.Dao
                        
                         while (rdr.Read())
                         {
-                            ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), float.Parse(rdr.GetString(4)), rdr.GetInt32(5)));
+                            float Prix = float.Parse(rdr.GetString(4));
+
+
+                            ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
                             NombreArticles++;
                         }
                         
