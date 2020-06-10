@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Cette classe permet de faire l'import CSV
+    /// </summary>
     public class ImportCsv
     {
+        /// <summary>
+        /// Cette fonction permet d'importer 
+        /// </summary>
+        /// <param name="Line">Correspond à la ligne à importer</param>
         public void ImporterLigneCsv(String Line)
         {
+            //Initialise la connexion à la bdd
             SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
             Connexion.Open();
 
+            
             String Description;
             String Ref;
             String Marque;
@@ -21,6 +30,7 @@ namespace Bacchus.Dao
             String SousFamille;
             String Prix;
             int Index1;
+
             if (Line != null)
             {
                 Index1 = Line.IndexOf(';');
@@ -45,26 +55,27 @@ namespace Bacchus.Dao
                 Line = Line.Substring(Index1 + 1);
                 Prix = Line;
 
-
+                // On ajoute la marque à la base de donnees
                 MarqueDao DaoMarque = new MarqueDao();
-                FamilleDAO DaoFamille = new FamilleDAO();
-                SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
-                ArticleDao DaoArticle = new ArticleDao();
-
-                
-                DaoFamille.AjouterFamille(Famille);
                 DaoMarque.AjouterMarque(Marque);
-                DaoSousFamille.AjouterSousFamille(Famille,SousFamille);
+
+                // On ajoute la famille à la base de donnees
+                FamilleDAO DaoFamille = new FamilleDAO();
+                DaoFamille.AjouterFamille(Famille);
+
+                // On ajoute la sous-famille à la base de donnees
+                SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
+                DaoSousFamille.AjouterSousFamille(Famille, SousFamille);
+
+                // On ajoute l'article à la base de donnees
+                ArticleDao DaoArticle = new ArticleDao();   
                 DaoArticle.AjouterArticle(Ref, Description, SousFamille, Marque, float.Parse(Prix));
 
-                Console.WriteLine("Famille = "+Famille + " Marque = "+Marque + " Article = "+Ref+" SousFamille = "+SousFamille);
 
             }
 
 
-            Console.WriteLine("Je suis dans import avant close");
             Connexion.Close();
-            Console.WriteLine("Je suis dans import apres close");
         }
     }
 }

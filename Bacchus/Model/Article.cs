@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Classe permet de creer un article
+    /// </summary>
+    /// 
     public class Article
     {
         /// <summary>
@@ -39,7 +43,7 @@ namespace Bacchus
         private int Quantite;
 
         /// <summary>
-        /// Cette fonction permet d'initialiser un article
+        /// Constructeur de Confort de l'article
         /// </summary>
         /// <param name="RefArticle"> La reference de l'article </param>
         /// <param name="Description">La description de l'article </param>
