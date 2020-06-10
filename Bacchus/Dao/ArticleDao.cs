@@ -18,7 +18,7 @@ namespace Bacchus.Dao
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
 
         /// <summary>
         /// Ajoute un article dans la base de données, 
@@ -82,9 +82,9 @@ namespace Bacchus.Dao
         /// Récupere la reference d'un article à partir de son nom,
         /// retourne -1 si l'article n'existe pas, 0 sinon
         /// </summary>
-        /// <param name="Nom">Nom de l'article</param>
+        /// <param name="Description">Description de l'article</param>
         /// <returns></returns>
-        public int GetRefArticle(String Nom)
+        public int GetRefArticle(String Description)
         {
             // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
             if ((ConnectionState.Closed == Connexion.State))
@@ -93,8 +93,8 @@ namespace Bacchus.Dao
             }
 
             // On met en place la commande Sql pour récuperer l'article 
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefArticle FROM Articles WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
+            SQLiteCommand Command = new SQLiteCommand("SELECT RefArticle FROM Articles WHERE Description = :Description", Connexion);
+            Command.Parameters.AddWithValue(":Description", Description);
 
             // On execute et recupere le résultat de la commande Sql dans un lecteur
             SQLiteDataReader Reader = Command.ExecuteReader();
