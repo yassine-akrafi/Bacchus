@@ -32,7 +32,7 @@ namespace Bacchus.Dao
             ArticleDao DaoArticle = new ArticleDao();
 
             List<Article> ListesArticles = new List<Article>();
-            ListesArticles = DaoArticle.TrouverArticles();
+            ListesArticles = DaoArticle.GetArticles();
 
             List<ExportCsv> ListeAExporter = new List<ExportCsv>();
             foreach (Article article in ListesArticles)
