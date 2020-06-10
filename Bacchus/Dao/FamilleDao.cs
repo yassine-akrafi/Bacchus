@@ -25,10 +25,10 @@ namespace Bacchus.Dao
         /// retourne 0 si succés, -1 echec
         /// </summary>
         /// <param name="Nom">Nom de la famille</param>
-        /// <returns></returns>
+        /// <returns>retourne 0 si succés, -1 echec</returns>
         public int AjouterFamille(String Nom)
         {
-            // // Si la famille existe on ne le crée pas
+            // Si la famille existe on ne le crée pas
             if (GetRefFamille(Nom) != -1)
             {
                 Connexion.Close();
@@ -41,19 +41,26 @@ namespace Bacchus.Dao
                 Connexion.Open();
             }
 
-            // On execute la commande Sql pour ajouter la famille à la base de données
-            SQLiteCommand CommandInsert = Connexion.CreateCommand();
-            CommandInsert.CommandText = "INSERT INTO Familles(Nom) Values(:Nom)";
-            CommandInsert.Parameters.Add(new SQLiteParameter(":Nom", Nom));
-            CommandInsert.ExecuteNonQuery();
+            try
+            {
+                // On execute la commande Sql pour ajouter la famille à la base de données
+                SQLiteCommand CommandInsert = Connexion.CreateCommand();
+                CommandInsert.CommandText = "INSERT INTO Familles(Nom) Values(:Nom)";
+                CommandInsert.Parameters.Add(new SQLiteParameter(":Nom", Nom));
+                CommandInsert.ExecuteNonQuery();
 
-            Connexion.Close();
-            return 0;
-
+                Connexion.Close();
+                return 0;
+            }
+            catch (Exception)
+            {
+                Connexion.Close();
+                return -1;
+            }
         }
 
         /// <summary>
-        /// Récupere la famille à partir du nom ,null si la famille n'existe pas
+        /// Récupere la famille à partir de sa reference ,null si la famille n'existe pas
         /// </summary>
         /// <param name="RefFamille">Reference de la famille</param>
         /// <returns>Retourne la famille</returns>
@@ -72,7 +79,7 @@ namespace Bacchus.Dao
             // On execute et recupere le résultat de la commande Sql dans un lecteur
             SQLiteDataReader Reader = Command.ExecuteReader();
 
-            // On vérifie que le résultat existe, si oui on crée la famille à retourner
+            // On vérifie que le résultat existe, si oui on crée la famille à retourner et on la retourne
             if (Reader.Read())
             {
                 Famille Famille = new Famille(Reader.GetInt32(0), Reader.GetString(1));
@@ -86,10 +93,10 @@ namespace Bacchus.Dao
 
         /// <summary>
         /// Récupere la reference d'une famille à partir de son nom,
-        /// retourne -1 si l'article n'existe pas
+        /// retourne -1 si la famille n'existe pas
         /// </summary>
         /// <param name="Nom">Nom de la famille</param>
-        /// <returns>-1 si l'article existe, la reference de la famille sinon</returns>
+        /// <returns>-1 si la famille existe, la reference de la famille sinon</returns>
         public int GetRefFamille(String Nom)
         {
 
@@ -153,7 +160,7 @@ namespace Bacchus.Dao
         /// retroune vrai si la famille existe et a été supprimé
         /// </summary>
         /// <param name="RefFamille">Reference de la famille a supprimer</param>
-        /// <returns></returns>
+        /// <returns>Retourne true si succés</returns>
         public Boolean SupprimerFamille(string RefFamille)
         {
             // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
@@ -192,7 +199,7 @@ namespace Bacchus.Dao
         /// </summary>
         /// <param name="RefFamille">Reference de la famille</param>
         /// <param name="Nom">Nom de la famille</param>
-        /// <returns></returns>
+        /// <returns>Retourne true si succés</returns>
         public Boolean ModifierFamille(string RefFamille, string Nom)
         {
             // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article

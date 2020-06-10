@@ -32,11 +32,11 @@ namespace Bacchus.View
             {
                 if (this.comboBox2.Text != null)
                 {
-                    RefSousFamille = DaoSousFamille.TrouverParNom(this.comboBox2.Text);
+                    RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBox2.Text);
                 }
                 if (this.comboBox1.Text != null)
                 {
-                    RefMarque = DaoMarque.TrouverParNom(this.comboBox1.Text);
+                    RefMarque = DaoMarque.GetRefMarque(this.comboBox1.Text);
                 }
 
                 DaoArticle.ModifierArticle(RefArticle, Description, RefSousFamille, RefMarque, float.Parse(Prix));

@@ -40,9 +40,9 @@ namespace Bacchus.Dao
                 ExportCsv LigneAAjouter = new ExportCsv();
                 LigneAAjouter.Descritpion = article.Description1;
                 LigneAAjouter.Ref = article.RefArticle1;
-                LigneAAjouter.Marque = DaoMarque.TrouverParId(article.RefMarque1).Nom1;
-                LigneAAjouter.Famille = DaoFamille.GetFamille(DaoSousFamille.TrouverParId(article.RefSousFamille1).RefFamille1).Nom1;
-                LigneAAjouter.SousFamille = DaoSousFamille.TrouverParId(article.RefSousFamille1).Nom1;
+                LigneAAjouter.Marque = DaoMarque.GetMarque(article.RefMarque1).Nom1;
+                LigneAAjouter.Famille = DaoFamille.GetFamille(DaoSousFamille.GetSousFamille(article.RefSousFamille1).RefFamille1).Nom1;
+                LigneAAjouter.SousFamille = DaoSousFamille.GetSousFamille(article.RefSousFamille1).Nom1;
                 LigneAAjouter.Prix = ""+article.PrixHT1;
 
                 ListeAExporter.Add(LigneAAjouter);

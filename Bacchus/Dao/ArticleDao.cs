@@ -49,24 +49,33 @@ namespace Bacchus.Dao
 
                 // On recupere la reference de la sous famille de l'article à partir du nom
                 SousFamilleDAO SousDaoFamille = new SousFamilleDAO();
-                int ReferenceSousFamille = SousDaoFamille.TrouverParNom(NomSousFamille);
+                int ReferenceSousFamille = SousDaoFamille.GetRefSousFamille(NomSousFamille);
 
                 // On recupere la reference de la marque de l'article à partir du nom
                 MarqueDao DaoMarque = new MarqueDao();
-                int ReferenceMarque = DaoMarque.TrouverParNom(NomMarque);
+                int ReferenceMarque = DaoMarque.GetRefMarque(NomMarque);
 
-                // On execute la commande Sql pour ajouter l'article à la base de données
-                SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
-                CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
-                CommandInsert.Parameters.AddWithValue(":Description", Description);
-                CommandInsert.Parameters.AddWithValue(":RefSousFamille", ReferenceSousFamille);
-                CommandInsert.Parameters.AddWithValue(":RefMarque", ReferenceMarque);
-                CommandInsert.Parameters.AddWithValue(":PrixHT", Prix);
-                CommandInsert.ExecuteNonQuery();
+                try
+                {
+                    // On execute la commande Sql pour ajouter l'article à la base de données
+                    SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
+                    CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
+                    CommandInsert.Parameters.AddWithValue(":Description", Description);
+                    CommandInsert.Parameters.AddWithValue(":RefSousFamille", ReferenceSousFamille);
+                    CommandInsert.Parameters.AddWithValue(":RefMarque", ReferenceMarque);
+                    CommandInsert.Parameters.AddWithValue(":PrixHT", Prix);
+                    CommandInsert.ExecuteNonQuery();
+
+                    Connexion.Close();
+                    return 0;
+                }
+                catch (Exception)
+                {
+                    Connexion.Close();
+                    return -1;
+                }
 
             }
-            Connexion.Close();
-            return 0;
         }
 
         /// <summary>
