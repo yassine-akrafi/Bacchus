@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Classe permet de creer une famille
+    /// </summary>
+    /// 
     public class Famille
     {
         /// <summary>
@@ -19,7 +23,7 @@ namespace Bacchus
         private String Nom;
 
         /// <summary>
-        /// Cette fonction permet d'initialiser une famille
+        /// Constructeur de Confort d'une famille
         /// </summary>
         /// <param name="RefFamille">La reference d'une famille</param>
         /// <param name="Nom">Le nom d'une famille</param>

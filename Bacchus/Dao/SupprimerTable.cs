@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Classe permet de supprimer les tables
+    /// </summary>
+    /// 
     public class SupprimerTable
     {
-
+        /// <summary>
+        /// Cette fonction permet de supprimer toutes les tables
+        /// </summary>
         public void SupprimerToutesTable()
         {
             SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");

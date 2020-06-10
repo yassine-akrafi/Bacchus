@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Classe permet de creer une sous-famille
+    /// </summary>
+    /// 
     public class SousFamille
     {
         /// <summary>
@@ -24,7 +28,7 @@ namespace Bacchus
         private String Nom;
 
         /// <summary>
-        /// Cette fonction permet d'initialiser une sous-famille avec la reference d'une famille et le nom de la sous-famille
+        /// Constructeur de confort d'une sous-famille avec la reference d'une famille et le nom de la sous-famille
         /// </summary>
         /// <param name="RefFamille">La reference d'une famille</param>
         /// <param name="Nom">Le nom d'une sous-famille</param>
@@ -35,7 +39,7 @@ namespace Bacchus
         }
 
         /// <summary>
-        /// Cette fonction permet d'initialiser une sous-famille avec la reference d'une sous-famille, la reference de la famille et le nom de la sous-famille
+        /// Constructeur de confort d'une sous-famille avec la reference d'une sous-famille, la reference de la famille et le nom de la sous-famille
         /// </summary>
         /// <param name="RefSousFamille">La reference d'une sous-famille</param>
         /// <param name="RefFamille">La reference de la famille </param>

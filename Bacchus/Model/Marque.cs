@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Classe permet de creer une marque
+    /// </summary>
+    /// 
     public class Marque
     {
         /// <summary>
@@ -19,7 +23,7 @@ namespace Bacchus
         private String Nom;
 
         /// <summary>
-        /// Cette fonction permet d'initialiser une marque
+        /// Constructeur de confort d'une marque
         /// </summary>
         /// <param name="RefMarque">La reference d'une marque</param>
         /// <param name="Nom">Le nom d'une marque</param>
