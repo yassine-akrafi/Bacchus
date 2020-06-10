@@ -21,7 +21,8 @@ namespace Bacchus.Dao
         private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
 
         /// <summary>
-        /// Ajoute un article dans la base de données
+        /// Ajoute un article dans la base de données, 
+        /// retourne 0 si succés, -1 echec
         /// </summary>
         /// <param name="RefArticle">Reference de l'article</param>
         /// <param name="Description">Description de l'article</param>
@@ -36,7 +37,7 @@ namespace Bacchus.Dao
             if (GetRefArticle(RefArticle) != -1)
             {
                 Connexion.Close();
-                return 0;
+                return -1;
             }
             else
             {
@@ -54,7 +55,7 @@ namespace Bacchus.Dao
                 MarqueDao DaoMarque = new MarqueDao();
                 int ReferenceMarque = DaoMarque.TrouverParNom(NomMarque);
 
-                // On execute la commande Sql pour ajouter l'article à la Base de données
+                // On execute la commande Sql pour ajouter l'article à la base de données
                 SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
                 CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
                 CommandInsert.Parameters.AddWithValue(":Description", Description);
@@ -65,7 +66,7 @@ namespace Bacchus.Dao
 
             }
             Connexion.Close();
-            return 1;
+            return 0;
         }
 
         /// <summary>
@@ -192,13 +193,16 @@ namespace Bacchus.Dao
                 Connexion.Close();
                 return true;
             }
-            Connexion.Close();
-            return false;
+            else
+            {
+                Connexion.Close();
+                return false;
+            }
         }
 
 
         /// <summary>
-        /// Modifie un article de la base de données
+        /// Modifie un article dans la base de données
         /// </summary>
         /// <param name="RefArticle">Reference de l'article</param>
         /// <param name="Description">Description de l'article</param>

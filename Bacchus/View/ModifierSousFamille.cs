@@ -29,7 +29,7 @@ namespace Bacchus.View
             {
                 if (this.comboBox2.Text != null)
                 {
-                    RefFamille = DaoFamille.TrouverParNom(this.comboBox2.Text);
+                    RefFamille = DaoFamille.GetRefFamille(this.comboBox2.Text);
                 }
 
                 DaoSousFamille.ModifierSousFamille(RefSousFamille, Nom, RefFamille);
