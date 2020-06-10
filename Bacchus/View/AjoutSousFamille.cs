@@ -18,7 +18,7 @@ namespace Bacchus.View
         {
             InitializeComponent();
             FamilleDAO DaoFamille = new FamilleDAO();
-            this.ListFamilles1 = DaoFamille.TrouverFamille();
+            this.ListFamilles1 = DaoFamille.GetFamilles();
 
             foreach (Famille famille in ListFamilles1)
             {
@@ -38,7 +38,7 @@ namespace Bacchus.View
             FamilleDAO DaoFamille = new FamilleDAO();
             int RefFamille = -1;
             if (this.comboBox2.Text != null) {
-                 RefFamille = DaoFamille.TrouverParNom(this.comboBox2.Text);
+                 RefFamille = DaoFamille.GetRefFamille(this.comboBox2.Text);
             }
             string Nom = this.textBox2.Text;
             if (Nom != "" && RefFamille!=-1)

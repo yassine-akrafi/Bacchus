@@ -37,7 +37,7 @@ namespace Bacchus.Dao
                     }
                     FamilleDAO DaoFamille = new FamilleDAO();
 
-                    int Famille = DaoFamille.TrouverParNom(RefFamille);
+                    int Famille = DaoFamille.GetRefFamille(RefFamille);
 
                     SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO SousFamilles (RefFamille, Nom) VALUES (:RefFamille, :Nom)", Connexion);
                     CommandInsert.Parameters.AddWithValue(":RefFamille", Famille);

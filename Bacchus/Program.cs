@@ -43,7 +43,7 @@ namespace Bacchus
             listMarques = DaoMarque.TrouverMarques();
 
             FamilleDAO DaoFamille = new FamilleDAO();
-            listFamille = DaoFamille.TrouverFamille();
+            listFamille = DaoFamille.GetFamilles();
 
            SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             SsListFamille = DaoSousFamille.TrouverSousFamilles();
