@@ -19,7 +19,7 @@ namespace Bacchus.Dao
         public void ImporterLigneCsv(String Line)
         {
             //Initialise la connexion à la bdd
-            SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+            SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
             Connexion.Open();
 
             

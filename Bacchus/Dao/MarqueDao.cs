@@ -15,7 +15,7 @@ namespace Bacchus.Dao
         public int AjouterMarque(String Nom)
         {
             SQLiteConnection.ClearAllPools();
-            Console.WriteLine("Je suis dans Ajouter Marque avec le nom = "+Nom );
+            Console.WriteLine("Je suis dans Ajouter Marque avec le nom = " + Nom);
             if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
             {
                 Connexion.Open();
@@ -39,13 +39,13 @@ namespace Bacchus.Dao
                 Connexion.Close();
                 return 0;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return 1;
             }
         }
 
-       
+
         public Boolean SupprimerMarque(string RefMarque)
         {
             if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
@@ -104,9 +104,9 @@ namespace Bacchus.Dao
             SQLiteDataReader Reader = Command.ExecuteReader();
             if (Reader.Read())
             {
-                
+
                 Ref = Reader.GetInt32(0);
-                
+
             }
             Reader.Close();
             Connexion.Close();
@@ -158,3 +158,4 @@ namespace Bacchus.Dao
 
         }
     }
+}
