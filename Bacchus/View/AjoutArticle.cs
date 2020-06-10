@@ -20,8 +20,8 @@ namespace Bacchus.View
             InitializeComponent();
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             MarqueDao DaoMarque = new MarqueDao();
-            this.ListSousFamilles1 = DaoSousFamille.TrouverSousFamilles();
-            this.ListMarques1 = DaoMarque.TrouverMarques();
+            this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+            this.ListMarques1 = DaoMarque.GetArticles();
             foreach (SousFamille Sousfamille in ListSousFamilles1)
             {
                 this.comboBox2.Items.Add(Sousfamille.Nom1);
@@ -48,11 +48,11 @@ namespace Bacchus.View
             int RefMarque = -1;
             if (this.comboBox2.Text != null)
             {
-                RefSousFamille = DaoSousFamille.TrouverParNom(this.comboBox2.Text);
+                RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBox2.Text);
             }
             if (this.comboBox1.Text != null)
             {
-                RefMarque = DaoMarque.TrouverParNom(this.comboBox1.Text);
+                RefMarque = DaoMarque.GetRefMarque(this.comboBox1.Text);
             }
             string RefArticle = this.textBox1.Text;
             string Description = this.DescriptionText.Text;

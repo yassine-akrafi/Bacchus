@@ -87,8 +87,8 @@ namespace Bacchus
             ArticleDao DaoArticle = new ArticleDao();
 
             this.ListFamilles1 = DaoFamille.GetFamilles();
-            this.ListSousFamilles1 = DaoSousFamille.TrouverSousFamilles();
-            this.ListMarques1 = DaoMarque.TrouverMarques();
+            this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+            this.ListMarques1 = DaoMarque.GetArticles();
             this.ListArticles1 = DaoArticle.GetArticles();
         }
 
