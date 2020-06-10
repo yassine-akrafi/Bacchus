@@ -53,19 +53,6 @@ namespace Bacchus.Dao
             return Ref;
         }
 
-        public void ModifierSousFamille(int Id, SousFamille SousFamille)
-        {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-            SQLiteCommand Command = new SQLiteCommand("UPDATE SousFamilles SET RefFamille = :RefFamille, Nom = :Nom WHERE RefSousFamille = :RefSousFamille", Connexion);
-            Command.Parameters.AddWithValue(":RefFamille", SousFamille.RefFamille1);
-            Command.Parameters.AddWithValue(":Nom", SousFamille.Nom1);
-            Command.Parameters.AddWithValue(":RefSousFamille", Id);
-            Command.ExecuteNonQuery();
-            Connexion.Close();
-        }
 
         public Boolean SupprimerSousFamille(string RefSousFamille)
         {
@@ -123,12 +110,12 @@ namespace Bacchus.Dao
             SQLiteDataReader Reader = Command.ExecuteReader();
             if (Reader.Read())
             {
-                
+
                 int Ref = Reader.GetInt32(0);
                 Reader.Close();
                 Connexion.Close();
                 return Ref;
-                
+
             }
             Connexion.Close();
             return -1;
@@ -149,6 +136,45 @@ namespace Bacchus.Dao
             }
             Connexion.Close();
             return ListeSousFamille;
+        }
+
+        public Boolean ModifierSousFamille(string RefSousFamille, string Nom, int RefFamille)
+        {
+            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            {
+                Connexion.Open();
+            }
+            if (TrouverParNom(RefSousFamille) != -1)
+            {
+                Connexion.Close();
+                return false;
+            }
+            else
+            {
+                if (Nom != null)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Nom = :Nom WHERE RefSousFamille = :RefSousFamille", Connexion);
+                    Command.Parameters.AddWithValue(":RefMarque", RefSousFamille);
+                    Command.Parameters.AddWithValue(":Nom", Nom);
+                    Command.ExecuteNonQuery();
+                }
+                if (RefFamille != -1)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET RefFamille = :RefFamille WHERE RefSousFamille = :RefSousFamille", Connexion);
+                    Command.Parameters.AddWithValue(":RefSousFamille", RefSousFamille);
+                    Command.Parameters.AddWithValue(":RefFamille", RefFamille);
+                    Command.ExecuteNonQuery();
+                }
+
+                if (TrouverParNom(RefSousFamille) != -1)
+                {
+                    Connexion.Close();
+                    return true;
+                }
+                Connexion.Close();
+                return false;
+            }
+
         }
     }
 }

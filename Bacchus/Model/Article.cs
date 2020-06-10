@@ -8,13 +8,27 @@ namespace Bacchus
 {
     public class Article
     {
+        /// <summary>
+        /// je te regale!
+        /// </summary>
         private String RefArticle;
+
+
         private String Description;
         private int RefSousFamille;
         private int RefMarque;
         private float PrixHT;
         private int Quantite;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RefArticle"> </param>
+        /// <param name="Description"></param>
+        /// <param name="RefSousFamille"></param>
+        /// <param name="RefMarque"></param>
+        /// <param name="PrixHT"></param>
+        /// <param name="Quantite"></param>
         public Article(String RefArticle, String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
         {
             this.RefArticle = RefArticle;

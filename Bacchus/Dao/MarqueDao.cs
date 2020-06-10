@@ -45,25 +45,7 @@ namespace Bacchus.Dao
             }
         }
 
-        public void ModifierMarque(int Id, Marque Marque)
-        {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
-            int SfIfExists = TrouverParNom(Marque.Nom1);
-            if (SfIfExists != -1)
-            {
-                SQLiteCommand Command = new SQLiteCommand("UPDATE Marques SET Nom = :Nom WHERE RefMarque = :RefMarque", Connexion);
-                Command.Parameters.AddWithValue(":Nom", Marque.Nom1);
-                Command.Parameters.AddWithValue(":RefMarque", Id);
-                Command.ExecuteNonQuery();
-                Connexion.Close();
-            }
-            Connexion.Close();
-        }
-
+       
         public Boolean SupprimerMarque(string RefMarque)
         {
             if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
@@ -147,5 +129,32 @@ namespace Bacchus.Dao
             Connexion.Close();
             return ListeMarque;
         }
+
+        public Boolean ModifierMarque(string RefMarque, string Nom)
+        {
+            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            {
+                Connexion.Open();
+            }
+            if (TrouverParNom(RefMarque) != -1)
+            {
+                Connexion.Close();
+                return false;
+            }
+            else
+            {
+                SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Nom = :Nom WHERE RefMarque = :RefMarque", Connexion);
+                Command.Parameters.AddWithValue(":RefMarque", RefMarque);
+                Command.Parameters.AddWithValue(":Nom", Nom);
+                Command.ExecuteNonQuery();
+                if (TrouverParNom(RefMarque) != -1)
+                {
+                    Connexion.Close();
+                    return true;
+                }
+                Connexion.Close();
+                return false;
+            }
+
+        }
     }
-}

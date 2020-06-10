@@ -31,7 +31,7 @@
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.File_Name_TextBox = new System.Windows.Forms.TextBox();
+            this.DescriptionText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,13 +67,13 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Description";
             // 
-            // File_Name_TextBox
+            // DescriptionText
             // 
-            this.File_Name_TextBox.Location = new System.Drawing.Point(182, 109);
-            this.File_Name_TextBox.Multiline = true;
-            this.File_Name_TextBox.Name = "File_Name_TextBox";
-            this.File_Name_TextBox.Size = new System.Drawing.Size(235, 60);
-            this.File_Name_TextBox.TabIndex = 14;
+            this.DescriptionText.Location = new System.Drawing.Point(182, 109);
+            this.DescriptionText.Multiline = true;
+            this.DescriptionText.Name = "DescriptionText";
+            this.DescriptionText.Size = new System.Drawing.Size(235, 60);
+            this.DescriptionText.TabIndex = 14;
             // 
             // label2
             // 
@@ -148,7 +148,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.File_Name_TextBox);
+            this.Controls.Add(this.DescriptionText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Nom_Fichier_Label);
@@ -164,7 +164,7 @@
         private System.Windows.Forms.Label Nom_Fichier_Label;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox File_Name_TextBox;
+        private System.Windows.Forms.TextBox DescriptionText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;

@@ -38,14 +38,14 @@ namespace Bacchus.Dao
                 int SousFamille = SousDaoFamille.TrouverParNom(RefSousFamille);
                 int Marque = DaoMarque.TrouverParNom(RefMarque);
 
-                    SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
-                    CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
-                    CommandInsert.Parameters.AddWithValue(":Description", Description);
-                    CommandInsert.Parameters.AddWithValue(":RefSousFamille", SousFamille);
-                    CommandInsert.Parameters.AddWithValue(":RefMarque", Marque);
-                    CommandInsert.Parameters.AddWithValue(":PrixHT", Prix);
-                    CommandInsert.ExecuteNonQuery();
-             
+                SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
+                CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
+                CommandInsert.Parameters.AddWithValue(":Description", Description);
+                CommandInsert.Parameters.AddWithValue(":RefSousFamille", SousFamille);
+                CommandInsert.Parameters.AddWithValue(":RefMarque", Marque);
+                CommandInsert.Parameters.AddWithValue(":PrixHT", Prix);
+                CommandInsert.ExecuteNonQuery();
+
             }
             Connexion.Close();
             return 1;
@@ -131,6 +131,54 @@ namespace Bacchus.Dao
                 return false;
             }
 
+        }
+
+        public Boolean ModifierArticle(String RefArticle, String Description, int RefSousFamille, int RefMarque, float Prix)
+        {
+            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            {
+                Connexion.Open();
+            }
+            if (TrouverParNom(RefArticle) != -1)
+            {
+                Connexion.Close();
+                return false;
+            }
+            else
+            {
+                if (Description != null)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Description = :Description WHERE RefArticle = :RefArticle", Connexion);
+                    Command.Parameters.AddWithValue(":RefArticle", RefArticle);
+                    Command.Parameters.AddWithValue(":Description", Description);
+                    Command.ExecuteNonQuery();
+                }
+                if (RefSousFamille != -1)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET RefSousFamille = :RefSousFamille WHERE RefArticle = :RefArticle", Connexion);
+                    Command.Parameters.AddWithValue(":RefArticle", RefArticle);
+                    Command.Parameters.AddWithValue(":RefSousFamille", RefSousFamille);
+                    Command.ExecuteNonQuery();
+                }
+                if (RefMarque != -1)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET RefMarque = :RefMarque WHERE RefArticle = :RefArticle", Connexion);
+                    Command.Parameters.AddWithValue(":RefArticle", RefArticle);
+                    Command.Parameters.AddWithValue(":RefMarque", RefMarque);
+                    Command.ExecuteNonQuery();
+                }
+                if (Prix != -1)
+                {
+                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET PrixHT = :Prix WHERE RefArticle = :RefArticle", Connexion);
+                    Command.Parameters.AddWithValue(":RefArticle", RefArticle);
+                    Command.Parameters.AddWithValue(":Prix", Prix);
+                    Command.ExecuteNonQuery();
+                }
+
+
+                Connexion.Close();
+                return true;
+            }
         }
     }
 }

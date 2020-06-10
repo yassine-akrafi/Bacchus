@@ -114,6 +114,33 @@ namespace Bacchus.Dao
             }
         }
 
+        public Boolean ModifierFamille(string RefFamille, string Nom)
+        {
+            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            {
+                Connexion.Open();
+            }
+            if (TrouverParNom(RefFamille) != -1)
+            {
+                Connexion.Close();
+                return false;
+            }
+            else
+            {
+                SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Nom = :Nom WHERE RefFamille = :RefFamille", Connexion);
+                Command.Parameters.AddWithValue(":RefFamille", RefFamille);
+                Command.Parameters.AddWithValue(":Nom", Nom);
+                Command.ExecuteNonQuery();
+                if (TrouverParNom(RefFamille) != -1)
+                {
+                    Connexion.Close();
+                    return true;
+                }
+                Connexion.Close();
+                return false;
+            }
+        }
+
     }
 
 

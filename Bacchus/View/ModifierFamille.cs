@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.Dao;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,17 @@ namespace Bacchus.View
         public ModifierFamille()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FamilleDAO DaoFamille = new FamilleDAO();
+            string RefFamille = this.textBox1.Text;
+            string Nom = this.textBox2.Text;
+            if (RefFamille != null )
+            {
+                DaoFamille.ModifierFamille(RefFamille, Nom);
+            }
         }
     }
 }

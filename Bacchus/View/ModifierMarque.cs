@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.Dao;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,17 @@ namespace Bacchus.View
         public ModifierMarque()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MarqueDao DaoMarque = new MarqueDao();
+            string RefMarque = this.textBox1.Text;
+            string Nom = this.textBox2.Text;
+            if (RefMarque != null)
+            {
+                DaoMarque.ModifierMarque(RefMarque, Nom);
+            }
         }
     }
 }
