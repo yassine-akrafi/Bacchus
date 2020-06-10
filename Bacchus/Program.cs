@@ -49,7 +49,7 @@ namespace Bacchus
             SsListFamille = DaoSousFamille.TrouverSousFamilles();
 
             ArticleDao DaoArticle = new ArticleDao();
-            listArticles = DaoArticle.TrouverArticles();
+            listArticles = DaoArticle.GetArticles();
 
             FenetrePrinciaple.ListFamilles1 = listFamille;
             FenetrePrinciaple.ListSousFamilles1 = SsListFamille;
