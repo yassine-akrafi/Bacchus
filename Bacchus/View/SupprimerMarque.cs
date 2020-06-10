@@ -29,10 +29,6 @@ namespace Bacchus.View
                 DaoMarque.SupprimerMarque(Refmarque);
             }
 
-            if (Refmarque != null)
-            {
-                DaoMarque.SupprimerMarque(Refmarque);
-            }
         }
     }
 }
