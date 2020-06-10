@@ -226,6 +226,7 @@ namespace Bacchus.Dao
                     Command.ExecuteNonQuery();
                 }
 
+            // Si une Reference de famille est passé en paramètre on modifie la famille de la sous famille
             if (RefFamille != -1)
                 {
                     SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET RefFamille = :RefFamille WHERE RefSousFamille = :RefSousFamille", Connexion);
