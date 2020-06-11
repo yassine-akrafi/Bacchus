@@ -19,7 +19,7 @@ namespace Bacchus.Dao
         public void SupprimerToutesTable()
         {
             //SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
-            String Connexion = "Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
+            String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
             //Suppression de la table familles
             String sql = "DELETE From Familles";
