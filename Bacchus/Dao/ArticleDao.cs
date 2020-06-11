@@ -149,11 +149,29 @@ namespace Bacchus.Dao
                        
                         while (rdr.Read())
                         {
-                            float Prix = float.Parse(rdr.GetString(4));
+ 
 
-
-                            ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
-                            NombreArticles++;
+                            try
+                            {
+                                float Prix = (float)rdr.GetFloat(4);
+                                ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                NombreArticles++;
+                            }
+                            catch(Exception)
+                            {
+                                try
+                                {
+                                    float Prix = (float)rdr.GetInt32(4);
+                                    ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                    NombreArticles++;
+                                }
+                                catch (Exception)
+                                {
+                                    float Prix = float.Parse(rdr.GetString(4));
+                                    ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                    NombreArticles++;
+                                }
+                            }
                         }
                         
                     }
