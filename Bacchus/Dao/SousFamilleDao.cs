@@ -9,15 +9,16 @@ using System.Data;
 namespace Bacchus.Dao
 {
 
-    //**************A enleverrrrrr
-    //**************A enleverrrrrr
-    //**************A enleverrrrrr
+ 
 
     /// <summary>
     /// Classe permettant l'accés au données des Sous familles
     /// </summary>
     public class SousFamilleDAO
     {
+        //**************A enleverrrrrr
+        //**************A enleverrrrrr
+        //**************A enleverrrrrr
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
