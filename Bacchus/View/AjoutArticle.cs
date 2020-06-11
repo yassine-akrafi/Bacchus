@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +63,6 @@ namespace Bacchus.View
             //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             MarqueDao DaoMarque = new MarqueDao();
-            ArticleDao DaoArticle = new ArticleDao();
 
             //On initialise la Reference de la sous famille et de la marque 
             Boolean Executer = true;
@@ -108,7 +108,8 @@ namespace Bacchus.View
             //Si parametre correcte on effectue l'ajout
             if (Executer == true)
             {
-                DaoArticle.AjouterArticle(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));
+                AjouterArticleConfirmation FenetreConfirmation = new AjouterArticleConfirmation(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));
+                FenetreConfirmation.ShowDialog(this);
             }
         }
 

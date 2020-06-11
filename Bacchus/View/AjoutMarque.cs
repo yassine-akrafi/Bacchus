@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,8 +27,6 @@ namespace Bacchus.View
 
         private void boutonAjout_Click(object sender, EventArgs e)
         {
-            //On initialise le Dao
-            MarqueDao DaoMarque = new MarqueDao();
 
             //On recupere le nom de la marque a ajouter
             string Nom = this.textBox2.Text;
@@ -35,7 +34,9 @@ namespace Bacchus.View
             //Si le nom existe on ajoute la marque
             if (Nom != "" && Nom != null)
             {
-                DaoMarque.AjouterMarque(Nom);
+
+                AjouterMarqueConfirmation FenetreConfirmation = new AjouterMarqueConfirmation(Nom);
+                FenetreConfirmation.ShowDialog(this);
             }
         }
     }
