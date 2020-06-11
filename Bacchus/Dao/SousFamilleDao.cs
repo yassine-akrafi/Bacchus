@@ -21,7 +21,7 @@ namespace Bacchus.Dao
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        String Connexion = "Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
+        String Connexion = "Data Source= Bacchus.SQLite";
         /// <summary>
         /// Ajoute une sous famille à la base de données
         /// retourne 0 si succés, -1 echec
