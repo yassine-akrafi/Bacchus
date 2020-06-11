@@ -50,7 +50,8 @@ namespace Bacchus.View
             int RefFamille = -1;
 
             //Si famille selectionnée dans le comboBox on affecte a RefFamille sa reference
-            if (this.comboBoxFamille.SelectedItem != null) {
+            if (this.comboBoxFamille.SelectedItem != null)
+            {
                  RefFamille = DaoFamille.GetRefFamille(this.comboBoxFamille.SelectedItem.ToString());
             }
 

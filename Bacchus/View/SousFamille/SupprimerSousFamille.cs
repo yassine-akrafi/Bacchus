@@ -25,12 +25,12 @@ namespace Bacchus.View
         {
             InitializeComponent();
         }
-
+        public TextBox TextRefSousFamille1 { get => this.TextRefSousFamille; set => this.TextRefSousFamille = value; }
         private void BouttonSupprimer_Click(object sender, EventArgs e)
         {
 
             //On recupere la reference de la sous famille si elle existe
-            string RefSousFamille = this.textRefSousFamille.Text;
+            string RefSousFamille = this.TextRefSousFamille.Text;
 
             //Si la reference d'une sous famille a été recuperé on effectue la suppression
             if (RefSousFamille != "" && RefSousFamille != null)

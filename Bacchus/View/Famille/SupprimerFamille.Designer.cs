@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textRefFamille = new System.Windows.Forms.TextBox();
+            this.TextRefFamille = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             // 
             // textRefFamille
             // 
-            this.textRefFamille.Location = new System.Drawing.Point(188, 79);
-            this.textRefFamille.Multiline = true;
-            this.textRefFamille.Name = "textRefFamille";
-            this.textRefFamille.Size = new System.Drawing.Size(199, 46);
-            this.textRefFamille.TabIndex = 14;
+            this.TextRefFamille.Location = new System.Drawing.Point(188, 79);
+            this.TextRefFamille.Multiline = true;
+            this.TextRefFamille.Name = "textRefFamille";
+            this.TextRefFamille.Size = new System.Drawing.Size(199, 46);
+            this.TextRefFamille.TabIndex = 14;
             // 
             // button1
             // 
@@ -66,7 +66,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 228);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textRefFamille);
+            this.Controls.Add(this.TextRefFamille);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerFamille";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -79,7 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textRefFamille;
+        private System.Windows.Forms.TextBox TextRefFamille;
         private System.Windows.Forms.Button button1;
     }
 }

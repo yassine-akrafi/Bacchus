@@ -25,13 +25,14 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox TextRefFamille1 { get => this.TextRefFamille; set => this.TextRefFamille = value; }
         /// <summary>
         /// Fonction appelé lorsque le bouton Supprimer est cliqué
         /// </summary>
         private void bouttonSupprimer_Click(object sender, EventArgs e)
         {
             //On recupere la reference de la famille si elle existe
-            string RefFamille = this.textRefFamille.Text;
+            string RefFamille = this.TextRefFamille.Text;
 
             //Si la reference d'une famille a été recuperé on effectue la suppression
             if (RefFamille != "" && RefFamille!=null)

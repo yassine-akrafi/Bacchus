@@ -25,6 +25,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox TextRefMarque1 { get => this.TextRefMarque; set => this.TextRefMarque = value; }
+
         /// <summary>
         /// Fonction appelé lorsque le bouton Supprimer est cliqué
         /// </summary>
@@ -32,7 +34,7 @@ namespace Bacchus.View
         {
 
             //On recupere la reference de la famille si elle existe
-            string RefMarque = this.textRefMarque.Text;
+            string RefMarque = this.TextRefMarque.Text;
 
             //Si la reference d'une famille a été recuperé on effectue la suppression
             if (RefMarque != "" && RefMarque != null)

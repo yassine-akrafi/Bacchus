@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textRefArticle = new System.Windows.Forms.TextBox();
+            this.TextRefArticle = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             // 
             // textRefArticle
             // 
-            this.textRefArticle.Location = new System.Drawing.Point(187, 69);
-            this.textRefArticle.Multiline = true;
-            this.textRefArticle.Name = "textRefArticle";
-            this.textRefArticle.Size = new System.Drawing.Size(170, 36);
-            this.textRefArticle.TabIndex = 12;
+            this.TextRefArticle.Location = new System.Drawing.Point(187, 69);
+            this.TextRefArticle.Multiline = true;
+            this.TextRefArticle.Name = "textRefArticle";
+            this.TextRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.TextRefArticle.TabIndex = 12;
             // 
             // button1
             // 
@@ -66,7 +66,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(401, 211);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textRefArticle);
+            this.Controls.Add(this.TextRefArticle);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -79,8 +79,8 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textRefArticle;
-        public System.Windows.Forms.TextBox RefArticle1 { get => textRefArticle; set => textRefArticle = value; }
+        private System.Windows.Forms.TextBox TextRefArticle;
+        public System.Windows.Forms.TextBox RefArticle1 { get => TextRefArticle; set => TextRefArticle = value; }
         private System.Windows.Forms.Button button1;
     }
 }

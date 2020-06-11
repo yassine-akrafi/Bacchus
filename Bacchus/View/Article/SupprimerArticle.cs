@@ -25,6 +25,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox TextRefArticle1 { get => this.TextRefArticle; set => this.TextRefArticle = value; }
+
         /// <summary>
         /// Fonction appelé lorsque le bouton Supprimer est cliqué
         /// </summary>
@@ -32,7 +34,7 @@ namespace Bacchus.View
         {
            
             //On recupere la reference de l'article si elle existe
-            string RefArticle = this.textRefArticle.Text;
+            string RefArticle = this.TextRefArticle.Text;
 
             //Si la reference d'un article a été recuperé on effectue la suppression
             if (RefArticle != "" && RefArticle != null)

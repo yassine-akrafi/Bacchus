@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textRefMarque = new System.Windows.Forms.TextBox();
+            this.TextRefMarque = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,11 +44,11 @@
             // 
             // textRefMarque
             // 
-            this.textRefMarque.Location = new System.Drawing.Point(201, 97);
-            this.textRefMarque.Multiline = true;
-            this.textRefMarque.Name = "textRefMarque";
-            this.textRefMarque.Size = new System.Drawing.Size(183, 36);
-            this.textRefMarque.TabIndex = 15;
+            this.TextRefMarque.Location = new System.Drawing.Point(201, 97);
+            this.TextRefMarque.Multiline = true;
+            this.TextRefMarque.Name = "textRefMarque";
+            this.TextRefMarque.Size = new System.Drawing.Size(183, 36);
+            this.TextRefMarque.TabIndex = 15;
             // 
             // button1
             // 
@@ -66,7 +66,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 253);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textRefMarque);
+            this.Controls.Add(this.TextRefMarque);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerMarque";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -79,7 +79,7 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textRefMarque;
+        private System.Windows.Forms.TextBox TextRefMarque;
         private System.Windows.Forms.Button button1;
     }
 }

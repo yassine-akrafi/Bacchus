@@ -17,12 +17,29 @@ namespace Bacchus.View
     /// </summary>
     public partial class ModifierSousFamille : Form
     {
+
+        /// <summary>
+        /// Liste des familles dans la base de données
+        /// </summary>
+        private List<Famille> ListFamilles1;
+
         /// <summary>
         /// Constructeur par défaut de la classe ModifierSousFamille
         /// </summary>
         public ModifierSousFamille()
         {
             InitializeComponent();
+
+            //On récupere toutes les marques de la base de données
+            FamilleDAO DaoFamille = new FamilleDAO();
+            this.ListFamilles1 = DaoFamille.GetFamilles();
+
+            //On ajoute dans le comboBox la liste des sous familles
+            foreach (Famille famille in ListFamilles1)
+            {
+                this.comboBoxFamille.Items.Add(famille.Nom1);
+
+            }
         }
 
         public TextBox TextRefSousFamille1 { get => this.TextRefSousFamille; set => this.TextRefSousFamille = value; }

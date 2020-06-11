@@ -124,24 +124,37 @@ namespace Bacchus
             // On recupere toutes les marques de la base de données
             MarqueDao DaoMarque = new MarqueDao();
             this.ListMarques1 = DaoMarque.GetMarques();
-            this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+            if (ListMarques1 != null)
+            {
+                this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+            }
+
 
             // On recupere toutes les familles de la base de données
             FamilleDAO DaoFamille = new FamilleDAO();
             this.ListFamilles1 = DaoFamille.GetFamilles();
-            this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+            if (ListFamilles1 != null)
+            {
+                this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+            }
 
             // On recupere toutes les sous familles de la base de données
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
-            this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+            if (ListSousFamilles1 != null)
+            {
+                this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+            }
 
             // On recupere toutes les articles de la base de données
             ArticleDao DaoArticle = new ArticleDao();
             this.ListArticles1 = DaoArticle.GetArticles();
 
             //On actualise le texte du StatusStrip
-            this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+            if (ListArticles1 != null)
+            {
+                this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+            }
 
             //On efface les elements presents dans la listView
             if (this.listView1 != null)
@@ -161,24 +174,37 @@ namespace Bacchus
                 // On recupere toutes les marques de la base de données
                 MarqueDao DaoMarque = new MarqueDao();
                 this.ListMarques1 = DaoMarque.GetMarques();
-                this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+                if(ListMarques1!=null)
+                {
+                    this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+                }
+                
 
                 // On recupere toutes les familles de la base de données
                 FamilleDAO DaoFamille = new FamilleDAO();
                 this.ListFamilles1 = DaoFamille.GetFamilles();
-                this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+                if (ListFamilles1 != null)
+                {
+                    this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+                }
 
                 // On recupere toutes les sous familles de la base de données
                 SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
                 this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
-                this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+                if (ListSousFamilles1 != null)
+                {
+                    this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+                }
 
                 // On recupere toutes les articles de la base de données
                 ArticleDao DaoArticle = new ArticleDao();
                 this.ListArticles1 = DaoArticle.GetArticles();
 
                 //On actualise le texte du StatusStrip
-                this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+                if (ListArticles1 != null)
+                {
+                    this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+                }
 
                 //On efface les elements presents dans la listView
                 if (this.listView1 != null)
@@ -412,15 +438,17 @@ namespace Bacchus
         {
             if (e.Button == MouseButtons.Right)
             {
-
+                if (listView1.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    contextMenuStrip1.Show(Cursor.Position);
+                }
             }
-
         }
 
         /// <summary>
         /// Régle la propriété ListViewItemSorter sur un nouveau ListViewItemComparer 
         /// </summary>
-        private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
+        private void ListViewColonneTri(object sender, ColumnClickEventArgs e)
         {
             // La mise en place de cette propriété permet de trier immédiatement l'objet 
             // ListView en utilisant l'objet ListViewItemComparer.
@@ -465,16 +493,41 @@ namespace Bacchus
                 //On affecte les colonnes
                 this.listView1.Columns.Add("Description");
                 this.listView1.Columns.Add("RefArticle");
+                this.listView1.Columns.Add("Famille");
                 this.listView1.Columns.Add("Sous-Famille");
+                this.listView1.Columns.Add("Marque");
                 this.listView1.Columns.Add("Prix");
 
                 if(ListArticles1 != null)
                 {
+                    string NomFamille = " ";
+                    string NomSousFamille = " ";
+                    string NomMarque = " ";
+
+                    SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
+                    FamilleDAO DaoFamille = new FamilleDAO();
+                    MarqueDao DaoMarque = new MarqueDao();
+
                     //On ajoute les items à la listView
                     foreach (Article article in ListArticles1)
                     {
-                        this.listView1.Items.Add(new ListViewItem(new string[] { article.Description1, article.RefArticle1, article.RefSousFamille1.ToString(), article.PrixHT1.ToString() }));
+                        SousFamille SousFamilleActuel = DaoSousFamille.GetSousFamille(article.RefSousFamille1);
+                        if(SousFamilleActuel != null)
+                        {
+                            NomSousFamille = SousFamilleActuel.Nom1;
+                            Famille FamilleActuel = DaoFamille.GetFamille(SousFamilleActuel.RefFamille1);
+                            if(FamilleActuel != null)
+                            {
+                                NomFamille = FamilleActuel.Nom1;
+                            }
+                        }
 
+                        Marque MarqueActuel = DaoMarque.GetMarque(article.RefMarque1);
+                        if (MarqueActuel != null)
+                        {
+                            NomMarque = MarqueActuel.Nom1;
+                        }
+                            this.listView1.Items.Add(new ListViewItem(new string[] { article.Description1, article.RefArticle1, NomFamille, NomSousFamille ,NomMarque ,article.PrixHT1.ToString() }));
                     }
                 }
             }
@@ -569,11 +622,31 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Modifier du menu Article avec une reference
+        /// </summary>
+        private void ArticleModifier_Click(object sender, EventArgs e, string RefArticle)
+        {
+            ModifierArticle Form = new ModifierArticle();
+            Form.TextRefArticle1.Text = RefArticle;
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Article
         /// </summary>
         private void ArticleSupprimer_Click(object sender, EventArgs e)
         {
             SupprimerArticle Form = new SupprimerArticle();
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Article avec une reference
+        /// </summary>
+        private void ArticleSupprimer_Click(object sender, EventArgs e, string RefArticle)
+        {
+            SupprimerArticle Form = new SupprimerArticle();
+            Form.TextRefArticle1.Text = RefArticle ;
             Form.ShowDialog(this);
         }
 
@@ -596,11 +669,31 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Modifier du menu Famille
+        /// </summary>
+        private void FamilleModifier_Click(object sender, EventArgs e, string RefFamille)
+        {
+            ModifierFamille Form = new ModifierFamille();
+            Form.TextRefFamille1.Text = RefFamille;
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Famille
         /// </summary>
         private void FamilleSupprimer_Click(object sender, EventArgs e)
         {
             SupprimerFamille Form = new SupprimerFamille();
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Famille
+        /// </summary>
+        private void FamilleSupprimer_Click(object sender, EventArgs e, string RefFamille)
+        {
+            SupprimerFamille Form = new SupprimerFamille();
+            Form.TextRefFamille1.Text = RefFamille;
             Form.ShowDialog(this);
         }
 
@@ -623,11 +716,31 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Modifier du menu SousFamille
+        /// </summary>
+        private void SousFamilleModifier_Click(object sender, EventArgs e,string RefSousFamille)
+        {
+            ModifierSousFamille Form = new ModifierSousFamille();
+            Form.TextRefSousFamille1.Text = RefSousFamille;
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu SousFamille
         /// </summary>
         private void SousFamilleSupprimer_Click(object sender, EventArgs e)
         {
             SupprimerSousFamille Form = new SupprimerSousFamille();
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu SousFamille
+        /// </summary>
+        private void SousFamilleSupprimer_Click(object sender, EventArgs e, string RefSousFamille)
+        {
+            SupprimerSousFamille Form = new SupprimerSousFamille();
+            Form.TextRefSousFamille1.Text = RefSousFamille;
             Form.ShowDialog(this);
         }
 
@@ -650,6 +763,16 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Modifier du menu Marque
+        /// </summary>
+        private void MarqueModifier_Click(object sender, EventArgs e,string RefMarque)
+        {
+            ModifierMarque Form = new ModifierMarque();
+            Form.TextRefMarque1.Text = RefMarque;
+            Form.ShowDialog(this);
+        }
+
+        /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Marque
         /// </summary>
         private void MarqueSupprimer_Click(object sender, EventArgs e)
@@ -658,9 +781,160 @@ namespace Bacchus
             Form.ShowDialog(this);
         }
 
+        /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur Supprimer du menu Marque
+        /// </summary>
+        private void MarqueSupprimer_Click(object sender, EventArgs e, string RefMarque)
+        {
+            SupprimerMarque Form = new SupprimerMarque();
+            Form.TextRefMarque1.Text = RefMarque;
+            Form.ShowDialog(this);
+        }
+
         private void StatusStrip_FormMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Cette fonction permet de faire l'ajout en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AjouterTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+
+                ArticleAjouter_Click(sender, e);
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                FamilleAjouter_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                MarqueAjouter_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                SousFamilleAjouter_Click(sender, e);
+
+            }
+        }
+        /// <summary>
+        /// Cette fonction permet de modifier en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ModifierTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+                try
+                {
+                    ArticleModifier_Click(sender, e, listView1.SelectedItems[0].SubItems[1].Text);
+                }
+                catch (Exception)
+                {
+                    ArticleModifier_Click(sender, e);
+                }
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                try
+                {
+                    FamilleModifier_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    FamilleModifier_Click(sender, e);
+                }
+ 
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                try
+                {
+                    MarqueModifier_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    MarqueModifier_Click(sender, e);
+                }
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                try
+                {
+                    SousFamilleModifier_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    SousFamilleModifier_Click(sender, e);
+                }
+            }
+        }
+        /// <summary>
+        /// Cette fonction permet de supprimer en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupprimerTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+                
+                try
+                {
+                    ArticleSupprimer_Click(sender, e, listView1.SelectedItems[0].SubItems[1].Text);
+                }
+                catch (Exception)
+                {
+                    ArticleSupprimer_Click(sender, e);
+                }
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                
+                try
+                {
+                    FamilleSupprimer_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    FamilleSupprimer_Click(sender, e);
+                }
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                try
+                {
+                    MarqueSupprimer_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    MarqueSupprimer_Click(sender, e);
+                }
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                try
+                {
+                    SousFamilleSupprimer_Click(sender, e, listView1.SelectedItems[0].SubItems[0].Text);
+                }
+                catch (Exception)
+                {
+                    SousFamilleSupprimer_Click(sender, e);
+                }
+
+            }
         }
 
     }

@@ -24,19 +24,15 @@ namespace Bacchus.Dao
         /// retourne 0 si succés, -1 echec
         /// </summary>
         /// <param name="NomFamille">Nom de la famille de la sous famille</param>
-        /// <param name="Nom">Nom de la famille</param>
+        /// <param name="RefFamille">Ref de la famille</param>
         /// <returns>0 si succés, -1 echec</returns>
-        public int AjouterSousFamille(String NomFamille, String Nom)
+        public int AjouterSousFamille(String RefFamille, String Nom)
         {
             // Si la sous famille existe on ne le crée pas
             if (Nom == null || GetRefSousFamille(Nom) != -1)
             {
                 return -1;
             }
-      
-            // On recupere la reference de la famille de la sous famille à partir de son nom
-            FamilleDAO DaoFamille = new FamilleDAO();
-            int RefFamille = DaoFamille.GetRefFamille(NomFamille);
 
             // On execute la commande Sql pour ajouter la sous famille à la base de données
             String sql = "INSERT INTO SousFamilles(RefFamille, Nom) Values('" + RefFamille + "','" + Nom + "')";

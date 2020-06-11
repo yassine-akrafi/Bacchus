@@ -17,12 +17,45 @@ namespace Bacchus.View
     /// </summary>
     public partial class ModifierArticle : Form
     {
+
+        /// <summary>
+        /// Listes des sous familles dans la base de données
+        /// </summary>
+        private List<SousFamille> ListSousFamilles1;
+
+        /// <summary>
+        /// Liste des marques dans la base de données
+        /// </summary>
+        private List<Marque> ListMarques1;
+
         /// <summary>
         /// Constructeur par défaut de la classe ModifierArticle
         /// </summary>
         public ModifierArticle()
         {
             InitializeComponent();
+
+            // On recupere toutes les familles de la base de données
+            SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
+            this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+
+            //On récupere toutes les marques de la base de données
+            MarqueDao DaoMarque = new MarqueDao();
+            this.ListMarques1 = DaoMarque.GetMarques();
+
+            //On ajoute dans le comboBox la liste des sous familles
+            foreach (SousFamille Sousfamille in ListSousFamilles1)
+            {
+                this.comboBoxSousFamille.Items.Add(Sousfamille.Nom1);
+
+            }
+
+            //On ajoute dans le comboBox de marque la liste des marques
+            foreach (Marque marque in ListMarques1)
+            {
+                this.comboBoxMarque.Items.Add(marque.Nom1);
+
+            }
 
         }
 
