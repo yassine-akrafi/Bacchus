@@ -27,6 +27,7 @@ namespace Bacchus.View.ConfirmationView
         {
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             DaoSousFamille.AjouterSousFamille(RefFamille, Nom);
+            this.Hide();
         }
     }
 }

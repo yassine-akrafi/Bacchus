@@ -25,6 +25,12 @@ namespace Bacchus.View.ConfirmationView
             //On initialise le Dao
             ArticleDao DaoArticle = new ArticleDao();
             DaoArticle.SupprimerArticle(RefArticle);
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

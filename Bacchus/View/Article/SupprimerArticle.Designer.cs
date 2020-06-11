@@ -80,6 +80,7 @@
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
         private System.Windows.Forms.TextBox textRefArticle;
+        public System.Windows.Forms.TextBox RefArticle1 { get => textRefArticle; set => textRefArticle = value; }
         private System.Windows.Forms.Button button1;
     }
 }

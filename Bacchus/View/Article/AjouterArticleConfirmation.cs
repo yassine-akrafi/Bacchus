@@ -34,7 +34,7 @@ namespace Bacchus.View.ConfirmationView
 
         private void Annuler_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)

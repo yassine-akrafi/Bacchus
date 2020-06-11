@@ -25,6 +25,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox textRefSousFamille1 { get => this.textRefSousFamille; set => this.textRefSousFamille = value; }
+
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>
@@ -51,6 +53,7 @@ namespace Bacchus.View
 
                 ModifierSousFamilleConfirmation FenetreConfirmation = new ModifierSousFamilleConfirmation(RefSousFamille, Nom, RefFamille);
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
            
         }

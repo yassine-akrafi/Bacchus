@@ -106,23 +106,16 @@ namespace Bacchus.View
             //Si parametre correcte on effectue l'ajout
             if (Executer == true)
             {
-               
                 AjouterArticleConfirmation FenetreConfirmation = new AjouterArticleConfirmation(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));
                 FenetreConfirmation.ShowDialog(this);
-
+                this.Hide();
             }
-
-
         }
 
 
         private void Nom_Fichier_Label_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void AjoutArticle_Load(object sender, EventArgs e)
-        {
         }
     }
 }

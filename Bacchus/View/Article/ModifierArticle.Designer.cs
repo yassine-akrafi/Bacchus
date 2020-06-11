@@ -57,6 +57,7 @@
             this.textRefArticle.Name = "textBox1";
             this.textRefArticle.Size = new System.Drawing.Size(170, 36);
             this.textRefArticle.TabIndex = 12;
+            this.textRefArticle.Text = "";
             // 
             // label1
             // 
@@ -164,7 +165,7 @@
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
         private System.Windows.Forms.TextBox textRefArticle;
-        private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox DescriptionText;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxSousFamille;

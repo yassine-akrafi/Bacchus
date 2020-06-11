@@ -27,6 +27,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox textRefMarque1 { get => this.textMarque; set => this.textMarque = value; }
+
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>
@@ -41,6 +43,7 @@ namespace Bacchus.View
             if (RefMarque != null)
             {
                 ModifierMarqueConfirmation FenetreConfirmation = new ModifierMarqueConfirmation(RefMarque, Nom);
+                this.Hide();
             }
         }
     }

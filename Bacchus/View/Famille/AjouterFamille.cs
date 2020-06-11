@@ -39,6 +39,7 @@ namespace Bacchus.View
             {
                 AjouterFamilleConfirmation FenetreConfirmation = new AjouterFamilleConfirmation(Nom);
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
         }
     }

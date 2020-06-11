@@ -23,7 +23,12 @@ namespace Bacchus.View
         public ModifierArticle()
         {
             InitializeComponent();
+
         }
+
+
+
+        public TextBox textRefArticle1 { get => this.textRefArticle; set => this.textRefArticle = value; }
 
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
@@ -60,7 +65,7 @@ namespace Bacchus.View
 
                 ModifierArticleConfirmation FenetreConfirmation =  new ModifierArticleConfirmation(RefArticle, Description, RefSousFamille, RefMarque, Prix);
                 FenetreConfirmation.ShowDialog(this);
-                this.Visible = false;
+                this.Hide();
             }
             
         }
