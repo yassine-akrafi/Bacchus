@@ -319,6 +319,7 @@ namespace Bacchus
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewColumn_Click);
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListViewPressed);
             // 
             // FormMain
             // 

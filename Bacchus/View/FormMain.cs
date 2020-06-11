@@ -106,11 +106,42 @@ namespace Bacchus
         /// </summary>
         private void KeyPressed(object sender, KeyEventArgs e)
         {
-          if(e.KeyCode == Keys.Enter)
+          if(e.KeyCode == Keys.F5)
             {
-                Console.WriteLine("appuyer sur entréé");
+                // On recupere toutes les marques de la base de données
+                MarqueDao DaoMarque = new MarqueDao();
+                this.ListMarques1 = DaoMarque.GetArticles();
+                this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+
+                // On recupere toutes les familles de la base de données
+                FamilleDAO DaoFamille = new FamilleDAO();
+                this.ListFamilles1 = DaoFamille.GetFamilles();
+                this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+
+                // On recupere toutes les sous familles de la base de données
+                SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
+                this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+                this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+
+                // On recupere toutes les articles de la base de données
+                ArticleDao DaoArticle = new ArticleDao();
+                this.ListArticles1 = DaoArticle.GetArticles();
+                this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+                if (this.listView1 != null)
+                {
+                    this.listView1.Clear();
+                }
             }
-            Console.WriteLine("je suis entrrée");
+            
+        }
+
+        private void ListViewPressed(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Console.Write("Je demande un delete");
+            }
+            
         }
 
         private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
