@@ -117,5 +117,10 @@ namespace Bacchus.View
         {
 
         }
+
+        private void AjoutArticle_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

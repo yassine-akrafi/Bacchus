@@ -13,6 +13,7 @@ namespace Bacchus.Dao
     /// </summary>
     public class SousFamilleDAO
     {
+        //**************A enleverrrrrr
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"

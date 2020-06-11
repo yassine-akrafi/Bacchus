@@ -41,52 +41,57 @@
             this.boutonAjouter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // comboBoxMarque
             // 
             this.comboBoxMarque.FormattingEnabled = true;
-            this.comboBoxMarque.Location = new System.Drawing.Point(259, 264);
-            this.comboBoxMarque.Name = "comboBox1";
-            this.comboBoxMarque.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxMarque.Location = new System.Drawing.Point(291, 330);
+            this.comboBoxMarque.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBoxMarque.Name = "comboBoxMarque";
+            this.comboBoxMarque.Size = new System.Drawing.Size(180, 28);
             this.comboBoxMarque.TabIndex = 0;
             // 
             // DescriptionText
             // 
-            this.DescriptionText.Location = new System.Drawing.Point(184, 126);
+            this.DescriptionText.Location = new System.Drawing.Point(207, 158);
+            this.DescriptionText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DescriptionText.Multiline = true;
             this.DescriptionText.Name = "DescriptionText";
-            this.DescriptionText.Size = new System.Drawing.Size(235, 60);
+            this.DescriptionText.Size = new System.Drawing.Size(264, 74);
             this.DescriptionText.TabIndex = 6;
             // 
-            // textBox1
+            // textRefArticle
             // 
-            this.textRefArticle.Location = new System.Drawing.Point(249, 63);
+            this.textRefArticle.Location = new System.Drawing.Point(280, 79);
+            this.textRefArticle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textRefArticle.Multiline = true;
-            this.textRefArticle.Name = "textBox1";
-            this.textRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.textRefArticle.Name = "textRefArticle";
+            this.textRefArticle.Size = new System.Drawing.Size(191, 44);
             this.textRefArticle.TabIndex = 7;
             // 
-            // comboBox2
+            // comboBoxSousFamille
             // 
             this.comboBoxSousFamille.FormattingEnabled = true;
-            this.comboBoxSousFamille.Location = new System.Drawing.Point(259, 214);
-            this.comboBoxSousFamille.Name = "comboBox2";
-            this.comboBoxSousFamille.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxSousFamille.Location = new System.Drawing.Point(291, 268);
+            this.comboBoxSousFamille.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBoxSousFamille.Name = "comboBoxSousFamille";
+            this.comboBoxSousFamille.Size = new System.Drawing.Size(180, 28);
             this.comboBoxSousFamille.TabIndex = 8;
             // 
-            // textBox2
+            // textPrix
             // 
-            this.textPrix.Location = new System.Drawing.Point(249, 320);
+            this.textPrix.Location = new System.Drawing.Point(280, 400);
+            this.textPrix.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textPrix.Multiline = true;
-            this.textPrix.Name = "textBox2";
-            this.textPrix.Size = new System.Drawing.Size(170, 36);
+            this.textPrix.Name = "textPrix";
+            this.textPrix.Size = new System.Drawing.Size(191, 44);
             this.textPrix.TabIndex = 9;
             // 
             // Nom_Fichier_Label
             // 
             this.Nom_Fichier_Label.AutoSize = true;
-            this.Nom_Fichier_Label.Location = new System.Drawing.Point(27, 66);
+            this.Nom_Fichier_Label.Location = new System.Drawing.Point(30, 82);
             this.Nom_Fichier_Label.Name = "Nom_Fichier_Label";
-            this.Nom_Fichier_Label.Size = new System.Drawing.Size(74, 17);
+            this.Nom_Fichier_Label.Size = new System.Drawing.Size(85, 20);
             this.Nom_Fichier_Label.TabIndex = 10;
             this.Nom_Fichier_Label.Text = "RefArticle*";
             this.Nom_Fichier_Label.Click += new System.EventHandler(this.Nom_Fichier_Label_Click);
@@ -94,44 +99,45 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 147);
+            this.label1.Location = new System.Drawing.Point(30, 184);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 17);
+            this.label1.Size = new System.Drawing.Size(89, 20);
             this.label1.TabIndex = 11;
             this.label1.Text = "Description";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 217);
+            this.label2.Location = new System.Drawing.Point(30, 271);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 17);
+            this.label2.Size = new System.Drawing.Size(96, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "SousFamille";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 267);
+            this.label3.Location = new System.Drawing.Point(30, 334);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 17);
+            this.label3.Size = new System.Drawing.Size(63, 20);
             this.label3.TabIndex = 13;
             this.label3.Text = "Marque";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 323);
+            this.label4.Location = new System.Drawing.Point(30, 404);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(40, 20);
             this.label4.TabIndex = 14;
             this.label4.Text = "Prix*";
             // 
-            // button1
+            // boutonAjouter
             // 
-            this.boutonAjouter.Location = new System.Drawing.Point(168, 387);
+            this.boutonAjouter.Location = new System.Drawing.Point(189, 484);
+            this.boutonAjouter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.boutonAjouter.Name = "boutonAjouter";
-            this.boutonAjouter.Size = new System.Drawing.Size(125, 27);
+            this.boutonAjouter.Size = new System.Drawing.Size(141, 34);
             this.boutonAjouter.TabIndex = 15;
             this.boutonAjouter.Text = "Ajouter";
             this.boutonAjouter.UseVisualStyleBackColor = true;
@@ -139,9 +145,9 @@
             // 
             // AjoutArticle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 448);
+            this.ClientSize = new System.Drawing.Size(530, 560);
             this.Controls.Add(this.boutonAjouter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -153,11 +159,13 @@
             this.Controls.Add(this.textRefArticle);
             this.Controls.Add(this.DescriptionText);
             this.Controls.Add(this.comboBoxMarque);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AjoutArticle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AjoutArticle";
+            this.Load += new System.EventHandler(this.AjoutArticle_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
