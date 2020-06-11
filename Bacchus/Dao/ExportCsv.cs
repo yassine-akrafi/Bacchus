@@ -10,79 +10,90 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Dao
 {
-
+    /// <summary>
+    /// Cette classe permet de faire l'export CSV
+    /// </summary>
     public class ExportCsv
     {
 
         public String Descritpion { get; set; }
+
         public String Ref { get; set; }
+
         public String Marque { get; set; }
+
         public String Famille { get; set; }
+
         public String SousFamille { get; set; }
 
         public String Prix { get; set; }
 
-
-        public void ExporterCsv(String Path)
+        /// <summary>
+        /// Cette fonction permet de faire l'export CSV
+        /// </summary>
+        /// <param name="Path">Le chemin du dossier dans lequel on exporte les informations contenues dans la base de données</param>
+        public int ExporterCsv(String Path)
         {
- 
+            //On declare et initialise les Dao
             MarqueDao DaoMarque = new MarqueDao();
             FamilleDAO DaoFamille = new FamilleDAO();
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             ArticleDao DaoArticle = new ArticleDao();
 
+            //On déclare et initialise la liste des articles
             List<Article> ListesArticles = new List<Article>();
-            ListesArticles = DaoArticle.TrouverArticles();
+            ListesArticles = DaoArticle.GetArticles();
 
+            //On ajoute la liste des articles au Format Csv
             List<ExportCsv> ListeAExporter = new List<ExportCsv>();
+
+            //On ajoute chaque article de la base de données dans la liste à exporter
             foreach (Article article in ListesArticles)
             {
+                //On recupere l'article a importer
                 ExportCsv LigneAAjouter = new ExportCsv();
                 LigneAAjouter.Descritpion = article.Description1;
                 LigneAAjouter.Ref = article.RefArticle1;
-                LigneAAjouter.Marque = DaoMarque.TrouverParId(article.RefMarque1).Nom1;
-                LigneAAjouter.Famille = DaoFamille.TrouverParId(DaoSousFamille.TrouverParId(article.RefSousFamille1).RefFamille1).Nom1;
-                LigneAAjouter.SousFamille = DaoSousFamille.TrouverParId(article.RefSousFamille1).Nom1;
-                LigneAAjouter.Prix = ""+article.PrixHT1;
+                LigneAAjouter.Marque = DaoMarque.GetMarque(article.RefMarque1).Nom1;
+                LigneAAjouter.Famille = DaoFamille.GetFamille(DaoSousFamille.GetSousFamille(article.RefSousFamille1).RefFamille1).Nom1;
+                LigneAAjouter.SousFamille = DaoSousFamille.GetSousFamille(article.RefSousFamille1).Nom1;
+                LigneAAjouter.Prix = article.PrixHT1.ToString();
 
+                //On ajoute L'article a importer
                 ListeAExporter.Add(LigneAAjouter);
             }
-            Console.WriteLine("---------------------------------");
-            foreach (ExportCsv export in ListeAExporter)
-            {
-                Console.WriteLine(export.Famille);
-            }
-            Console.WriteLine("---------------------------------");
+         
+            //Path de l'emplacement de la création de notre Csv
             String path = Path + "\\DonnesExporter.csv";
 
-            Console.WriteLine("Voila le path ou on crée le fichier : "+path);
-            bool errorL = WriteFile<ExportCsv>(path, ListeAExporter);
+            WriteFile<ExportCsv>(path, ListeAExporter);
+
+            return 0;
 
         }
 
+       /// <summary>
+       /// Cette fonction permet de creer et d'ecrire les donnees dans le fichier CSV
+       /// </summary>
+       /// <typeparam name="T"></typeparam>
+       /// <param name="_path">Le chemin du dossier dans lequel sera contenues les données à exporter</param>
+       /// <param name="_ListeAExporter">La liste des elements à exporter</param>
+       /// <returns></returns>
         public bool WriteFile<T>(string _path, List<T> _ListeAExporter) where T : class
         {
-            Console.WriteLine("On est rentrée dans le WriteFile");
             CultureInfo test = new CultureInfo("fr-FR",false);
             CsvHelper.Configuration.CsvConfiguration CsvConf = new CsvHelper.Configuration.CsvConfiguration(test) { Delimiter = ";" };
             try
             {
-                Console.WriteLine("On va rentrer dans le using");
                 using (TextWriter tr = new StreamWriter(_path, true, Encoding.GetEncoding(1252)))
                 {
-                    Console.WriteLine("On rentre dans le using");
-
-                    Console.WriteLine("On affecte la variable csv");
                     var csv = new CsvWriter(tr, CsvConf);
-
-                    Console.WriteLine("On met le liste dans le csv");
                     csv.WriteRecords(_ListeAExporter);
                 }
                 return false;
             }
             catch(Exception)
             {
-                Console.WriteLine("On est pas rentrer dans le try");
                 return true;
             }
         }

@@ -2,135 +2,318 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Classe permettant l'accés au données des Articles
+    /// </summary>
+    /// 
     public class ArticleDao
     {
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
 
-        public int AjouterArticle(String RefArticle, String Description, String RefSousFamille, String RefMarque, float Prix)
+        /// <summary>
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
+        /// </summary>
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
+        
+        /// <summary>
+        /// Ajoute un article dans la base de données, 
+        /// retourne 0 si succés, -1 echec
+        /// </summary>
+        /// <param name="RefArticle">Reference de l'article</param>
+        /// <param name="Description">Description de l'article</param>
+        /// <param name="NomSousFamille">Nom de la sous famille de l'article</param>
+        /// <param name="NomMarque">Nom de la marque de l'article</param>
+        /// <param name="Prix">Prix de l'article</param>
+        /// <returns>0 si succés</returns>
+        public int AjouterArticle(String RefArticle, String Description, String NomSousFamille, String NomMarque, float Prix)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+
+            // Si l'article existe on ne le crée pas
+            if (GetRefArticle(RefArticle) != -1)
             {
-                Connexion.Open();
-            }
-
-
-            int SfIfExists = TrouverParNom(RefArticle);
-
-            if (SfIfExists != -1)
-            {
-                Connexion.Close();
-                return 0;
+                return -1;
             }
             else
             {
-                if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-                {
-                    Connexion.Open();
-                }
+
+                // On recupere la reference de la sous famille de l'article à partir du nom
                 SousFamilleDAO SousDaoFamille = new SousFamilleDAO();
+                int ReferenceSousFamille = SousDaoFamille.GetRefSousFamille(NomSousFamille);
+
+                // On recupere la reference de la marque de l'article à partir du nom
                 MarqueDao DaoMarque = new MarqueDao();
-                int SousFamille = SousDaoFamille.TrouverParNom(RefSousFamille);
-                int Marque = DaoMarque.TrouverParNom(RefMarque);
+                int ReferenceMarque = DaoMarque.GetRefMarque(NomMarque);
 
-                    SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (:RefArticle, :Description, :RefSousFamille, :RefMarque, :PrixHT,10)", Connexion);
-                    CommandInsert.Parameters.AddWithValue(":RefArticle", RefArticle);
-                    CommandInsert.Parameters.AddWithValue(":Description", Description);
-                    CommandInsert.Parameters.AddWithValue(":RefSousFamille", SousFamille);
-                    CommandInsert.Parameters.AddWithValue(":RefMarque", Marque);
-                    CommandInsert.Parameters.AddWithValue(":PrixHT", Prix);
-                    CommandInsert.ExecuteNonQuery();
-             
+                // On execute la commande Sql pour ajouter l'article à la base de données
+                String sql = "INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES ('" + RefArticle + "','" + Description + "','" + ReferenceSousFamille + "','" + ReferenceMarque + "','" + Prix + "','" + 10 + "')"; ;
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return 0;
+
+
             }
-            Connexion.Close();
-            return 1;
         }
 
-
-        public int TrouverParNom(String Nom)
+        /// <summary>
+        /// Récupere la reference d'un article à partir de son nom,
+        /// retourne -1 si l'article n'existe pas, 0 sinon
+        /// </summary>
+        /// <param name="RefArticle">Reference de l'article</param>
+        /// <returns>retourne -1 si l'article n'existe pas, 0 sinon</returns>
+        public int GetRefArticle(String RefArticle)
         {
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefArticle FROM Articles WHERE RefArticle = :RefArticle", Connexion);
-            Command.Parameters.AddWithValue(":RefArticle", Nom);
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            // On met en place la commande Sql pour récuperer l'article 
+            String sql = "SELECT RefArticle FROM Articles WHERE RefArticle ='" + RefArticle + "'";
+
+            //Mise en place de la connexion avec la base de données
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+
+                //On effectue la commande Sql
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    //On verifie si on a recuperé un résultat
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if(rdr.Read())
+                        {
+                            return 0;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                        
+                    }
+                }
             }
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
+        }
+
+        /// <summary>
+        /// Verifie si un article existe à partir de sa reference
+        /// retourne -1 si l'article n'existe pas, 0 sinon
+        /// </summary>
+        /// <param name="RefArticle">Reference de l'article</param>
+        /// <returns>retourne -1 si l'article n'existe pas, 0 sinon</returns>
+        public int RefArticleExiste(String RefArticle)
+        {
+
+            // On met en place la commande Sql pour récuperer l'article 
+            String sql = "SELECT RefArticle FROM Articles WHERE RefArticle = '" + RefArticle+"'";
+           
+            //Mise en place de la connexion avec la base de données
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Close();
-                return 0;
+                c.Open();
+                //On effectue la commande Sql
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
             return -1;
         }
 
-        public int TrouverParDescription(String Nom)
+
+        /// <summary>
+        /// Retourne Tous les Articles présents dans la base de données
+        /// </summary>
+        /// <returns>Une liste d'articles</returns>
+        public List<Article> GetArticles()
         {
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefArticle FROM Articles WHERE Description = :Description", Connexion);
-            Command.Parameters.AddWithValue(":Description", Nom);
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            //Liste d'articles à retourner
+            List<Article> ListeArticles;
+            int NombreArticles = 0;
+            // On met en place la commande Sql pour récuperer tous les articles 
+            String sql = "SELECT * FROM Articles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        ListeArticles = new List<Article>();
+                       
+                        while (rdr.Read())
+                        {
+                            //A cause de problemes de casting on tente plusieurs récuperation du prix 
+                            try
+                            {
+                                float Prix = float.Parse(rdr.GetString(4));
+                                ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                NombreArticles++;
+                            }
+                            catch(Exception)
+                            {
+                                try
+                                {
+                                    float Prix = (float)rdr.GetInt32(4);
+                                    ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                    NombreArticles++;
+                                }
+                                catch (Exception)
+                                {
+                                    float Prix = (float)rdr.GetFloat(4);
+                                    ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
+                                    NombreArticles++;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
             }
 
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
+            if (NombreArticles == 0)
             {
-                Connexion.Close();
-                return 0;
+                return null;
             }
-            Connexion.Close();
-            return -1;
+            else
+            {
+                return ListeArticles;
+            }
+
+            
         }
 
-        public List<Article> TrouverArticles()
-        {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Articles", Connexion);
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            List<Article> ListeArticles = new List<Article>();
-            while (Reader.Read())
-            {
-                ListeArticles.Add(new Article(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), Reader.GetFloat(4), Reader.GetInt32(5)));
-            }
-            Connexion.Close();
-            return ListeArticles;
-        }
-
+        /// <summary>
+        /// Supprime un article de la base de données,
+        /// retroune vrai si l'article existe et a été supprimé
+        /// </summary>
+        /// <param name="RefArticle">Reference de l'article à supprimer</param>
+        /// <returns>Retourne vrai si l'article a été supprimé</returns>
         public Boolean SupprimerArticle(string RefArticle)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            // On verfie si l'article n'existe pas 
+            if(RefArticleExiste(RefArticle) == -1)
             {
-                Connexion.Open();
-            }
-            if (TrouverParNom(RefArticle) != -1)
-            {
-                Connexion.Close();
-                return false;
-            }
-            else
-            {
-                SQLiteCommand Command = new SQLiteCommand("DELETE FROM Articles WHERE RefArticle = :RefArticle", Connexion);
-                Command.Parameters.AddWithValue(":RefArticle", RefArticle);
-                Command.ExecuteNonQuery();
-                if (TrouverParNom(RefArticle) != -1)
-                {
-                    Connexion.Close();
-                    return true;
-                }
-                Connexion.Close();
                 return false;
             }
 
+            // On execute la commande Sql pour supprimer l'article de la base de données
+            String sql = "DELETE FROM Articles WHERE RefArticle ='" + RefArticle + "'";
+
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Si l'article n'existe plus, on retourne vrai
+            if (RefArticleExiste(RefArticle) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// Modifie un article dans la base de données
+        /// </summary>
+        /// <param name="RefArticle">Reference de l'article</param>
+        /// <param name="Description">Description de l'article</param>
+        /// <param name="RefSousFamille">Reference de la sous famille de l'article</param>
+        /// <param name="RefMarque">Reference de la marque de l'article </param>
+        /// <param name="Prix">Prix de l'article</param>
+        /// <returns></returns>
+        public Boolean ModifierArticle(String RefArticle, String Description, int RefSousFamille, int RefMarque, float Prix)
+        {
+
+            // On verfie, si l'article n'existe pas on retourne false 
+            if (RefArticle == null || RefArticleExiste(RefArticle) == -1)
+            {
+                return false;
+            }
+
+            // Si une description est passé en paramètre on modifie la description de l'article
+            if (Description != null)
+            {
+                String sql = "UPDATE Articles SET Description ='" + Description+ "' WHERE RefArticle ='" + RefArticle + "'";
+
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            // Si la reference d'une sous famille est passé en paramètre on modifie la sous famille de l'article
+            if (RefSousFamille != -1)
+            {
+
+                String sql = "UPDATE Articles SET RefSousFamille ='" + RefSousFamille + "' WHERE RefArticle ='" + RefArticle + "'";
+
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            // Si une marque est passé en paramètre on modifie la marque de l'article
+            if (RefMarque != -1)
+            {
+                String sql = "UPDATE Articles SET RefMarque ='" + RefMarque + "' WHERE RefArticle ='" + RefArticle + "'";
+
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            // Si un prix est passé en paramètre on modifie le prix de l'article
+            if (Prix != -1)
+            {
+                String sql = "UPDATE Articles SET PrixHT ='" + Prix + "' WHERE RefArticle ='" + RefArticle + "'";
+
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

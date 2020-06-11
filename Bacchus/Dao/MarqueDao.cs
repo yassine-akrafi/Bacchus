@@ -8,144 +8,214 @@ using System.Data;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Classe permettant l'accés au données des Marques
+    /// </summary>
     public class MarqueDao
     {
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
 
+        /// <summary>
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
+        /// </summary>
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
+
+        /// <summary>
+        /// Ajoute une marque à la base de données
+        /// retourne 0 si succés, -1 echec
+        /// </summary>
+        /// <param name="Nom">Nom de la famille</param>
+        /// <returns>retourne 0 si succés, -1 echec</returns>
         public int AjouterMarque(String Nom)
         {
-            SQLiteConnection.ClearAllPools();
-            Console.WriteLine("Je suis dans Ajouter Marque avec le nom = "+Nom );
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            //Si la marque existe on ne la crée pas
+            if (GetRefMarque(Nom) != -1)
             {
-                Connexion.Open();
+                return -1;
             }
 
-            if (TrouverParNom(Nom) != -1)
+            // On execute la commande Sql pour ajouter la famille à la base de données
+            String sql = "INSERT INTO Marques (Nom) Values('" + Nom + "')";
+
+            //Mise en place de la connexion avec la base de données
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                return 1;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    //On effectue la commande Sql
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //On verifie si on a recuperé un résultat
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
             }
-            SQLiteConnection.ClearAllPools();
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-            try
-            {
-                Console.WriteLine("Je vais crée une marque");
-                SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Marques (Nom) VALUES (:Nom)", Connexion);
-                CommandInsert.Parameters.AddWithValue(":Nom", Nom);
-                CommandInsert.ExecuteNonQuery();
-                Connexion.Close();
-                return 0;
-            }
-            catch(Exception)
-            {
-                return 1;
-            }
+            return -1;
+           
         }
 
-        public void ModifierMarque(int Id, Marque Marque)
-        {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
-            int SfIfExists = TrouverParNom(Marque.Nom1);
-            if (SfIfExists != -1)
-            {
-                SQLiteCommand Command = new SQLiteCommand("UPDATE Marques SET Nom = :Nom WHERE RefMarque = :RefMarque", Connexion);
-                Command.Parameters.AddWithValue(":Nom", Marque.Nom1);
-                Command.Parameters.AddWithValue(":RefMarque", Id);
-                Command.ExecuteNonQuery();
-                Connexion.Close();
-            }
-            Connexion.Close();
-        }
-
+        /// <summary>
+        /// Supprime une marque 
+        /// retroune vrai si la marque existe et a été supprimé
+        /// </summary>
+        /// <param name="RefMarque">Reference de la marque</param>
+        /// <returns>Retourne true si succés</returns>
         public Boolean SupprimerMarque(string RefMarque)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            // On verfie si la marque n'existe pas 
+            if (GetMarque(int.Parse(RefMarque)) == null)
             {
-                Connexion.Open();
-            }
-            if (TrouverParNom(RefMarque) != -1)
-            {
-                Connexion.Close();
-                return false;
-            }
-            else
-            {
-                SQLiteCommand Command = new SQLiteCommand("DELETE FROM Marques WHERE RefMarque = :RefMarque", Connexion);
-                Command.Parameters.AddWithValue(":RefMarque", RefMarque);
-                Command.ExecuteNonQuery();
-                if (TrouverParNom(RefMarque) != -1)
-                {
-                    Connexion.Close();
-                    return true;
-                }
-                Connexion.Close();
                 return false;
             }
 
+            // On execute la commande Sql pour supprimer l'article de la base de données
+            String sql = "DELETE FROM Marques WHERE RefMarque ='" + RefMarque + "'";
+
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // On verfie si la marque n'existe plus 
+            if (GetMarque(int.Parse(RefMarque)) == null)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public Marque TrouverParId(int Id)
+        /// <summary>
+        /// Récupere la marque à partir de sa reference ,null si la marque n'existe pas
+        /// </summary>
+        /// <param name="RefMarque">Reference de la marque</param>
+        /// <returns>La marque ou null si elle n'existe pas</returns>
+        public Marque GetMarque(int RefMarque)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            Marque Marque;
+            // On met en place la commande Sql pour récuperer la famille
+            String sql = "SELECT * FROM Marques WHERE RefMarque = '" + RefMarque + "'";
+
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            Marque = new Marque(rdr.GetInt32(0), rdr.GetString(1));
+                            return Marque;
+                        }
+                    }
+                }
             }
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Marques WHERE RefMarque = :Id", Connexion);
-            Command.Parameters.AddWithValue(":Id", Id);
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
-            {
-                Marque Marque = new Marque(Reader.GetInt32(0), Reader.GetString(1));
-                Connexion.Close();
-                return Marque;
-            }
-            Connexion.Close();
             return null;
         }
 
-        public int TrouverParNom(String Nom)
+        /// <summary>
+        /// Récupere la reference d'une marque à partir de son nom,
+        /// retourne -1 si la marque n'existe pas
+        /// </summary>
+        /// <param name="Nom">Nom de la marque</param>
+        /// <returns>-1 si la marque existe, la reference de la marque sinon</returns>
+        public int GetRefMarque(String Nom)
         {
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefMarque FROM Marques WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+
+            // On met en place la commande Sql pour récuperer la famille 
+            String sql = "SELECT RefMarque FROM Marques WHERE Nom = '" + Nom + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //Si on recupere un résultat on retourne la reference de la marque
+                        if (rdr.Read())
+                        {
+                            int Ref = rdr.GetInt32(0);
+                            return Ref;
+                        }
+                    }
+                }
             }
-            int Ref = -1;
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
-            {
-                
-                Ref = Reader.GetInt32(0);
-                
-            }
-            Reader.Close();
-            Connexion.Close();
-            return Ref;
+            return -1;
         }
 
-        public List<Marque> TrouverMarques()
+        /// <summary>
+        /// Retourne toutes les marques présentes dans la base de données
+        /// </summary>
+        /// <returns>Une liste de marques</returns>
+        public List<Marque> GetMarques()
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Marques", Connexion);
-            SQLiteDataReader Reader = Command.ExecuteReader();
             List<Marque> ListeMarque = new List<Marque>();
-            while (Reader.Read())
+
+            // On met en place la commande Sql pour récuperer toutes les familles 
+            String sql = "SELECT * FROM Marques";
+
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                ListeMarque.Add(new Marque(Reader.GetInt32(0), Reader.GetString(1)));
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //Si on recupere des resultats on les ajoutes à la liste de marques
+                        if (rdr.Read())
+                        {   
+                            ListeMarque.Add(new Marque(rdr.GetInt32(0), rdr.GetString(1)));
+                            while (rdr.Read())
+                            {
+                                ListeMarque.Add(new Marque(rdr.GetInt32(0), rdr.GetString(1)));
+                            }
+                            return ListeMarque;
+                        }
+                        //Si on ne recupere aucun résultat on renvoi null
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
-            return ListeMarque;
+        }
+
+        /// <summary>
+        /// Modifie la marque dans la base de données
+        /// </summary>
+        /// <param name="RefMarque">Reference de la marque</param>
+        /// <param name="Nom">Nom de la marque</param>
+        /// <returns>Retourne true si succés</returns>
+        public Boolean ModifierMarque(string RefMarque, string Nom)
+        {
+            // On verfie si la famille n'existe pas 
+            if (RefMarque == null || GetMarque(int.Parse(RefMarque)) == null)
+            {
+                return false;
+            }
+
+            // Si un nom est passé en paramètre on modifie le nom de la famille
+            if (Nom != null)
+            {
+                String sql = "UPDATE Marques SET Nom ='" + Nom + "' WHERE RefMarque ='" + RefMarque + "'";
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            return true;
         }
     }
 }

@@ -17,7 +17,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,28 +91,28 @@
     <Compile Include="Model\Famille.cs" />
     <Compile Include="Model\Marque.cs" />
     <Compile Include="Model\SousFamille.cs" />
-    <Compile Include="View\AjoutArticle.cs">
+    <Compile Include="View\Article\AjoutArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AjoutArticle.Designer.cs">
+    <Compile Include="View\Article\AjoutArticle.Designer.cs">
       <DependentUpon>AjoutArticle.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AjouterFamille.cs">
+    <Compile Include="View\Famille\AjouterFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AjouterFamille.Designer.cs">
+    <Compile Include="View\Famille\AjouterFamille.Designer.cs">
       <DependentUpon>AjouterFamille.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AjoutMarque.cs">
+    <Compile Include="View\Marque\AjoutMarque.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AjoutMarque.Designer.cs">
+    <Compile Include="View\Marque\AjoutMarque.Designer.cs">
       <DependentUpon>AjoutMarque.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\AjoutSousFamille.cs">
+    <Compile Include="View\SousFamille\AjoutSousFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AjoutSousFamille.Designer.cs">
+    <Compile Include="View\SousFamille\AjoutSousFamille.Designer.cs">
       <DependentUpon>AjoutSousFamille.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormExporter.cs">
@@ -134,53 +135,125 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\ModifierArticle.cs">
+    <Compile Include="View\Article\ModifierArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ModifierArticle.Designer.cs">
+    <Compile Include="View\Article\ModifierArticle.Designer.cs">
       <DependentUpon>ModifierArticle.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ModifierFamille.cs">
+    <Compile Include="View\Famille\ModifierFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ModifierFamille.Designer.cs">
+    <Compile Include="View\Famille\ModifierFamille.Designer.cs">
       <DependentUpon>ModifierFamille.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ModifierMarque.cs">
+    <Compile Include="View\Marque\ModifierMarque.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ModifierMarque.Designer.cs">
+    <Compile Include="View\Marque\ModifierMarque.Designer.cs">
       <DependentUpon>ModifierMarque.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ModifierSousFamille.cs">
+    <Compile Include="View\SousFamille\ModifierSousFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ModifierSousFamille.Designer.cs">
+    <Compile Include="View\SousFamille\ModifierSousFamille.Designer.cs">
       <DependentUpon>ModifierSousFamille.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SupprimerArticle.cs">
+    <Compile Include="View\Article\SupprimerArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SupprimerArticle.Designer.cs">
+    <Compile Include="View\Article\SupprimerArticle.Designer.cs">
       <DependentUpon>SupprimerArticle.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SupprimerFamille.cs">
+    <Compile Include="View\Famille\SupprimerFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SupprimerFamille.Designer.cs">
+    <Compile Include="View\Famille\SupprimerFamille.Designer.cs">
       <DependentUpon>SupprimerFamille.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SupprimerMarque.cs">
+    <Compile Include="View\Marque\SupprimerMarque.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SupprimerMarque.Designer.cs">
+    <Compile Include="View\Marque\SupprimerMarque.Designer.cs">
       <DependentUpon>SupprimerMarque.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SupprimerSousFamille.cs">
+    <Compile Include="View\SousFamille\SupprimerSousFamille.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SupprimerSousFamille.Designer.cs">
+    <Compile Include="View\SousFamille\SupprimerSousFamille.Designer.cs">
       <DependentUpon>SupprimerSousFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Article\AjouterArticleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Article\AjouterArticleConfirmation.designer.cs">
+      <DependentUpon>AjouterArticleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Famille\AjouterFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Famille\AjouterFamilleConfirmation.designer.cs">
+      <DependentUpon>AjouterFamilleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Marque\AjouterMarqueConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Marque\AjouterMarqueConfirmation.designer.cs">
+      <DependentUpon>AjouterMarqueConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SousFamille\AjouterSousFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SousFamille\AjouterSousFamilleConfirmation.designer.cs">
+      <DependentUpon>AjouterSousFamilleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Article\ModifierArticleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Article\ModifierArticleConfirmation.designer.cs">
+      <DependentUpon>ModifierArticleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Famille\ModifierFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Famille\ModifierFamilleConfirmation.designer.cs">
+      <DependentUpon>ModifierFamilleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Marque\ModifierMarqueConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Marque\ModifierMarqueConfirmation.designer.cs">
+      <DependentUpon>ModifierMarqueConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SousFamille\ModifierSousFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SousFamille\ModifierSousFamilleConfirmation.designer.cs">
+      <DependentUpon>ModifierSousFamilleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Article\SupprimerArticleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Article\SupprimerArticleConfirmation.designer.cs">
+      <DependentUpon>SupprimerArticleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Famille\SupprimerFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Famille\SupprimerFamilleConfirmation.designer.cs">
+      <DependentUpon>SupprimerFamilleConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Marque\SupprimerMarqueConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Marque\SupprimerMarqueConfirmation.designer.cs">
+      <DependentUpon>SupprimerMarqueConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\SousFamille\SupprimerSousFamilleConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SousFamille\SupprimerSousFamilleConfirmation.designer.cs">
+      <DependentUpon>SupprimerSousFamilleConfirmation.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,16 +264,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\AjoutArticle.resx">
+    <EmbeddedResource Include="View\Article\AjoutArticle.resx">
       <DependentUpon>AjoutArticle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\AjouterFamille.resx">
+    <EmbeddedResource Include="View\Famille\AjouterFamille.resx">
       <DependentUpon>AjouterFamille.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\AjoutMarque.resx">
+    <EmbeddedResource Include="View\Marque\AjoutMarque.resx">
       <DependentUpon>AjoutMarque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\AjoutSousFamille.resx">
+    <EmbeddedResource Include="View\SousFamille\AjoutSousFamille.resx">
       <DependentUpon>AjoutSousFamille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormExporter.resx">
@@ -212,30 +285,69 @@
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ModifierArticle.resx">
+    <EmbeddedResource Include="View\Article\ModifierArticle.resx">
       <DependentUpon>ModifierArticle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ModifierFamille.resx">
+    <EmbeddedResource Include="View\Famille\ModifierFamille.resx">
       <DependentUpon>ModifierFamille.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ModifierMarque.resx">
+    <EmbeddedResource Include="View\Marque\ModifierMarque.resx">
       <DependentUpon>ModifierMarque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ModifierSousFamille.resx">
+    <EmbeddedResource Include="View\SousFamille\ModifierSousFamille.resx">
       <DependentUpon>ModifierSousFamille.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SupprimerArticle.resx">
+    <EmbeddedResource Include="View\Article\SupprimerArticle.resx">
       <DependentUpon>SupprimerArticle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SupprimerFamille.resx">
+    <EmbeddedResource Include="View\Famille\SupprimerFamille.resx">
       <DependentUpon>SupprimerFamille.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SupprimerMarque.resx">
+    <EmbeddedResource Include="View\Marque\SupprimerMarque.resx">
       <DependentUpon>SupprimerMarque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SupprimerSousFamille.resx">
+    <EmbeddedResource Include="View\SousFamille\SupprimerSousFamille.resx">
       <DependentUpon>SupprimerSousFamille.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Article\AjouterArticleConfirmation.resx">
+      <DependentUpon>AjouterArticleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Famille\AjouterFamilleConfirmation.resx">
+      <DependentUpon>AjouterFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Marque\AjouterMarqueConfirmation.resx">
+      <DependentUpon>AjouterMarqueConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SousFamille\AjouterSousFamilleConfirmation.resx">
+      <DependentUpon>AjouterSousFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Article\ModifierArticleConfirmation.resx">
+      <DependentUpon>ModifierArticleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Famille\ModifierFamilleConfirmation.resx">
+      <DependentUpon>ModifierFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Marque\ModifierMarqueConfirmation.resx">
+      <DependentUpon>ModifierMarqueConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SousFamille\ModifierSousFamilleConfirmation.resx">
+      <DependentUpon>ModifierSousFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Article\SupprimerArticleConfirmation.resx">
+      <DependentUpon>SupprimerArticleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Famille\SupprimerFamilleConfirmation.resx">
+      <DependentUpon>SupprimerFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Marque\SupprimerMarqueConfirmation.resx">
+      <DependentUpon>SupprimerMarqueConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SousFamille\SupprimerSousFamilleConfirmation.resx">
+      <DependentUpon>SupprimerSousFamilleConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Dao\Bacchus.SQLite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -250,6 +362,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

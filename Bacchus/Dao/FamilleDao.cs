@@ -8,113 +8,221 @@ using System.Data;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Classe permettant l'accés au données des Familles
+    /// </summary>
+    /// 
     public class FamilleDAO
     {
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+
+        /// <summary>
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
+        /// </summary>
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
+
+        /// <summary>
+        /// Ajoute une famille à la base de données
+        /// retourne 0 si succés, -1 echec
+        /// </summary>
+        /// <param name="Nom">Nom de la famille</param>
+        /// <returns>retourne 0 si succés, -1 echec</returns>
         public int AjouterFamille(String Nom)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            // Si la famille existe on ne le crée pas
+            if (GetRefFamille(Nom) != -1)
             {
-                Connexion.Open();
+                return -1;
             }
 
-            int SfIfExists = TrouverParNom(Nom);
-            if (SfIfExists != -1)
-            {
-                Connexion.Close();
-                return 1;
-            }
-            SQLiteCommand Requete = Connexion.CreateCommand();
-            Requete.CommandText = "Insert into Familles(Nom) Values(@nom)";
-            Requete.Parameters.Add(new SQLiteParameter("@nom", Nom));
-            SQLiteDataReader LectureRequette = Requete.ExecuteReader();
-            Connexion.Close();
-            return 0;
+            // On execute la commande Sql pour ajouter la famille à la base de données
+            String sql = "INSERT INTO Familles(Nom) Values('"+Nom+"')";
 
+            //Mise en place de la connexion avec la base de données
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                //On effectue la commande Sql
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    //On verifie si on a recuperé un résultat
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
+            }
+            return -1;   
         }
 
-        public Famille TrouverParId(int Id)
+        /// <summary>
+        /// Récupere la famille à partir de sa reference ,null si la famille n'existe pas
+        /// </summary>
+        /// <param name="RefFamille">Reference de la famille</param>
+        /// <returns>Retourne la famille</returns>
+        public Famille GetFamille(int RefFamille)
         {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            Famille Famille;
+            // On met en place la commande Sql pour récuperer la famille
+            String sql = "SELECT * FROM Familles WHERE RefFamille = '" + RefFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //Si on récupere un resultat on renvoi la famille
+                        if (rdr.Read())
+                        {
+                            Famille = new Famille(rdr.GetInt32(0), rdr.GetString(1));
+                            return Famille;
+                        }
+                    }
+                }
             }
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Familles WHERE RefFamille = :Id", Connexion);
-            Command.Parameters.AddWithValue(":Id", Id);
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
-            {
-                Famille Famille = new Famille(Reader.GetInt32(0), Reader.GetString(1));
-                Connexion.Close();
-                return Famille;
-            }
-            Connexion.Close();
             return null;
         }
 
-        public int TrouverParNom(String Nom)
+
+        /// <summary>
+        /// Récupere la reference d'une famille à partir de son nom,
+        /// retourne -1 si la famille n'existe pas
+        /// </summary>
+        /// <param name="Nom">Nom de la famille</param>
+        /// <returns>-1 si la famille existe, la reference de la famille sinon</returns>
+        public int GetRefFamille(String Nom)
         {
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefFamille FROM Familles WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+            // On met en place la commande Sql pour récuperer la famille 
+            String sql = "SELECT RefFamille FROM Familles WHERE Nom ='" + Nom + "'";
+
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
-            }
-            SQLiteDataReader Reader = Command.ExecuteReader();
-            if (Reader.Read())
-            {
-                int Ref = Reader.GetInt32(0);
-                Reader.Close();
-                Connexion.Close();
-                return Ref;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //Si on recupere un resultat on renvoi la reference de la famille
+                        if (rdr.Read())
+                        {
+                            int Ref = rdr.GetInt32(0);
+                            return Ref;
+                        }
+                    }
+                }
             }
             return -1;
         }
-        public List<Famille> TrouverFamille()
+
+
+        /// <summary>
+        /// Retourne Tous les Familles présentes dans la base de données
+        /// </summary>
+        /// <returns>Une liste de famille</returns>
+        public List<Famille> GetFamilles()
         {
-          
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Familles", Connexion);
-            SQLiteDataReader Reader = Command.ExecuteReader();
             List<Famille> ListeFamille = new List<Famille>();
-            while (Reader.Read())
+
+            // On met en place la commande Sql pour récuperer toutes les familles 
+            String sql = "SELECT * FROM Familles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                ListeFamille.Add(new Famille(Reader.GetInt32(0), Reader.GetString(1)));
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        //Si on recupere des resultats on les ajoutes à la liste de familles
+                       if(rdr.Read())
+                        {
+                            ListeFamille.Add(new Famille(rdr.GetInt32(0), rdr.GetString(1)));
+                            while (rdr.Read())
+                            {
+                                ListeFamille.Add(new Famille(rdr.GetInt32(0), rdr.GetString(1)));
+                            }
+                            return ListeFamille;
+                        }
+                       //Si on ne recupere aucun résultat on renvoi null
+                        else
+                        {
+                            return null;
+                        }                   
+                    }
+                }
             }
-            Connexion.Close();
-            return ListeFamille;
         }
 
+        /// <summary>
+        /// Supprime une famille 
+        /// retroune vrai si la famille existe et a été supprimé
+        /// </summary>
+        /// <param name="RefFamille">Reference de la famille a supprimer</param>
+        /// <returns>Retourne true si succés</returns>
         public Boolean SupprimerFamille(string RefFamille)
-        {
-            if ((Connexion == null) || (ConnectionState.Closed == Connexion.State))
+        { 
+
+            // On verfie si la famille n'existe pas 
+            if (RefFamille == null || GetFamille(int.Parse(RefFamille)) == null)
             {
-                Connexion.Open();
-            }
-            if (TrouverParNom(RefFamille) != -1)
-            {
-                Connexion.Close();
                 return false;
+            }
+
+            // On execute la commande Sql pour supprimer l'article de la base de données
+            String sql = "DELETE FROM Familles WHERE RefFamille ='" + RefFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Si l'article n'existe plus, on retourne vrai
+            if (GetFamille(int.Parse(RefFamille)) == null)
+            {
+                return true;
             }
             else
             {
-                SQLiteCommand Command = new SQLiteCommand("DELETE FROM Familles WHERE RefFamille = :RefFamille", Connexion);
-                Command.Parameters.AddWithValue(":RefFamille", RefFamille);
-                Command.ExecuteNonQuery();
-                if (TrouverParNom(RefFamille) != -1)
-                {
-                    Connexion.Close();
-                    return true;
-                }
-                Connexion.Close();
                 return false;
             }
         }
 
-    }
+        /// <summary>
+        /// Modifie la famille dans la base de données
+        /// </summary>
+        /// <param name="RefFamille">Reference de la famille</param>
+        /// <param name="Nom">Nom de la famille</param>
+        /// <returns>Retourne true si succés</returns>
+        public Boolean ModifierFamille(string RefFamille, string Nom)
+        {
 
+            // On verfie si la famille n'existe pas 
+            if (RefFamille == null || GetFamille(int.Parse(RefFamille)) == null)
+            {
+                return false;
+            }
+
+            // Si un nom est passé en paramètre on modifie le nom de la famille
+            if (Nom != null)
+            {
+                String sql = "UPDATE Familles SET Nom ='" + Nom + "' WHERE RefFamille ='" + RefFamille + "'";
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            return true;   
+        }
+
+    }
 
 }

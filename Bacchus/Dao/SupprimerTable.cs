@@ -7,35 +7,63 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Dao
 {
+    /// <summary>
+    /// Classe permet de supprimer les tables
+    /// </summary>
+    /// 
     public class SupprimerTable
     {
-
+        /// <summary>
+        /// Cette fonction permet de supprimer toutes les tables
+        /// </summary>
         public void SupprimerToutesTable()
         {
-            SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
-            Connexion.Open();
+            //SQLiteConnection Connexion = new SQLiteConnection("Data Source=C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+            String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
             //Suppression de la table familles
-            SQLiteCommand DeleteFamilles = Connexion.CreateCommand();
-            DeleteFamilles.CommandText = "Delete From Familles ";
-            SQLiteDataReader ReadRequeteFamilles = DeleteFamilles.ExecuteReader();
+            String sql = "DELETE From Familles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             //suppression de la table sous-familles
-            SQLiteCommand DeleteSousFamilles = Connexion.CreateCommand();
-            DeleteSousFamilles.CommandText = "Delete From SousFamilles ";
-            SQLiteDataReader ReadRequeteSousFamilles = DeleteSousFamilles.ExecuteReader();
+            sql = "DELETE From SousFamilles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             //suppresion de la table marque
-            SQLiteCommand DeleteMarque = Connexion.CreateCommand();
-            DeleteMarque.CommandText = "Delete From Marques ";
-            SQLiteDataReader ReadRequeteMarque = DeleteMarque.ExecuteReader();
+            sql = "DELETE From Marques";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             //suppression de la table articles
-            SQLiteCommand DeleteArticles = Connexion.CreateCommand();
-            DeleteArticles.CommandText = "Delete From Articles ";
-            SQLiteDataReader ReadRequeteArticles = DeleteArticles.ExecuteReader();
-
-            Connexion.Close();
+            sql = "DELETE From Articles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
