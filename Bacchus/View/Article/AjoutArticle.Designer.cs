@@ -41,12 +41,12 @@
             this.boutonAjouter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // comboBoxMarque
             // 
             this.comboBoxMarque.FormattingEnabled = true;
-            this.comboBoxMarque.Location = new System.Drawing.Point(259, 264);
-            this.comboBoxMarque.Name = "comboBox1";
-            this.comboBoxMarque.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxMarque.Location = new System.Drawing.Point(184, 264);
+            this.comboBoxMarque.Name = "comboBoxMarque";
+            this.comboBoxMarque.Size = new System.Drawing.Size(235, 24);
             this.comboBoxMarque.TabIndex = 0;
             // 
             // DescriptionText
@@ -57,28 +57,28 @@
             this.DescriptionText.Size = new System.Drawing.Size(235, 60);
             this.DescriptionText.TabIndex = 6;
             // 
-            // textBox1
+            // textRefArticle
             // 
-            this.textRefArticle.Location = new System.Drawing.Point(249, 63);
+            this.textRefArticle.Location = new System.Drawing.Point(184, 63);
             this.textRefArticle.Multiline = true;
-            this.textRefArticle.Name = "textBox1";
-            this.textRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.textRefArticle.Name = "textRefArticle";
+            this.textRefArticle.Size = new System.Drawing.Size(235, 36);
             this.textRefArticle.TabIndex = 7;
             // 
-            // comboBox2
+            // comboBoxSousFamille
             // 
             this.comboBoxSousFamille.FormattingEnabled = true;
-            this.comboBoxSousFamille.Location = new System.Drawing.Point(259, 214);
-            this.comboBoxSousFamille.Name = "comboBox2";
-            this.comboBoxSousFamille.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxSousFamille.Location = new System.Drawing.Point(184, 214);
+            this.comboBoxSousFamille.Name = "comboBoxSousFamille";
+            this.comboBoxSousFamille.Size = new System.Drawing.Size(235, 24);
             this.comboBoxSousFamille.TabIndex = 8;
             // 
-            // textBox2
+            // textPrix
             // 
-            this.textPrix.Location = new System.Drawing.Point(249, 320);
+            this.textPrix.Location = new System.Drawing.Point(184, 320);
             this.textPrix.Multiline = true;
-            this.textPrix.Name = "textBox2";
-            this.textPrix.Size = new System.Drawing.Size(170, 36);
+            this.textPrix.Name = "textPrix";
+            this.textPrix.Size = new System.Drawing.Size(235, 36);
             this.textPrix.TabIndex = 9;
             // 
             // Nom_Fichier_Label
@@ -127,9 +127,9 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Prix*";
             // 
-            // button1
+            // boutonAjouter
             // 
-            this.boutonAjouter.Location = new System.Drawing.Point(168, 387);
+            this.boutonAjouter.Location = new System.Drawing.Point(294, 386);
             this.boutonAjouter.Name = "boutonAjouter";
             this.boutonAjouter.Size = new System.Drawing.Size(125, 27);
             this.boutonAjouter.TabIndex = 15;
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(471, 448);
+            this.ClientSize = new System.Drawing.Size(439, 448);
             this.Controls.Add(this.boutonAjouter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -154,10 +154,10 @@
             this.Controls.Add(this.DescriptionText);
             this.Controls.Add(this.comboBoxMarque);
             this.Name = "AjoutArticle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AjoutArticle";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

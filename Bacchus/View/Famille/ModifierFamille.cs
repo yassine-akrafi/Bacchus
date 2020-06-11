@@ -32,7 +32,7 @@ namespace Bacchus.View
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>
-        private void bouttonModifier_Click(object sender, EventArgs e)
+        private void BouttonModifier_Click(object sender, EventArgs e)
         {
 
             //On recupere les champs que l'utilisateur a remplit

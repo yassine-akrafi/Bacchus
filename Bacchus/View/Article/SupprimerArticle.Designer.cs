@@ -36,23 +36,23 @@
             // Nom_Fichier_Label
             // 
             this.Nom_Fichier_Label.AutoSize = true;
-            this.Nom_Fichier_Label.Location = new System.Drawing.Point(33, 90);
+            this.Nom_Fichier_Label.Location = new System.Drawing.Point(64, 72);
             this.Nom_Fichier_Label.Name = "Nom_Fichier_Label";
             this.Nom_Fichier_Label.Size = new System.Drawing.Size(74, 17);
             this.Nom_Fichier_Label.TabIndex = 11;
             this.Nom_Fichier_Label.Text = "RefArticle*";
             // 
-            // textBox1
+            // textRefArticle
             // 
-            this.textRefArticle.Location = new System.Drawing.Point(231, 87);
+            this.textRefArticle.Location = new System.Drawing.Point(187, 69);
             this.textRefArticle.Multiline = true;
-            this.textRefArticle.Name = "textBox1";
+            this.textRefArticle.Name = "textRefArticle";
             this.textRefArticle.Size = new System.Drawing.Size(170, 36);
             this.textRefArticle.TabIndex = 12;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(154, 162);
+            this.button1.Location = new System.Drawing.Point(232, 156);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 27);
             this.button1.TabIndex = 16;
@@ -64,15 +64,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 227);
+            this.ClientSize = new System.Drawing.Size(401, 211);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textRefArticle);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerArticle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SupprimerArticle";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

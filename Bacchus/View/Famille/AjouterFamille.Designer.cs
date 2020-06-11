@@ -37,23 +37,23 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 100);
+            this.label1.Location = new System.Drawing.Point(37, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 17);
             this.label1.TabIndex = 12;
             this.label1.Text = "Nom*";
             // 
-            // textBox2
+            // textNom
             // 
-            this.textNom.Location = new System.Drawing.Point(159, 83);
+            this.textNom.Location = new System.Drawing.Point(135, 69);
             this.textNom.Multiline = true;
-            this.textNom.Name = "textBox2";
-            this.textNom.Size = new System.Drawing.Size(259, 42);
+            this.textNom.Name = "textNom";
+            this.textNom.Size = new System.Drawing.Size(245, 42);
             this.textNom.TabIndex = 14;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(159, 192);
+            this.button1.Location = new System.Drawing.Point(255, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 27);
             this.button1.TabIndex = 16;
@@ -73,16 +73,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 272);
+            this.ClientSize = new System.Drawing.Size(392, 226);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
             this.Name = "AjouterFamille";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AjouterFamille";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

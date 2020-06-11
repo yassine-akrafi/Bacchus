@@ -50,14 +50,13 @@
             this.Nom_Fichier_Label.TabIndex = 11;
             this.Nom_Fichier_Label.Text = "RefArticle*";
             // 
-            // textBox1
+            // TextRefArticle
             // 
-            this.TextRefArticle.Location = new System.Drawing.Point(247, 48);
+            this.TextRefArticle.Location = new System.Drawing.Point(182, 48);
             this.TextRefArticle.Multiline = true;
-            this.TextRefArticle.Name = "textBox1";
-            this.TextRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.TextRefArticle.Name = "TextRefArticle";
+            this.TextRefArticle.Size = new System.Drawing.Size(235, 36);
             this.TextRefArticle.TabIndex = 12;
-            this.TextRefArticle.Text = "";
             // 
             // label1
             // 
@@ -85,12 +84,12 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "SousFamille";
             // 
-            // comboBox2
+            // comboBoxSousFamille
             // 
             this.comboBoxSousFamille.FormattingEnabled = true;
-            this.comboBoxSousFamille.Location = new System.Drawing.Point(237, 200);
-            this.comboBoxSousFamille.Name = "comboBox2";
-            this.comboBoxSousFamille.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxSousFamille.Location = new System.Drawing.Point(182, 200);
+            this.comboBoxSousFamille.Name = "comboBoxSousFamille";
+            this.comboBoxSousFamille.Size = new System.Drawing.Size(235, 24);
             this.comboBoxSousFamille.TabIndex = 16;
             // 
             // label3
@@ -102,12 +101,12 @@
             this.label3.TabIndex = 17;
             this.label3.Text = "Marque";
             // 
-            // comboBox1
+            // comboBoxMarque
             // 
             this.comboBoxMarque.FormattingEnabled = true;
-            this.comboBoxMarque.Location = new System.Drawing.Point(247, 267);
-            this.comboBoxMarque.Name = "comboBox1";
-            this.comboBoxMarque.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxMarque.Location = new System.Drawing.Point(182, 267);
+            this.comboBoxMarque.Name = "comboBoxMarque";
+            this.comboBoxMarque.Size = new System.Drawing.Size(235, 24);
             this.comboBoxMarque.TabIndex = 18;
             // 
             // label4
@@ -119,17 +118,17 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Prix";
             // 
-            // textBox2
+            // textPrix
             // 
-            this.textPrix.Location = new System.Drawing.Point(237, 328);
+            this.textPrix.Location = new System.Drawing.Point(182, 328);
             this.textPrix.Multiline = true;
-            this.textPrix.Name = "textBox2";
-            this.textPrix.Size = new System.Drawing.Size(170, 36);
+            this.textPrix.Name = "textPrix";
+            this.textPrix.Size = new System.Drawing.Size(235, 36);
             this.textPrix.TabIndex = 20;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(170, 404);
+            this.button1.Location = new System.Drawing.Point(292, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 27);
             this.button1.TabIndex = 21;
@@ -154,10 +153,10 @@
             this.Controls.Add(this.TextRefArticle);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierArticle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ModifierArticle";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

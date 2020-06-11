@@ -36,25 +36,25 @@
             // Nom_Fichier_Label
             // 
             this.Nom_Fichier_Label.AutoSize = true;
-            this.Nom_Fichier_Label.Location = new System.Drawing.Point(42, 100);
+            this.Nom_Fichier_Label.Location = new System.Drawing.Point(39, 97);
             this.Nom_Fichier_Label.Name = "Nom_Fichier_Label";
             this.Nom_Fichier_Label.Size = new System.Drawing.Size(83, 17);
             this.Nom_Fichier_Label.TabIndex = 13;
             this.Nom_Fichier_Label.Text = "RefMarque*";
             // 
-            // textBox1
+            // textRefMarque
             // 
-            this.textRefMarque.Location = new System.Drawing.Point(214, 97);
+            this.textRefMarque.Location = new System.Drawing.Point(201, 97);
             this.textRefMarque.Multiline = true;
-            this.textRefMarque.Name = "textBox1";
-            this.textRefMarque.Size = new System.Drawing.Size(170, 36);
+            this.textRefMarque.Name = "textRefMarque";
+            this.textRefMarque.Size = new System.Drawing.Size(183, 36);
             this.textRefMarque.TabIndex = 15;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(149, 193);
+            this.button1.Location = new System.Drawing.Point(238, 188);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 27);
+            this.button1.Size = new System.Drawing.Size(146, 27);
             this.button1.TabIndex = 18;
             this.button1.Text = "Supprimer";
             this.button1.UseVisualStyleBackColor = true;
@@ -64,15 +64,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 279);
+            this.ClientSize = new System.Drawing.Size(414, 253);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textRefMarque);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerMarque";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SupprimerMarque";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

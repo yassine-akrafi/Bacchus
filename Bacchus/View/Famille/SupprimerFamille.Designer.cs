@@ -36,23 +36,23 @@
             // Nom_Fichier_Label
             // 
             this.Nom_Fichier_Label.AutoSize = true;
-            this.Nom_Fichier_Label.Location = new System.Drawing.Point(31, 92);
+            this.Nom_Fichier_Label.Location = new System.Drawing.Point(42, 79);
             this.Nom_Fichier_Label.Name = "Nom_Fichier_Label";
             this.Nom_Fichier_Label.Size = new System.Drawing.Size(79, 17);
             this.Nom_Fichier_Label.TabIndex = 12;
             this.Nom_Fichier_Label.Text = "RefFamille*";
             // 
-            // textBox1
+            // textRefFamille
             // 
-            this.textRefFamille.Location = new System.Drawing.Point(200, 89);
+            this.textRefFamille.Location = new System.Drawing.Point(188, 79);
             this.textRefFamille.Multiline = true;
-            this.textRefFamille.Name = "textBox1";
-            this.textRefFamille.Size = new System.Drawing.Size(170, 36);
+            this.textRefFamille.Name = "textRefFamille";
+            this.textRefFamille.Size = new System.Drawing.Size(199, 46);
             this.textRefFamille.TabIndex = 14;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(144, 182);
+            this.button1.Location = new System.Drawing.Point(262, 175);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(125, 27);
             this.button1.TabIndex = 17;
@@ -64,15 +64,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 255);
+            this.ClientSize = new System.Drawing.Size(415, 228);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textRefFamille);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "SupprimerFamille";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SupprimerFamille";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

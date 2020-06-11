@@ -45,18 +45,22 @@ namespace Bacchus
         /// </summary>
         private void Exporter_Click(object sender, EventArgs e)
         {
-            //On recupere le dossier selectionnée et on appel la fonction ExporterCsv
-            ExportCsv CsvExport = new ExportCsv();
-            int ResultatExport;
+            //On verifie que l'utilisateur a selectionné un dossier
+            if(this.label1.Text != null && this.label1.Text!="")
+            {
+                //On recupere le dossier selectionnée et on appel la fonction ExporterCsv
+                ExportCsv CsvExport = new ExportCsv();
+                int ResultatExport;
 
-            this.progressBar1.Increment(50);
+                this.progressBar1.Increment(50);
 
-            ResultatExport = CsvExport.ExporterCsv(this.label1.Text);
+                ResultatExport = CsvExport.ExporterCsv(this.label1.Text);
 
-            this.progressBar1.Increment(100);
+                this.progressBar1.Increment(100);
 
-            // Message affiché à la fin de l'importation
-            this.textStatus.Text = "Le fichier a été exporté avec succés";
+                // Message affiché à la fin de l'importation
+                this.textStatus.Text = "Le fichier a été exporté avec succés";
+            }     
         }
 
         private void FormExporter_Load(object sender, EventArgs e)

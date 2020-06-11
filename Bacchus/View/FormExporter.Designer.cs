@@ -57,14 +57,14 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(88, 189);
+            this.progressBar1.Location = new System.Drawing.Point(88, 178);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(301, 26);
             this.progressBar1.TabIndex = 4;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(191, 134);
+            this.button2.Location = new System.Drawing.Point(191, 124);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 33);
             this.button2.TabIndex = 5;
@@ -75,11 +75,11 @@
             // Status_Label
             // 
             this.Status_Label.AutoSize = true;
-            this.Status_Label.Location = new System.Drawing.Point(207, 218);
+            this.Status_Label.Location = new System.Drawing.Point(165, 218);
             this.Status_Label.Name = "Status_Label";
-            this.Status_Label.Size = new System.Drawing.Size(48, 17);
+            this.Status_Label.Size = new System.Drawing.Size(150, 17);
             this.Status_Label.TabIndex = 8;
-            this.Status_Label.Text = "Status";
+            this.Status_Label.Text = "Message d\'exportation";
             // 
             // textStatus
             // 

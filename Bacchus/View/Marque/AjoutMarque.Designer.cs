@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 85);
+            this.label1.Location = new System.Drawing.Point(38, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 17);
             this.label1.TabIndex = 15;
@@ -52,9 +52,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(144, 180);
+            this.button1.Location = new System.Drawing.Point(266, 163);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 27);
+            this.button1.Size = new System.Drawing.Size(141, 33);
             this.button1.TabIndex = 17;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
@@ -64,15 +64,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 252);
+            this.ClientSize = new System.Drawing.Size(415, 240);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Name = "AjoutMarque";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AjoutMarque";
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 

@@ -86,7 +86,7 @@
             // Nom_Fichier_Label
             // 
             this.Nom_Fichier_Label.AutoSize = true;
-            this.Nom_Fichier_Label.Location = new System.Drawing.Point(33, 84);
+            this.Nom_Fichier_Label.Location = new System.Drawing.Point(64, 84);
             this.Nom_Fichier_Label.Name = "Nom_Fichier_Label";
             this.Nom_Fichier_Label.Size = new System.Drawing.Size(183, 17);
             this.Nom_Fichier_Label.TabIndex = 6;
@@ -95,17 +95,17 @@
             // Status_Label
             // 
             this.Status_Label.AutoSize = true;
-            this.Status_Label.Location = new System.Drawing.Point(135, 297);
+            this.Status_Label.Location = new System.Drawing.Point(79, 302);
             this.Status_Label.Name = "Status_Label";
-            this.Status_Label.Size = new System.Drawing.Size(48, 17);
+            this.Status_Label.Size = new System.Drawing.Size(150, 17);
             this.Status_Label.TabIndex = 7;
-            this.Status_Label.Text = "Status";
+            this.Status_Label.Text = "Message d\'importation";
             // 
-            // textBox1
+            // textStatus
             // 
             this.textStatus.Location = new System.Drawing.Point(27, 337);
             this.textStatus.Multiline = true;
-            this.textStatus.Name = "textBox1";
+            this.textStatus.Name = "textStatus";
             this.textStatus.Size = new System.Drawing.Size(255, 112);
             this.textStatus.TabIndex = 8;
             // 
