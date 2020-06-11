@@ -26,6 +26,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
+        public TextBox textRefFamille1 { get => this.textRefFamille; set => this.textRefFamille = value; }
+
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>

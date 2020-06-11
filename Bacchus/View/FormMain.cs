@@ -1,5 +1,6 @@
 ﻿using Bacchus.Dao;
 using Bacchus.View;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace Bacchus
         /// </summary>
         private List<Marque> ListMarques;
 
+        private string SelectedNodeText;
         //Getters && Setters
 
         public List<Article> ListArticles1 {
@@ -104,7 +106,7 @@ namespace Bacchus
         /// <summary>
         /// La fonction appelé lors d'evenement de clavier
         /// </summary>
-        private void KeyPressed(object sender, KeyEventArgs e)
+        private void ActualiserClavier(object sender, KeyEventArgs e)
         {
           if(e.KeyCode == Keys.F5)
             {
@@ -132,19 +134,222 @@ namespace Bacchus
                     this.listView1.Clear();
                 }
             }
-            
+
+            Console.WriteLine("Je rentre bien dans KeyPressed");
+
         }
 
-        private void ListViewPressed(object sender, KeyEventArgs e)
+        private void SupprClavier(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                Console.Write("Je demande un delete");
+
+                if (SelectedNodeText == "Articles")
+                {
+                    
+                        try
+                        {
+                            SupprimerArticleConfirmation FenetreSuppression = new SupprimerArticleConfirmation(listView1.SelectedItems[0].SubItems[1].Text);
+                            FenetreSuppression.ShowDialog(this);
+                        }
+                        catch (Exception)
+                        {
+                            SupprimerArticle FenetreSuppression = new SupprimerArticle();
+                            FenetreSuppression.ShowDialog(this);
+                        }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                   try
+                    {
+                        SupprimerMarqueConfirmation FenetreSuppression = new SupprimerMarqueConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerMarque FenetreSuppression = new SupprimerMarque();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    try
+                    {
+                        SupprimerFamilleConfirmation FenetreSuppression = new SupprimerFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerFamille FenetreSuppression = new SupprimerFamille();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    try
+                    {
+                        SupprimerSousFamilleConfirmation FenetreSuppression = new SupprimerSousFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerSousFamille FenetreSuppression = new SupprimerSousFamille();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                }
             }
-            
+
         }
 
-        private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
+        private void EntreeClavier(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+
+                if (SelectedNodeText == "Articles")
+                {
+
+                    try
+                    {
+                        ModifierArticle FenetreModification = new ModifierArticle();
+                        FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                    try
+                    {
+                        ModifierMarque FenetreModification = new ModifierMarque();
+                        FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    try
+                    {
+                       ModifierFamille FenetreModification = new ModifierFamille();
+                        FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    try
+                    {
+                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
+                        FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+       
+                    }
+                }
+            }
+
+        }
+
+        private void DoubleCliqueSouris(object sender, MouseEventArgs e)
+        {
+            
+                if (SelectedNodeText == "Articles")
+                {
+
+                    try
+                    {
+                        ModifierArticle FenetreModification = new ModifierArticle();
+                        FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                    try
+                    {
+                        ModifierMarque FenetreModification = new ModifierMarque();
+                        FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    try
+                    {
+                        ModifierFamille FenetreModification = new ModifierFamille();
+                        FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    try
+                    {
+                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
+                        FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+        }
+
+        private void CliqueDroitSouris(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+            
+            }
+
+
+        }
+
+            private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
         {
             // Set the ListViewItemSorter property to a new ListViewItemComparer 
             // object. Setting this property immediately sorts the 
@@ -216,8 +421,9 @@ namespace Bacchus
         /// </summary>
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+             SelectedNodeText = e.Node.Text;
             // Si le noeud selectionné est Articles
-            if (e.Node.Text == "Articles")
+            if (SelectedNodeText == "Articles")
             {
                 //On supprimer la listView si elle existe deja
                 if (this.listView1 != null)
@@ -242,7 +448,7 @@ namespace Bacchus
                 }
             }
             // Si le noeud selectionné est Marques
-            else if (e.Node.Text == "Marques")
+            else if (SelectedNodeText == "Marques")
             {
                 //On supprimer la listView si elle existe deja
                 if (this.listView1 != null)
@@ -265,7 +471,7 @@ namespace Bacchus
 
             }
             // Si le noeud selectionné est Familles
-            else if (e.Node.Text == "Familles")
+            else if (SelectedNodeText == "Familles")
             {
                 //On supprimer la listView si elle existe deja
                 if (this.listView1 != null)
@@ -288,7 +494,7 @@ namespace Bacchus
 
             }
             // Si le noeud selectionné est Sous familles
-            else if (e.Node.Text == "Sous familles")
+            else if (SelectedNodeText == "Sous familles")
             {
                 //On supprimer la listView si elle existe deja
                 if (this.listView1 != null)

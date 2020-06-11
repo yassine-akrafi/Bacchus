@@ -81,7 +81,7 @@ namespace Bacchus
             this.MenuStrip_FormMain.Size = new System.Drawing.Size(713, 28);
             this.MenuStrip_FormMain.TabIndex = 0;
             this.MenuStrip_FormMain.Text = "menuStrip1";
-            this.MenuStrip_FormMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
+            this.MenuStrip_FormMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ActualiserClavier);
             // 
             // fichierToolStripMenuItem
             // 
@@ -305,7 +305,8 @@ namespace Bacchus
             this.treeView1.Size = new System.Drawing.Size(237, 403);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
-            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ActualiserClavier);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SupprClavier);
             // 
             // listView1
             // 
@@ -318,8 +319,11 @@ namespace Bacchus
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewColumn_Click);
-            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
-            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListViewPressed);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ActualiserClavier);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SupprClavier);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EntreeClavier);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DoubleCliqueSouris);
+            this.listView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CliqueDroitSouris);
             // 
             // FormMain
             // 
@@ -333,7 +337,7 @@ namespace Bacchus
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ActualiserClavier);
             this.MenuStrip_FormMain.ResumeLayout(false);
             this.MenuStrip_FormMain.PerformLayout();
             this.StatusStrip_FormMain.ResumeLayout(false);
@@ -378,6 +382,7 @@ namespace Bacchus
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusMarque;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusFamille;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusSousFamille;
+
     }
 }
 
