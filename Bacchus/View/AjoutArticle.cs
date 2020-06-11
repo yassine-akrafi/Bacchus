@@ -103,8 +103,6 @@ namespace Bacchus.View
                 Description = "Sans Description";
             }
 
-            Console.WriteLine("voila ce qu'il y a dans la combobox : " + this.comboBoxSousFamille.SelectedItem + " et " + this.comboBoxSousFamille.SelectedItem.ToString());
-
             //Si parametre correcte on effectue l'ajout
             if (Executer == true)
             {
