@@ -23,10 +23,6 @@ namespace Bacchus.Dao
         String Connexion = "Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
 
 
-
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
         /// <summary>
         /// Ajoute une famille à la base de données
         /// retourne 0 si succés, -1 echec

@@ -14,10 +14,7 @@ namespace Bacchus.Dao
     /// 
     public class ArticleDao
     {
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
-
+     
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"

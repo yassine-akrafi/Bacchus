@@ -13,10 +13,6 @@ namespace Bacchus.Dao
     /// </summary>
     public class MarqueDao
     {
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
-        //**************A enleverrrrrr
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
