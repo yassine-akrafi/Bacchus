@@ -51,6 +51,7 @@ namespace Bacchus.View
 
                 ModifierSousFamilleConfirmation FenetreConfirmation = new ModifierSousFamilleConfirmation(RefSousFamille, Nom, RefFamille);
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
            
         }

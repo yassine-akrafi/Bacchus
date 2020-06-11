@@ -108,6 +108,7 @@ namespace Bacchus.View
             {
                 AjouterArticleConfirmation FenetreConfirmation = new AjouterArticleConfirmation(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
         }
 

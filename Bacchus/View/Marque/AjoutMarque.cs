@@ -37,6 +37,7 @@ namespace Bacchus.View
 
                 AjouterMarqueConfirmation FenetreConfirmation = new AjouterMarqueConfirmation(Nom);
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
         }
     }

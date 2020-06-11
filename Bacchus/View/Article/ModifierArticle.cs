@@ -60,7 +60,7 @@ namespace Bacchus.View
 
                 ModifierArticleConfirmation FenetreConfirmation =  new ModifierArticleConfirmation(RefArticle, Description, RefSousFamille, RefMarque, Prix);
                 FenetreConfirmation.ShowDialog(this);
-                this.Visible = false;
+                this.Hide();
             }
             
         }

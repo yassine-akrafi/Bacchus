@@ -1,4 +1,6 @@
-﻿namespace Bacchus
+﻿using System.Windows.Forms;
+
+namespace Bacchus
 {
     partial class FormMain
     {
@@ -50,13 +52,13 @@
             this.modifierToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.supprimerToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusStrip_FormMain = new System.Windows.Forms.StatusStrip();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.toolStripStatusArticle = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusMarque = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusFamille = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusSousFamille = new System.Windows.Forms.ToolStripStatusLabel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.MenuStrip_FormMain.SuspendLayout();
             this.StatusStrip_FormMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -79,6 +81,7 @@
             this.MenuStrip_FormMain.Size = new System.Drawing.Size(713, 28);
             this.MenuStrip_FormMain.TabIndex = 0;
             this.MenuStrip_FormMain.Text = "menuStrip1";
+            this.MenuStrip_FormMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
             // 
             // fichierToolStripMenuItem
             // 
@@ -250,6 +253,30 @@
             this.StatusStrip_FormMain.Text = "statusStrip";
             this.StatusStrip_FormMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.StatusStrip_FormMain_ItemClicked);
             // 
+            // toolStripStatusArticle
+            // 
+            this.toolStripStatusArticle.Name = "toolStripStatusArticle";
+            this.toolStripStatusArticle.Size = new System.Drawing.Size(13, 20);
+            this.toolStripStatusArticle.Text = " ";
+            // 
+            // toolStripStatusMarque
+            // 
+            this.toolStripStatusMarque.Name = "toolStripStatusMarque";
+            this.toolStripStatusMarque.Size = new System.Drawing.Size(13, 20);
+            this.toolStripStatusMarque.Text = " ";
+            // 
+            // toolStripStatusFamille
+            // 
+            this.toolStripStatusFamille.Name = "toolStripStatusFamille";
+            this.toolStripStatusFamille.Size = new System.Drawing.Size(13, 20);
+            this.toolStripStatusFamille.Text = " ";
+            // 
+            // toolStripStatusSousFamille
+            // 
+            this.toolStripStatusSousFamille.Name = "toolStripStatusSousFamille";
+            this.toolStripStatusSousFamille.Size = new System.Drawing.Size(13, 20);
+            this.toolStripStatusSousFamille.Text = " ";
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -278,6 +305,7 @@
             this.treeView1.Size = new System.Drawing.Size(237, 403);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1_AfterSelect);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
             // 
             // listView1
             // 
@@ -289,31 +317,8 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.importerClicked);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusArticle.Name = "toolStripStatusLabel1";
-            this.toolStripStatusArticle.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusArticle.Text = " ";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusMarque.Name = "toolStripStatusLabel2";
-            this.toolStripStatusMarque.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusMarque.Text = " ";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusFamille.Name = "toolStripStatusLabel3";
-            this.toolStripStatusFamille.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusFamille.Text = " ";
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusSousFamille.Name = "toolStripStatusLabel4";
-            this.toolStripStatusSousFamille.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusSousFamille.Text = " ";
+            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewColumn_Click);
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
             // 
             // FormMain
             // 
@@ -327,6 +332,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyPressed);
             this.MenuStrip_FormMain.ResumeLayout(false);
             this.MenuStrip_FormMain.PerformLayout();
             this.StatusStrip_FormMain.ResumeLayout(false);

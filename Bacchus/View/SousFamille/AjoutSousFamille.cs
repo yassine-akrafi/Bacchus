@@ -66,6 +66,8 @@ namespace Bacchus.View
             if (Nom != "" && Nom != null && RefFamille!=-1)
             {
                 AjouterSousFamilleConfirmation FenetreConfirmation = new AjouterSousFamilleConfirmation(RefFamille.ToString(), Nom);
+                FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
         }
     }

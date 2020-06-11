@@ -35,6 +35,12 @@ namespace Bacchus.View.ConfirmationView
             //On initialise le Dao
             MarqueDao DaoMarque = new MarqueDao();
             DaoMarque.AjouterMarque(Nom);
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

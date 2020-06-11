@@ -34,7 +34,7 @@ namespace Bacchus.View.ConfirmationView
 
         private void Annuler_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,6 +46,7 @@ namespace Bacchus.View.ConfirmationView
         {
             ArticleDao DaoArticle = new ArticleDao();
             DaoArticle.AjouterArticle(this.RefArticle, this.Description, this.SousFamille, this.Marque, this.Prix);
+            this.Hide();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace Bacchus.View
             {
                 SupprimerSousFamilleConfirmation FenetreConfirmation = new SupprimerSousFamilleConfirmation(RefSousFamille);
                 FenetreConfirmation.ShowDialog(this);
+                this.Hide();
             }
         }
     }

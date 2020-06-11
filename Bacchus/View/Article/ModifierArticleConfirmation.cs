@@ -15,7 +15,12 @@ namespace Bacchus.View.ConfirmationView
     {
         private string RefArticle, Description, Prix;
         private int RefSousFamille, RefMarque;
-        
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
         public ModifierArticleConfirmation(string PRefArticle, string PDescription, int PRefSousFamille, int PRefMarque, string PPrix)
         {
             InitializeComponent();
@@ -39,7 +44,9 @@ namespace Bacchus.View.ConfirmationView
             {
                 DaoArticle.ModifierArticle(RefArticle, Description, RefSousFamille, RefMarque, float.Parse(Prix));
             }
-           
+
+            this.Hide();
+
         }
     }
 }

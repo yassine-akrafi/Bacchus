@@ -33,7 +33,7 @@ namespace Bacchus.View.ConfirmationView
 
         private void Annuler_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
         private void Confirmation_Click(object sender, EventArgs e)
@@ -42,6 +42,7 @@ namespace Bacchus.View.ConfirmationView
             FamilleDAO DaoFamille = new FamilleDAO();
 
             DaoFamille.AjouterFamille(Nom);
+            this.Hide();
         }
     }
 }

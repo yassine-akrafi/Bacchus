@@ -11,22 +11,27 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
-    public partial class ModifierMarqueConfirmation : Form
+    public partial class ModifierFamilleConfirmation : Form
     {
-        private string RefMarque, Nom;
-        public ModifierMarqueConfirmation(string PRefMarque, string PNom)
+        private string RefFamille, Nom;
+        public ModifierFamilleConfirmation(string PRefFamille, string PNom)
         {
             InitializeComponent();
-            this.RefMarque = PRefMarque;
+            this.RefFamille = PRefFamille;
             this.Nom = PNom;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
         private void Confirmation_Click(object sender, EventArgs e)
         {
             //On initialise le Dao
-            MarqueDao DaoMarque = new MarqueDao();
-
-            DaoMarque.ModifierMarque(RefMarque, Nom);
+            FamilleDAO DaoFamille = new FamilleDAO();
+            DaoFamille.ModifierFamille(RefFamille, Nom);
+            this.Hide();
         }
     }
 }

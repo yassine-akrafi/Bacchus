@@ -11,23 +11,29 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
-    public partial class ModifierSousFamilleConfirmation : Form
+   
+    public partial class SupprimerSousFamilleConfirmation : Form
     {
-        private string RefSousFamille, Nom;
-        private int RefFamille;
-
-        public ModifierSousFamilleConfirmation(string PRefSousFamille, string PNom, int PRefFamille)
+        private string RefSousFamille;
+        public SupprimerSousFamilleConfirmation(string PRefSousFamille)
         {
             InitializeComponent();
             this.RefSousFamille = PRefSousFamille;
-            this.Nom = PNom;
-            this.RefFamille = PRefFamille;
         }
 
         private void Confirmation_Click(object sender, EventArgs e)
         {
+            //On initialise le Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
-            DaoSousFamille.ModifierSousFamille(RefSousFamille, Nom, RefFamille);
+
+            DaoSousFamille.SupprimerSousFamille(RefSousFamille);
+            this.Hide();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

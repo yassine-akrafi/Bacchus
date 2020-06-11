@@ -11,19 +11,28 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
-    public partial class SupprimerMarqueConfirmation : Form
+    public partial class ModifierMarqueConfirmation : Form
     {
-        private string RefMarque;
-        public SupprimerMarqueConfirmation(string PRefMarque)
+        private string RefMarque, Nom;
+        public ModifierMarqueConfirmation(string PRefMarque, string PNom)
         {
             InitializeComponent();
+            this.RefMarque = PRefMarque;
+            this.Nom = PNom;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
         private void Confirmation_Click(object sender, EventArgs e)
         {
             //On initialise le Dao
             MarqueDao DaoMarque = new MarqueDao();
-            DaoMarque.SupprimerMarque(RefMarque);
+
+            DaoMarque.ModifierMarque(RefMarque, Nom);
+            this.Hide();
         }
     }
 }

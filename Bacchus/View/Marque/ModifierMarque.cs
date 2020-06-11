@@ -41,6 +41,7 @@ namespace Bacchus.View
             if (RefMarque != null)
             {
                 ModifierMarqueConfirmation FenetreConfirmation = new ModifierMarqueConfirmation(RefMarque, Nom);
+                this.Hide();
             }
         }
     }

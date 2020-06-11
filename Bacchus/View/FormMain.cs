@@ -1,6 +1,7 @@
 ﻿using Bacchus.Dao;
 using Bacchus.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,9 +102,48 @@ namespace Bacchus
         }
 
         /// <summary>
-        /// Fonction appelé lorsque qu'on on appuie sur exporter
+        /// La fonction appelé lors d'evenement de clavier
         /// </summary>
-        private void exporterClicked(object sender, EventArgs e)
+        private void KeyPressed(object sender, KeyEventArgs e)
+        {
+          if(e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine("appuyer sur entréé");
+            }
+            Console.WriteLine("je suis entrrée");
+        }
+
+        private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
+        {
+            // Set the ListViewItemSorter property to a new ListViewItemComparer 
+            // object. Setting this property immediately sorts the 
+            // ListView using the ListViewItemComparer object.
+            this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
+        }
+        // Implements the manual sorting of items by columns.
+        class ListViewItemComparer : IComparer
+        {
+            private int col;
+            public ListViewItemComparer()
+            {
+                col = 0;
+            }
+            public ListViewItemComparer(int column)
+            {
+                col = column;
+            }
+            public int Compare(object x, object y)
+            {
+                return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+            }
+        }
+    
+
+
+    /// <summary>
+    /// Fonction appelé lorsque qu'on on appuie sur exporter
+    /// </summary>
+    private void exporterClicked(object sender, EventArgs e)
         {
             FormExporter form = new FormExporter();
             form.ShowDialog(this);
@@ -354,5 +394,6 @@ namespace Bacchus
         {
 
         }
+
     }
 }
