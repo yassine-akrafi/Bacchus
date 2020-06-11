@@ -17,7 +17,7 @@ namespace Bacchus.Dao
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        String Connexion = "Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
 
         /// <summary>
         /// Ajoute une sous famille à la base de données
@@ -29,38 +29,33 @@ namespace Bacchus.Dao
         public int AjouterSousFamille(String NomFamille, String Nom)
         {
             // Si la sous famille existe on ne le crée pas
-            if (GetRefSousFamille(Nom) != -1)
+            if (Nom == null || GetRefSousFamille(Nom) != -1)
             {
-                Connexion.Close();
                 return -1;
             }
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
+      
+            // On recupere la reference de la famille de la sous famille à partir de son nom
+            FamilleDAO DaoFamille = new FamilleDAO();
+            int RefFamille = DaoFamille.GetRefFamille(NomFamille);
+
+            // On execute la commande Sql pour ajouter la sous famille à la base de données
+            String sql = "INSERT INTO SousFamilles(RefFamille, Nom) Values('" + RefFamille + "','" + Nom + "')";
+            Console.Write("J'ajoute une sous famille avec les parametres " + RefFamille + "  et " + Nom);
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
             }
-
-            try
-            {
-                // On recupere la reference de la famille de la sous famille à partir de son nom
-                FamilleDAO DaoFamille = new FamilleDAO();
-                int RefFamille = DaoFamille.GetRefFamille(NomFamille);
-
-                // On execute la commande Sql pour ajouter la sous famille à la base de données
-                SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO SousFamilles (RefFamille, Nom) VALUES (:RefFamille, :Nom)", Connexion);
-                CommandInsert.Parameters.AddWithValue(":RefFamille", RefFamille);
-                CommandInsert.Parameters.AddWithValue(":Nom", Nom);
-                CommandInsert.ExecuteNonQuery();
-
-                Connexion.Close();
-                return 0;
-            }
-            catch (Exception)
-            {
-                Connexion.Close();
-                return -1;
-            }
-
+            return -1;
         }
 
         /// <summary>
@@ -71,31 +66,29 @@ namespace Bacchus.Dao
         /// <returns>vrai si la sous famille existe et a été supprimé</returns>
         public Boolean SupprimerSousFamille(string RefSousFamille)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
 
             // On verfie si la sous famille n'existe pas 
-            if (GetSousFamille(int.Parse(RefSousFamille)) == null)
+            if (RefSousFamille == null || GetSousFamille(int.Parse(RefSousFamille)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
             // On execute la commande Sql pour supprimer l'article de la base de données
-            SQLiteCommand Command = new SQLiteCommand("DELETE FROM SousFamilles WHERE RefSousFamille = :RefSousFamille", Connexion);
-            Command.Parameters.AddWithValue(":RefSousFamille", RefSousFamille);
-            Command.ExecuteNonQuery();
+            String sql = "DELETE FROM SousFamilles WHERE RefSousFamille ='" + RefSousFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             // Si l'article n'existe plus, on retourne vrai
             if (GetSousFamille(int.Parse(RefSousFamille)) == null)
             {
-                Connexion.Close();
                 return true;
             }
-            Connexion.Close();
             return false;
  
         }
@@ -107,27 +100,24 @@ namespace Bacchus.Dao
         /// <returns>Retourne la sous famille</returns>
         public SousFamille GetSousFamille(int RefSousFamille)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
 
             // On met en place la commande Sql pour récuperer la famille
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM SousFamilles WHERE RefSousFamille = :RefSousFamille", Connexion);
-            Command.Parameters.AddWithValue(":RefSousFamille", RefSousFamille);
-
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on crée la famille à retourner et on la retourne
-            if (Reader.Read())
+            String sql = "SELECT * FROM SousFamilles WHERE RefSousFamille = '" + RefSousFamille + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                SousFamille SousFamille = new SousFamille(Reader.GetInt32(0), Reader.GetInt32(1), Reader.GetString(2));
-                Connexion.Close();
-                return SousFamille;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            SousFamille SousFamille = new SousFamille(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2));
+                            return SousFamille;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
             return null;
         }
 
@@ -139,29 +129,25 @@ namespace Bacchus.Dao
         /// <returns></returns>
         public int GetRefSousFamille(String Nom)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
 
             // On met en place la commande Sql pour récuperer la sous famille 
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefSousFamille FROM SousFamilles WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
+            String sql = "SELECT RefSousFamille FROM SousFamilles WHERE Nom = '" + Nom + "'";
 
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on retourne la reference de la sous famille
-            if (Reader.Read())
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                int Ref = Reader.GetInt32(0);
-                Reader.Close();
-                Connexion.Close();
-                return Ref;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            int Ref = rdr.GetInt32(0);
+                            return Ref;
+                        }
+                    }
+                }
             }
-
-            Connexion.Close();
             return -1;
         }
 
@@ -171,27 +157,33 @@ namespace Bacchus.Dao
         /// <returns>Une liste de sous familles</returns>
         public List<SousFamille> GetFamilles()
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
+            List<SousFamille> ListeSousFamille = new List<SousFamille>();
 
             // On met en place la commande Sql pour récuperer toutes les familles 
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM SousFamilles", Connexion);
-
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On crée une listes de sous familles et on lui ajoute toutes les sous familles recupérés à partir de la commande sql
-            List<SousFamille> ListeSousFamille = new List<SousFamille>();
-            while (Reader.Read())
+            String sql = "SELECT * FROM SousFamilles";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                ListeSousFamille.Add(new SousFamille(Reader.GetInt32(0), Reader.GetInt32(1), Reader.GetString(2)));
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            ListeSousFamille.Add(new SousFamille(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2)));
+                            while (rdr.Read())
+                            {
+                                ListeSousFamille.Add(new SousFamille(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2)));
+                            }
+                            return ListeSousFamille;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
             }
-
-            Connexion.Close();
-            return ListeSousFamille;
         }
 
         /// <summary>
@@ -204,38 +196,39 @@ namespace Bacchus.Dao
         public Boolean ModifierSousFamille(string RefSousFamille, string Nom, int RefFamille)
         {
 
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
             // On verfie si la famille n'existe pas 
-            if (GetSousFamille(int.Parse(RefSousFamille)) == null)
+            if (RefSousFamille == null || GetSousFamille(int.Parse(RefSousFamille)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
             // Si un nom est passé en paramètre on modifie le nom de la sous famille
             if (Nom != null)
                 {
-                    SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET Nom = :Nom WHERE RefSousFamille = :RefSousFamille", Connexion);
-                    Command.Parameters.AddWithValue(":RefMarque", RefSousFamille);
-                    Command.Parameters.AddWithValue(":Nom", Nom);
-                    Command.ExecuteNonQuery();
-                }
+                    String sql = "UPDATE SousFamilles SET Nom ='" + Nom + "' WHERE RefSousFamille ='" + RefSousFamille + "'";
+                    using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                    {
+                        c.Open();
+                        using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+            }
 
             // Si une Reference de famille est passé en paramètre on modifie la famille de la sous famille
             if (RefFamille != -1)
             {
-                SQLiteCommand Command = new SQLiteCommand("UPDATE Familles SET RefFamille = :RefFamille WHERE RefSousFamille = :RefSousFamille", Connexion);
-                Command.Parameters.AddWithValue(":RefSousFamille", RefSousFamille);
-                Command.Parameters.AddWithValue(":RefFamille", RefFamille);
-                Command.ExecuteNonQuery();
+                String sql = "UPDATE SousFamilles SET RefFamille ='" + RefFamille + "' WHERE RefSousFamille ='" + RefSousFamille + "'";
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
-
-            Connexion.Close();
             return true;
         }
 
