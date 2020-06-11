@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,8 +30,6 @@ namespace Bacchus.View
         /// </summary>
         private void bouttonSupprimer_Click(object sender, EventArgs e)
         {
-            //On initialise le Dao
-            ArticleDao DaoArticle = new ArticleDao();
            
             //On recupere la reference de l'article si elle existe
             string RefArticle = this.textRefArticle.Text;
@@ -38,7 +37,8 @@ namespace Bacchus.View
             //Si la reference d'un article a été recuperé on effectue la suppression
             if (RefArticle != "" && RefArticle != null)
             {
-                DaoArticle.SupprimerArticle(RefArticle);
+                SupprimerArticleConfirmation FenetreConfirmation = new SupprimerArticleConfirmation(RefArticle);
+                FenetreConfirmation.ShowDialog(this);
             }
         }
     }

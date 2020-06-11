@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,8 +31,6 @@ namespace Bacchus.View
         /// </summary>
         private void bouttonModifier_Click(object sender, EventArgs e)
         {
-            //On initialise le Dao
-            FamilleDAO DaoFamille = new FamilleDAO();
 
             //On recupere les champs que l'utilisateur a remplit
             string RefFamille = this.textRefFamille.Text;
@@ -40,7 +39,8 @@ namespace Bacchus.View
             //Si la reference d'une famille a été ecrite on effectue le changement
             if (RefFamille != null )
             {
-                DaoFamille.ModifierFamille(RefFamille, Nom);
+                ModifierFamilleConfirmation FenetreConfirmation = new ModifierFamilleConfirmation(RefFamille, Nom);
+                FenetreConfirmation.ShowDialog(this);
             }
         }
     }

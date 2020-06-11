@@ -117,23 +117,27 @@ namespace Bacchus
             // On recupere toutes les marques de la base de données
             MarqueDao DaoMarque = new MarqueDao();
             this.ListMarques1 = DaoMarque.GetArticles();
+            this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
 
             // On recupere toutes les familles de la base de données
             FamilleDAO DaoFamille = new FamilleDAO();
             this.ListFamilles1 = DaoFamille.GetFamilles();
+            this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
 
             // On recupere toutes les sous familles de la base de données
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+            this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
 
             // On recupere toutes les articles de la base de données
             ArticleDao DaoArticle = new ArticleDao();
             this.ListArticles1 = DaoArticle.GetArticles();
-
+            this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
             if (this.listView1 != null)
             {
                 this.listView1.Clear();
             }
+         
         }
 
         /// <summary>
@@ -344,6 +348,11 @@ namespace Bacchus
         {
             SupprimerMarque Form = new SupprimerMarque();
             Form.ShowDialog(this);
+        }
+
+        private void StatusStrip_FormMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

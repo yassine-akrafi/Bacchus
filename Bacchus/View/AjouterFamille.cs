@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +37,8 @@ namespace Bacchus.View
             //Si le nom existe on ajoute la famille
             if (Nom!= "" && Nom!=null)
             {
-                DaoFamille.AjouterFamille(Nom);
+                AjouterFamilleConfirmation FenetreConfirmation = new AjouterFamilleConfirmation(Nom);
+                FenetreConfirmation.ShowDialog(this);
             }
         }
     }

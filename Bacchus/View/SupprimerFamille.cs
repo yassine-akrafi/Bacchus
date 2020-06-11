@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,16 +30,14 @@ namespace Bacchus.View
         /// </summary>
         private void bouttonSupprimer_Click(object sender, EventArgs e)
         {
-            //On initialise le Dao
-            FamilleDAO DaoFamille = new FamilleDAO();
-
             //On recupere la reference de la famille si elle existe
             string RefFamille = this.textRefFamille.Text;
 
             //Si la reference d'une famille a été recuperé on effectue la suppression
             if (RefFamille != "" && RefFamille!=null)
             {
-                DaoFamille.SupprimerFamille(RefFamille);
+                SupprimerFamilleConfirmation FenetreConfirmation = new SupprimerFamilleConfirmation(RefFamille);
+                FenetreConfirmation.ShowDialog(this);
             }
         }
     }

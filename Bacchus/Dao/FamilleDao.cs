@@ -15,12 +15,11 @@ namespace Bacchus.Dao
     public class FamilleDAO
     {
 
-
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
         // private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
-        String Connexion = "Data Source= Bacchus.SQLite";
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
         /// <summary>
         /// Ajoute une famille à la base de données

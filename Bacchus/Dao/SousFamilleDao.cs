@@ -8,20 +8,17 @@ using System.Data;
 
 namespace Bacchus.Dao
 {
-
- 
-
     /// <summary>
     /// Classe permettant l'accés au données des Sous familles
     /// </summary>
     public class SousFamilleDAO
     {
 
-
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        String Connexion = "Data Source= Bacchus.SQLite";
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
+
         /// <summary>
         /// Ajoute une sous famille à la base de données
         /// retourne 0 si succés, -1 echec
@@ -135,7 +132,7 @@ namespace Bacchus.Dao
 
             // On met en place la commande Sql pour récuperer la sous famille 
             String sql = "SELECT RefSousFamille FROM SousFamilles WHERE Nom = '" + Nom + "'";
-
+            Console.WriteLine("Commande Sql suivante effectuer :" + sql);
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
@@ -148,10 +145,14 @@ namespace Bacchus.Dao
                             int Ref = rdr.GetInt32(0);
                             return Ref;
                         }
+                        else
+                        {
+                            return -1;
+                        }
                     }
                 }
             }
-            return -1;
+            
         }
 
         /// <summary>

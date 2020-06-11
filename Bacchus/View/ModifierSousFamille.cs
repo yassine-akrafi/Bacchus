@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +31,6 @@ namespace Bacchus.View
         private void bouttonModifier_Click(object sender, EventArgs e)
         {
             //On initialise les Dao
-            SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             FamilleDAO DaoFamille = new FamilleDAO();
 
             //On initialise la Reference de la famille
@@ -44,12 +44,13 @@ namespace Bacchus.View
             if (RefSousFamille != null)
             {
                 //On recupere la reference de la famille si elle est selectionnée
-                if (this.comboBoxFamille.Text != null)
+                if (this.comboBoxFamille.SelectedItem != null)
                 {
-                    RefFamille = DaoFamille.GetRefFamille(this.comboBoxFamille.Text);
+                    RefFamille = DaoFamille.GetRefFamille(this.comboBoxFamille.SelectedItem.ToString());
                 }
 
-                DaoSousFamille.ModifierSousFamille(RefSousFamille, Nom, RefFamille);
+                ModifierSousFamilleConfirmation FenetreConfirmation = new ModifierSousFamilleConfirmation(RefSousFamille, Nom, RefFamille);
+                FenetreConfirmation.ShowDialog(this);
             }
            
         }

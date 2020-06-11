@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,6 @@ namespace Bacchus.View
             //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             MarqueDao DaoMarque = new MarqueDao();
-            ArticleDao DaoArticle = new ArticleDao();
 
             //On initialise la Reference de la sous famille et de la marque 
             int RefSousFamille = -1;
@@ -47,19 +47,20 @@ namespace Bacchus.View
             if (RefArticle != null)
             {
                 //On recupere la reference de la sous famille si elle est selectionnée
-                if (this.comboBoxSousFamille.Text != null)
+                if (this.comboBoxSousFamille.SelectedItem != null)
                 {
-                    RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBoxSousFamille.Text);
+                    RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBoxSousFamille.SelectedItem.ToString());
                 }
 
                 //On recupere la marque de la sous famille si elle est selectionnée
-                if (this.comboBoxMarque.Text != null)
+                if (this.comboBoxMarque.SelectedItem != null)
                 {
-                    RefMarque = DaoMarque.GetRefMarque(this.comboBoxMarque.Text);
+                    RefMarque = DaoMarque.GetRefMarque(this.comboBoxMarque.SelectedItem.ToString());
                 }
 
-                DaoArticle.ModifierArticle(RefArticle, Description, RefSousFamille, RefMarque, float.Parse(Prix));
-                
+                ModifierArticleConfirmation FenetreConfirmation =  new ModifierArticleConfirmation(RefArticle, Description, RefSousFamille, RefMarque, Prix);
+                FenetreConfirmation.ShowDialog(this);
+                this.Visible = false;
             }
             
         }

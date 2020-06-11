@@ -1,4 +1,5 @@
 ﻿using Bacchus.Dao;
+using Bacchus.View.ConfirmationView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,8 +32,6 @@ namespace Bacchus.View
         /// </summary>
         private void bouttonModifier_Click(object sender, EventArgs e)
         {
-            //On initialise le Dao
-            MarqueDao DaoMarque = new MarqueDao();
 
             //On recupere les champs que l'utilisateur a remplit
             string RefMarque = this.textMarque.Text;
@@ -41,7 +40,7 @@ namespace Bacchus.View
             //Si la reference d'une marque a été ecrite on effectue le changement
             if (RefMarque != null)
             {
-                DaoMarque.ModifierMarque(RefMarque, Nom);
+                ModifierMarqueConfirmation FenetreConfirmation = new ModifierMarqueConfirmation(RefMarque, Nom);
             }
         }
     }

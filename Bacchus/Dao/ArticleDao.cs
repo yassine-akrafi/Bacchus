@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,12 @@ namespace Bacchus.Dao
     /// 
     public class ArticleDao
     {
-     
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        String Connexion = "Data Source= Bacchus.SQLite";
-
+        String Connexion = "Data Source= Dao//Bacchus.SQLite";
+        
         /// <summary>
         /// Ajoute un article dans la base de données, 
         /// retourne 0 si succés, -1 echec
@@ -149,7 +149,10 @@ namespace Bacchus.Dao
                        
                         while (rdr.Read())
                         {
-                            ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), float.Parse(rdr.GetString(4)), rdr.GetInt32(5)));
+                            float Prix = float.Parse(rdr.GetString(4));
+
+
+                            ListeArticles.Add(new Article(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2), rdr.GetInt32(3), Prix, rdr.GetInt32(5)));
                             NombreArticles++;
                         }
                         
