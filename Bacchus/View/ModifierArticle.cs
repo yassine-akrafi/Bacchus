@@ -11,32 +11,51 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe de la vue de modification d'article
+    /// </summary>
     public partial class ModifierArticle : Form
     {
+        /// <summary>
+        /// Constructeur par défaut de la classe ModifierArticle
+        /// </summary>
         public ModifierArticle()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fonction appelé lorsque le bouton Modifier est cliqué
+        /// </summary>
+        private void bouttonModifier_Click(object sender, EventArgs e)
         {
+            //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             MarqueDao DaoMarque = new MarqueDao();
             ArticleDao DaoArticle = new ArticleDao();
+
+            //On initialise la Reference de la sous famille et de la marque 
             int RefSousFamille = -1;
             int RefMarque = -1;
-            string RefArticle = this.textBox1.Text;
+
+            //On recupere les champs que l'utilisateur a remplit
+            string RefArticle = this.textRefArticle.Text;
             string Description = this.DescriptionText.Text;
-            string Prix = this.textBox2.Text;
+            string Prix = this.textPrix.Text;
+
+            //Si la reference d'un article a été recuperé on effectue le changement
             if (RefArticle != null)
             {
-                if (this.comboBox2.Text != null)
+                //On recupere la reference de la sous famille si elle est selectionnée
+                if (this.comboBoxSousFamille.Text != null)
                 {
-                    RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBox2.Text);
+                    RefSousFamille = DaoSousFamille.GetRefSousFamille(this.comboBoxSousFamille.Text);
                 }
-                if (this.comboBox1.Text != null)
+
+                //On recupere la marque de la sous famille si elle est selectionnée
+                if (this.comboBoxMarque.Text != null)
                 {
-                    RefMarque = DaoMarque.GetRefMarque(this.comboBox1.Text);
+                    RefMarque = DaoMarque.GetRefMarque(this.comboBoxMarque.Text);
                 }
 
                 DaoArticle.ModifierArticle(RefArticle, Description, RefSousFamille, RefMarque, float.Parse(Prix));

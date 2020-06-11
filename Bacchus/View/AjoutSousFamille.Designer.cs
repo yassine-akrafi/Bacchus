@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBoxFamille = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -46,12 +46,12 @@
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(275, 64);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(160, 24);
-            this.comboBox2.TabIndex = 14;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBoxFamille.FormattingEnabled = true;
+            this.comboBoxFamille.Location = new System.Drawing.Point(275, 64);
+            this.comboBoxFamille.Name = "comboBox2";
+            this.comboBoxFamille.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxFamille.TabIndex = 14;
+            this.comboBoxFamille.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -64,11 +64,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(265, 134);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 36);
-            this.textBox2.TabIndex = 16;
+            this.textNom.Location = new System.Drawing.Point(265, 134);
+            this.textNom.Multiline = true;
+            this.textNom.Name = "textBox2";
+            this.textNom.Size = new System.Drawing.Size(170, 36);
+            this.textNom.TabIndex = 16;
             // 
             // button1
             // 
@@ -78,7 +78,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.boutonAjout_Click);
             // 
             // AjoutSousFamille
             // 
@@ -86,22 +86,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 305);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBoxFamille);
             this.Controls.Add(this.label2);
             this.Name = "AjoutSousFamille";
             this.Text = "AjoutSousFamille";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBoxFamille;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;
     }
 }

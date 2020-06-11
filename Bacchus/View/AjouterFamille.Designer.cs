@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -45,11 +45,11 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(159, 83);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(259, 42);
-            this.textBox2.TabIndex = 14;
+            this.textNom.Location = new System.Drawing.Point(159, 83);
+            this.textNom.Multiline = true;
+            this.textNom.Name = "textBox2";
+            this.textNom.Size = new System.Drawing.Size(259, 42);
+            this.textNom.TabIndex = 14;
             // 
             // button1
             // 
@@ -59,7 +59,7 @@
             this.button1.TabIndex = 16;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.boutonAjout_Click);
             // 
             // label2
             // 
@@ -76,18 +76,19 @@
             this.ClientSize = new System.Drawing.Size(430, 272);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
             this.Name = "AjouterFamille";
             this.Text = "AjouterFamille";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 
         }
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
     }

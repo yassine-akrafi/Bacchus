@@ -11,18 +11,34 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+
+    /// <summary>
+    /// Classe de la vue de modification de famille
+    /// </summary>
     public partial class ModifierMarque : Form
     {
+
+        /// <summary>
+        /// Constructeur par défaut de la classe ModifierFamille
+        /// </summary>
         public ModifierMarque()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fonction appelé lorsque le bouton Modifier est cliqué
+        /// </summary>
+        private void bouttonModifier_Click(object sender, EventArgs e)
         {
+            //On initialise le Dao
             MarqueDao DaoMarque = new MarqueDao();
-            string RefMarque = this.textBox1.Text;
-            string Nom = this.textBox2.Text;
+
+            //On recupere les champs que l'utilisateur a remplit
+            string RefMarque = this.textMarque.Text;
+            string Nom = this.textNom.Text;
+
+            //Si la reference d'une marque a été ecrite on effectue le changement
             if (RefMarque != null)
             {
                 DaoMarque.ModifierMarque(RefMarque, Nom);

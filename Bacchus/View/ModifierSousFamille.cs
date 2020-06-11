@@ -11,25 +11,42 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe de la vue de modification de sous famille
+    /// </summary>
     public partial class ModifierSousFamille : Form
     {
+        /// <summary>
+        /// Constructeur par défaut de la classe ModifierSousFamille
+        /// </summary>
         public ModifierSousFamille()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fonction appelé lorsque le bouton Modifier est cliqué
+        /// </summary>
+        private void bouttonModifier_Click(object sender, EventArgs e)
         {
+            //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             FamilleDAO DaoFamille = new FamilleDAO();
+
+            //On initialise la Reference de la famille
             int RefFamille = -1;
-            string Nom = this.textBox2.Text;
-            string RefSousFamille = this.textBox1.Text;
-            if(RefSousFamille != null)
+
+            //On recupere les champs que l'utilisateur a remplit
+            string Nom = this.textNom.Text;
+            string RefSousFamille = this.textRefSousFamille.Text;
+
+            //Si la reference d'une sous famille a été recuperé on effectue le changement
+            if (RefSousFamille != null)
             {
-                if (this.comboBox2.Text != null)
+                //On recupere la reference de la famille si elle est selectionnée
+                if (this.comboBoxFamille.Text != null)
                 {
-                    RefFamille = DaoFamille.GetRefFamille(this.comboBox2.Text);
+                    RefFamille = DaoFamille.GetRefFamille(this.comboBoxFamille.Text);
                 }
 
                 DaoSousFamille.ModifierSousFamille(RefSousFamille, Nom, RefFamille);
