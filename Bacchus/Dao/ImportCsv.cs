@@ -31,7 +31,6 @@ namespace Bacchus.Dao
 
             if (Line != null)
             {
-                Console.Write(" ImporteCsv Je parse la ligne :" + Line);
                 //On recupere la description de l'article
                 Index1 = Line.IndexOf(';');
                 Description = Line.Substring(0, Index1 );
@@ -60,22 +59,18 @@ namespace Bacchus.Dao
                 Line = Line.Substring(Index1 + 1);
                 Prix = Line;
 
-                Console.Write(" Ajout de la marque " + Marque);
                 // On ajoute la marque récuperé à la base de donnees
                 MarqueDao DaoMarque = new MarqueDao();
                 DaoMarque.AjouterMarque(Marque);
 
-                Console.Write(" Ajout de la famille " + Famille);
                 // On ajoute la famille récuperé à la base de donnees
                 FamilleDAO DaoFamille = new FamilleDAO();
                 DaoFamille.AjouterFamille(Famille);
 
-                Console.Write(" Ajout de la ss famille " + SousFamille);
                 // On ajoute la sous-famille récuperé à la base de donnees
                 SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
                 DaoSousFamille.AjouterSousFamille(Famille, SousFamille);
 
-                Console.Write(" Ajout de la article " + Ref);
                 // On ajoute l'article récuperé à la base de donnees
                 ArticleDao DaoArticle = new ArticleDao();   
                 DaoArticle.AjouterArticle(Ref, Description, SousFamille, Marque, float.Parse(Prix));

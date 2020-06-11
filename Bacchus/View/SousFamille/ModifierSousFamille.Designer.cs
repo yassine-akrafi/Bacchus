@@ -31,7 +31,7 @@
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textRefSousFamille = new System.Windows.Forms.TextBox();
+            this.TextRefSousFamille = new System.Windows.Forms.TextBox();
             this.comboBoxFamille = new System.Windows.Forms.ComboBox();
             this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -66,11 +66,11 @@
             // 
             // textBox1
             // 
-            this.textRefSousFamille.Location = new System.Drawing.Point(293, 62);
-            this.textRefSousFamille.Multiline = true;
-            this.textRefSousFamille.Name = "textBox1";
-            this.textRefSousFamille.Size = new System.Drawing.Size(170, 36);
-            this.textRefSousFamille.TabIndex = 17;
+            this.TextRefSousFamille.Location = new System.Drawing.Point(293, 62);
+            this.TextRefSousFamille.Multiline = true;
+            this.TextRefSousFamille.Name = "textBox1";
+            this.TextRefSousFamille.Size = new System.Drawing.Size(170, 36);
+            this.TextRefSousFamille.TabIndex = 17;
             // 
             // comboBox2
             // 
@@ -106,7 +106,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textNom);
             this.Controls.Add(this.comboBoxFamille);
-            this.Controls.Add(this.textRefSousFamille);
+            this.Controls.Add(this.TextRefSousFamille);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Nom_Fichier_Label);
@@ -123,7 +123,7 @@
         private System.Windows.Forms.Label Nom_Fichier_Label;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textRefSousFamille;
+        private System.Windows.Forms.TextBox TextRefSousFamille;
         private System.Windows.Forms.ComboBox comboBoxFamille;
         private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;

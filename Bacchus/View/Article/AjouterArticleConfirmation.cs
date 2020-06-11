@@ -11,10 +11,16 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
+    /// <summary>
+    /// Classe de la vue permettant la confirmation d'ajout d'article
+    /// </summary>
     public partial class AjouterArticleConfirmation : Form
     {
 
-        private string RefArticle, Description, SousFamille, Marque;
+        private string RefArticle;
+        private string Description;
+        private string SousFamille;
+        private string Marque;
         float Prix;
 
         public AjouterArticleConfirmation(string PRefArticle, string PDescription, string PSousFamille, string PMarque, float PPrix)
@@ -32,6 +38,9 @@ namespace Bacchus.View.ConfirmationView
             
         }
 
+        /// <summary>
+        /// Fonction appelé si l'utilisateur ne confirme pas 
+        /// </summary>
         private void Annuler_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -42,8 +51,12 @@ namespace Bacchus.View.ConfirmationView
             
         }
 
+        /// <summary>
+        /// Fonction appelé si l'utilisateur ne confirme  
+        /// </summary>
         private void Confirmation_Click(object sender, EventArgs e)
         {
+            //On appel la fonction qui va effectuer la requete sur la Base de données
             ArticleDao DaoArticle = new ArticleDao();
             DaoArticle.AjouterArticle(this.RefArticle, this.Description, this.SousFamille, this.Marque, this.Prix);
             this.Hide();

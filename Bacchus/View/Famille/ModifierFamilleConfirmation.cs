@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
+    /// <summary>
+    /// Classe de la vue permettant la confirmation de modification d'une famille
+    /// </summary>
     public partial class ModifierFamilleConfirmation : Form
     {
         private string RefFamille, Nom;
@@ -21,7 +24,7 @@ namespace Bacchus.View.ConfirmationView
             this.Nom = PNom;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Annuler_Click(object sender, EventArgs e)
         {
             this.Hide();
         }

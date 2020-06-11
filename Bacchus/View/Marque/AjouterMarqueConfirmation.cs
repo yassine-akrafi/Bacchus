@@ -11,13 +11,30 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
+    /// <summary>
+    /// Classe de la vue permettant la confirmation d'ajout d'une marque
+    /// </summary>
     public partial class AjouterMarqueConfirmation : Form
     {
         private string Nom;
+
         public AjouterMarqueConfirmation(string PNom)
         {
             InitializeComponent();
             this.Nom = PNom;
+        }
+
+        private void Confirmation_Click(object sender, EventArgs e)
+        {
+            //On initialise le Dao
+            MarqueDao DaoMarque = new MarqueDao();
+            DaoMarque.AjouterMarque(Nom);
+            this.Hide();
+        }
+
+        private void Annuler_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
         private void AjouterMarqueConfirmation_Load(object sender, EventArgs e)
@@ -28,19 +45,6 @@ namespace Bacchus.View.ConfirmationView
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //On initialise le Dao
-            MarqueDao DaoMarque = new MarqueDao();
-            DaoMarque.AjouterMarque(Nom);
-            this.Hide();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
         }
     }
 }

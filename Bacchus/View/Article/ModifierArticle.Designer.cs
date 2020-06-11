@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textRefArticle = new System.Windows.Forms.TextBox();
+            this.TextRefArticle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.DescriptionText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,12 +52,12 @@
             // 
             // textBox1
             // 
-            this.textRefArticle.Location = new System.Drawing.Point(247, 48);
-            this.textRefArticle.Multiline = true;
-            this.textRefArticle.Name = "textBox1";
-            this.textRefArticle.Size = new System.Drawing.Size(170, 36);
-            this.textRefArticle.TabIndex = 12;
-            this.textRefArticle.Text = "";
+            this.TextRefArticle.Location = new System.Drawing.Point(247, 48);
+            this.TextRefArticle.Multiline = true;
+            this.TextRefArticle.Name = "textBox1";
+            this.TextRefArticle.Size = new System.Drawing.Size(170, 36);
+            this.TextRefArticle.TabIndex = 12;
+            this.TextRefArticle.Text = "";
             // 
             // label1
             // 
@@ -135,7 +135,7 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Modifier";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.bouttonModifier_Click);
+            this.button1.Click += new System.EventHandler(this.BouttonModifier_Click);
             // 
             // ModifierArticle
             // 
@@ -151,7 +151,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.DescriptionText);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textRefArticle);
+            this.Controls.Add(this.TextRefArticle);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierArticle";
             this.Text = "ModifierArticle";
@@ -164,7 +164,7 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textRefArticle;
+        private System.Windows.Forms.TextBox TextRefArticle;
     private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox DescriptionText;
         private System.Windows.Forms.Label label2;

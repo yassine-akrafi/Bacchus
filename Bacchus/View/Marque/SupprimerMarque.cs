@@ -28,7 +28,7 @@ namespace Bacchus.View
         /// <summary>
         /// Fonction appelé lorsque le bouton Supprimer est cliqué
         /// </summary>
-        private void bouttonSuppriemr_Click(object sender, EventArgs e)
+        private void BouttonSupprimer_Click(object sender, EventArgs e)
         {
 
             //On recupere la reference de la famille si elle existe

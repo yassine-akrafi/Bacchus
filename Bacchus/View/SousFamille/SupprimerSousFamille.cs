@@ -26,7 +26,7 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
-        private void bouttonSupprimer_Click(object sender, EventArgs e)
+        private void BouttonSupprimer_Click(object sender, EventArgs e)
         {
 
             //On recupere la reference de la sous famille si elle existe

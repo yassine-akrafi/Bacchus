@@ -40,7 +40,7 @@ namespace Bacchus
 
             
             MarqueDao DaoMarque = new MarqueDao();
-            listMarques = DaoMarque.GetArticles();
+            listMarques = DaoMarque.GetMarques();
 
             FamilleDAO DaoFamille = new FamilleDAO();
             listFamille = DaoFamille.GetFamilles();

@@ -41,7 +41,7 @@ namespace Bacchus.View
 
             //On récupere toutes les marques de la base de données
             MarqueDao DaoMarque = new MarqueDao();
-            this.ListMarques1 = DaoMarque.GetArticles();
+            this.ListMarques1 = DaoMarque.GetMarques();
 
             //On ajoute dans le comboBox la liste des sous familles
             foreach (SousFamille Sousfamille in ListSousFamilles1)
@@ -64,7 +64,7 @@ namespace Bacchus.View
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
             MarqueDao DaoMarque = new MarqueDao();
 
-            //On initialise la Reference de la sous famille et de la marque 
+            // Cette variable sera mis à true si une erreur est passé dans le formulaire
             Boolean Executer = true;
 
 
@@ -74,36 +74,34 @@ namespace Bacchus.View
                 Executer = false;
             }
 
-
-
             //Si marque existe on affecte a RefMarque sa reference
             if (this.comboBoxMarque.SelectedItem == null)
             {
                 Executer = false;
             }
 
-
-
+            //Recuperation de la reference de l'article
             string RefArticle = this.textRefArticle.Text;
             if (RefArticle == "" || RefArticle == null)
             {
                 Executer = false;
             }
 
-
+            //Récuperation du prix
             string Prix = this.textPrix.Text;
             if (Prix == "" || Prix == null)
             {
                 Executer = false;
             }
 
-                string Description = this.DescriptionText.Text;
+            //On recupere la description ajouté, s'il y'en a pas on met une description par défaut
+            string Description = this.DescriptionText.Text;
             if(Description == "" || Description == null)
             {
                 Description = "Sans Description";
             }
 
-            //Si parametre correcte on effectue l'ajout
+            //Si Aucune erreur on effectue demande la confirmation de l'ajout
             if (Executer == true)
             {
                 AjouterArticleConfirmation FenetreConfirmation = new AjouterArticleConfirmation(RefArticle, Description, this.comboBoxSousFamille.SelectedItem.ToString(), this.comboBoxMarque.SelectedItem.ToString(), (float)Convert.ToDouble(Prix));

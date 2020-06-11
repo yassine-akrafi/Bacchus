@@ -17,7 +17,7 @@ namespace Bacchus.Dao
     {
 
         /// <summary>
-        /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
         /// </summary>
         String Connexion = "Data Source= Dao//Bacchus.SQLite";
         
@@ -30,7 +30,7 @@ namespace Bacchus.Dao
         /// <param name="NomSousFamille">Nom de la sous famille de l'article</param>
         /// <param name="NomMarque">Nom de la marque de l'article</param>
         /// <param name="Prix">Prix de l'article</param>
-        /// <returns></returns>
+        /// <returns>0 si succés</returns>
         public int AjouterArticle(String RefArticle, String Description, String NomSousFamille, String NomMarque, float Prix)
         {
 
@@ -71,16 +71,21 @@ namespace Bacchus.Dao
         /// retourne -1 si l'article n'existe pas, 0 sinon
         /// </summary>
         /// <param name="RefArticle">Reference de l'article</param>
-        /// <returns></returns>
+        /// <returns>retourne -1 si l'article n'existe pas, 0 sinon</returns>
         public int GetRefArticle(String RefArticle)
         {
             // On met en place la commande Sql pour récuperer l'article 
             String sql = "SELECT RefArticle FROM Articles WHERE RefArticle ='" + RefArticle + "'";
+
+            //Mise en place de la connexion avec la base de données
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
+
+                //On effectue la commande Sql
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
                 {
+                    //On verifie si on a recuperé un résultat
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
                         if(rdr.Read())
@@ -102,16 +107,18 @@ namespace Bacchus.Dao
         /// retourne -1 si l'article n'existe pas, 0 sinon
         /// </summary>
         /// <param name="RefArticle">Reference de l'article</param>
-        /// <returns></returns>
+        /// <returns>retourne -1 si l'article n'existe pas, 0 sinon</returns>
         public int RefArticleExiste(String RefArticle)
         {
 
             // On met en place la commande Sql pour récuperer l'article 
             String sql = "SELECT RefArticle FROM Articles WHERE RefArticle = '" + RefArticle+"'";
            
+            //Mise en place de la connexion avec la base de données
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
+                //On effectue la commande Sql
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
@@ -130,7 +137,7 @@ namespace Bacchus.Dao
         /// <summary>
         /// Retourne Tous les Articles présents dans la base de données
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Une liste d'articles</returns>
         public List<Article> GetArticles()
         {
             //Liste d'articles à retourner
@@ -149,8 +156,7 @@ namespace Bacchus.Dao
                        
                         while (rdr.Read())
                         {
- 
-
+                            //A cause de problemes de casting on tente plusieurs récuperation du prix 
                             try
                             {
                                 float Prix = float.Parse(rdr.GetString(4));
@@ -195,7 +201,7 @@ namespace Bacchus.Dao
         /// retroune vrai si l'article existe et a été supprimé
         /// </summary>
         /// <param name="RefArticle">Reference de l'article à supprimer</param>
-        /// <returns></returns>
+        /// <returns>Retourne vrai si l'article a été supprimé</returns>
         public Boolean SupprimerArticle(string RefArticle)
         {
             // On verfie si l'article n'existe pas 

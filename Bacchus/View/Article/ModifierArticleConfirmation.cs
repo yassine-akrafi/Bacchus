@@ -11,15 +11,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
+    /// <summary>
+    /// Classe de la vue permettant la confirmation de modificatin d'article
+    /// </summary>
     public partial class ModifierArticleConfirmation : Form
     {
         private string RefArticle, Description, Prix;
         private int RefSousFamille, RefMarque;
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
 
         public ModifierArticleConfirmation(string PRefArticle, string PDescription, int PRefSousFamille, int PRefMarque, string PPrix)
         {
@@ -31,6 +29,17 @@ namespace Bacchus.View.ConfirmationView
             this.Prix = PPrix;
         }
 
+        /// <summary>
+        /// Fonction appelé si l'utilisateur ne confirme pas 
+        /// </summary>
+        private void Annuler_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Fonction appelé si l'utilisateur ne confirme  
+        /// </summary>
         private void Confirmation_Click(object sender, EventArgs e)
         {
             ArticleDao DaoArticle = new ArticleDao();

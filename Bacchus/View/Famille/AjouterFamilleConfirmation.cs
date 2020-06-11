@@ -11,24 +11,18 @@ using System.Windows.Forms;
 
 namespace Bacchus.View.ConfirmationView
 {
+    /// <summary>
+    /// Classe de la vue permettant la confirmation d'ajout de famille
+    /// </summary>
     public partial class AjouterFamilleConfirmation : Form
     {
 
         private string Nom;
+
         public AjouterFamilleConfirmation(string PNom)
         {
             InitializeComponent();
             this.Nom = PNom;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Annuler_Click(object sender, EventArgs e)
@@ -43,6 +37,16 @@ namespace Bacchus.View.ConfirmationView
 
             DaoFamille.AjouterFamille(Nom);
             this.Hide();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

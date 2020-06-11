@@ -15,9 +15,8 @@ namespace Bacchus.Dao
     {
 
         /// <summary>
-        /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
         /// </summary>
-        //private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
         String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
         /// <summary>
@@ -36,15 +35,17 @@ namespace Bacchus.Dao
 
             // On execute la commande Sql pour ajouter la famille à la base de données
             String sql = "INSERT INTO Marques (Nom) Values('" + Nom + "')";
-            Console.Write("J'ajoute une Marques avec les parametres " + Nom);
+
+            //Mise en place de la connexion avec la base de données
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
                 {
-
+                    //On effectue la commande Sql
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //On verifie si on a recuperé un résultat
                         if (rdr.Read())
                         {
                             return 0;
@@ -137,6 +138,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on recupere un résultat on retourne la reference de la marque
                         if (rdr.Read())
                         {
                             int Ref = rdr.GetInt32(0);
@@ -152,7 +154,7 @@ namespace Bacchus.Dao
         /// Retourne toutes les marques présentes dans la base de données
         /// </summary>
         /// <returns>Une liste de marques</returns>
-        public List<Marque> GetArticles()
+        public List<Marque> GetMarques()
         {
             List<Marque> ListeMarque = new List<Marque>();
 
@@ -166,8 +168,9 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on recupere des resultats on les ajoutes à la liste de marques
                         if (rdr.Read())
-                        {
+                        {   
                             ListeMarque.Add(new Marque(rdr.GetInt32(0), rdr.GetString(1)));
                             while (rdr.Read())
                             {
@@ -175,6 +178,7 @@ namespace Bacchus.Dao
                             }
                             return ListeMarque;
                         }
+                        //Si on ne recupere aucun résultat on renvoi null
                         else
                         {
                             return null;
@@ -192,14 +196,12 @@ namespace Bacchus.Dao
         /// <returns>Retourne true si succés</returns>
         public Boolean ModifierMarque(string RefMarque, string Nom)
         {
-
             // On verfie si la famille n'existe pas 
             if (RefMarque == null || GetMarque(int.Parse(RefMarque)) == null)
             {
                 return false;
             }
 
-            
             // Si un nom est passé en paramètre on modifie le nom de la famille
             if (Nom != null)
             {
@@ -214,7 +216,6 @@ namespace Bacchus.Dao
                 }
             }
             return true;
-
         }
     }
 }

@@ -41,12 +41,7 @@ namespace Bacchus.View
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void boutonAjout_Click(object sender, EventArgs e)
+        private void BouttonAjout_Click(object sender, EventArgs e)
         {
             //On initialise les Dao
             FamilleDAO DaoFamille = new FamilleDAO();
@@ -69,6 +64,12 @@ namespace Bacchus.View
                 FenetreConfirmation.ShowDialog(this);
                 this.Hide();
             }
+        }
+
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Bacchus.Dao
     {
 
         /// <summary>
-        /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
         /// </summary>
         String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
@@ -40,7 +40,8 @@ namespace Bacchus.Dao
 
             // On execute la commande Sql pour ajouter la sous famille à la base de données
             String sql = "INSERT INTO SousFamilles(RefFamille, Nom) Values('" + RefFamille + "','" + Nom + "')";
-            Console.Write("J'ajoute une sous famille avec les parametres " + RefFamille + "  et " + Nom);
+
+            //Mise en place de la connexion avec la base de données
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
@@ -48,6 +49,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //On verifie si on a recuperé un résultat
                         if (rdr.Read())
                         {
                             return 0;
@@ -101,7 +103,7 @@ namespace Bacchus.Dao
         public SousFamille GetSousFamille(int RefSousFamille)
         {
 
-            // On met en place la commande Sql pour récuperer la famille
+            // On met en place la commande Sql pour récuperer la sous famille
             String sql = "SELECT * FROM SousFamilles WHERE RefSousFamille = '" + RefSousFamille + "'";
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
@@ -110,6 +112,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //On verifie si on a recuperé un résultat, si oui on retourne la sous famille
                         if (rdr.Read())
                         {
                             SousFamille SousFamille = new SousFamille(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2));
@@ -140,6 +143,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //On verifie si on a recuperé un résultat, si oui alors on retourne la reference de la sous famille
                         if (rdr.Read())
                         {
                             int Ref = rdr.GetInt32(0);
@@ -172,6 +176,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on recupere des resultats on les ajoutes à la liste de sous familles
                         if (rdr.Read())
                         {
                             ListeSousFamille.Add(new SousFamille(rdr.GetInt32(0), rdr.GetInt32(1), rdr.GetString(2)));

@@ -59,7 +59,7 @@
             this.button1.TabIndex = 16;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.boutonAjout_Click);
+            this.button1.Click += new System.EventHandler(this.BouttonAjout_Click);
             // 
             // label2
             // 

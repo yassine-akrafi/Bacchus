@@ -16,9 +16,8 @@ namespace Bacchus.Dao
     {
 
         /// <summary>
-        /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
+        /// Le path ou se trouve notre Fichier inclus dans notre projet contenant notre Base de données 
         /// </summary>
-        // private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
         String Connexion = "Data Source= Dao//Bacchus.SQLite";
 
         /// <summary>
@@ -37,12 +36,15 @@ namespace Bacchus.Dao
 
             // On execute la commande Sql pour ajouter la famille à la base de données
             String sql = "INSERT INTO Familles(Nom) Values('"+Nom+"')";
-            Console.Write("J'ajoute une famille avec les parametres "  + Nom);
+
+            //Mise en place de la connexion avec la base de données
             using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
                 c.Open();
+                //On effectue la commande Sql
                 using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
                 {
+                    //On verifie si on a recuperé un résultat
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
                         if (rdr.Read())
@@ -52,9 +54,7 @@ namespace Bacchus.Dao
                     }
                 }
             }
-
-            return -1;
-          
+            return -1;   
         }
 
         /// <summary>
@@ -74,6 +74,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on récupere un resultat on renvoi la famille
                         if (rdr.Read())
                         {
                             Famille = new Famille(rdr.GetInt32(0), rdr.GetString(1));
@@ -104,6 +105,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on recupere un resultat on renvoi la reference de la famille
                         if (rdr.Read())
                         {
                             int Ref = rdr.GetInt32(0);
@@ -133,6 +135,7 @@ namespace Bacchus.Dao
                 {
                     using (SQLiteDataReader rdr = cmd.ExecuteReader())
                     {
+                        //Si on recupere des resultats on les ajoutes à la liste de familles
                        if(rdr.Read())
                         {
                             ListeFamille.Add(new Famille(rdr.GetInt32(0), rdr.GetString(1)));
@@ -142,6 +145,7 @@ namespace Bacchus.Dao
                             }
                             return ListeFamille;
                         }
+                       //Si on ne recupere aucun résultat on renvoi null
                         else
                         {
                             return null;

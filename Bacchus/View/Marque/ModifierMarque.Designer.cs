@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textMarque = new System.Windows.Forms.TextBox();
+            this.TextRefMarque = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,11 +46,11 @@
             // 
             // textBox1
             // 
-            this.textMarque.Location = new System.Drawing.Point(241, 70);
-            this.textMarque.Multiline = true;
-            this.textMarque.Name = "textBox1";
-            this.textMarque.Size = new System.Drawing.Size(170, 36);
-            this.textMarque.TabIndex = 15;
+            this.TextRefMarque.Location = new System.Drawing.Point(241, 70);
+            this.TextRefMarque.Multiline = true;
+            this.TextRefMarque.Name = "textBox1";
+            this.TextRefMarque.Size = new System.Drawing.Size(170, 36);
+            this.TextRefMarque.TabIndex = 15;
             // 
             // label1
             // 
@@ -77,7 +77,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "Modifier";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.bouttonModifier_Click);
+            this.button1.Click += new System.EventHandler(this.BouttonModifier_Click);
             // 
             // ModifierMarque
             // 
@@ -87,7 +87,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textMarque);
+            this.Controls.Add(this.TextRefMarque);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierMarque";
             this.Text = "ModifierMarque";
@@ -100,7 +100,7 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textMarque;
+        private System.Windows.Forms.TextBox TextRefMarque;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;

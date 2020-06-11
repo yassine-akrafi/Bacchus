@@ -24,7 +24,6 @@ namespace Bacchus.View
         {
             InitializeComponent();
         }
-
         private void boutonAjout_Click(object sender, EventArgs e)
         {
 
@@ -34,7 +33,6 @@ namespace Bacchus.View
             //Si le nom existe on ajoute la marque
             if (Nom != "" && Nom != null)
             {
-
                 AjouterMarqueConfirmation FenetreConfirmation = new AjouterMarqueConfirmation(Nom);
                 FenetreConfirmation.ShowDialog(this);
                 this.Hide();

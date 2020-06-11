@@ -26,14 +26,13 @@ namespace Bacchus.View
 
         }
 
-
-
-        public TextBox textRefArticle1 { get => this.textRefArticle; set => this.textRefArticle = value; }
+        //Getters & Setters
+        public TextBox TextRefArticle1 { get => this.TextRefArticle; set => this.TextRefArticle = value; }
 
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>
-        private void bouttonModifier_Click(object sender, EventArgs e)
+        private void BouttonModifier_Click(object sender, EventArgs e)
         {
             //On initialise les Dao
             SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
@@ -44,7 +43,7 @@ namespace Bacchus.View
             int RefMarque = -1;
 
             //On recupere les champs que l'utilisateur a remplit
-            string RefArticle = this.textRefArticle.Text;
+            string RefArticle = this.TextRefArticle.Text;
             string Description = this.DescriptionText.Text;
             string Prix = this.textPrix.Text;
 
@@ -63,6 +62,7 @@ namespace Bacchus.View
                     RefMarque = DaoMarque.GetRefMarque(this.comboBoxMarque.SelectedItem.ToString());
                 }
 
+                //On demande la confirmation de modification
                 ModifierArticleConfirmation FenetreConfirmation =  new ModifierArticleConfirmation(RefArticle, Description, RefSousFamille, RefMarque, Prix);
                 FenetreConfirmation.ShowDialog(this);
                 this.Hide();

@@ -41,7 +41,11 @@ namespace Bacchus
         /// </summary>
         private List<Marque> ListMarques;
 
+        /// <summary>
+        /// Le node actuel du treeview
+        /// </summary>
         private string SelectedNodeText;
+
         //Getters && Setters
 
         public List<Article> ListArticles1 {
@@ -104,282 +108,9 @@ namespace Bacchus
         }
 
         /// <summary>
-        /// La fonction appelé lors d'evenement de clavier
+        /// Fonction appelé lorsque qu'on on appuie sur exporter
         /// </summary>
-        private void ActualiserClavier(object sender, KeyEventArgs e)
-        {
-          if(e.KeyCode == Keys.F5)
-            {
-                // On recupere toutes les marques de la base de données
-                MarqueDao DaoMarque = new MarqueDao();
-                this.ListMarques1 = DaoMarque.GetArticles();
-                this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
-
-                // On recupere toutes les familles de la base de données
-                FamilleDAO DaoFamille = new FamilleDAO();
-                this.ListFamilles1 = DaoFamille.GetFamilles();
-                this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
-
-                // On recupere toutes les sous familles de la base de données
-                SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
-                this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
-                this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
-
-                // On recupere toutes les articles de la base de données
-                ArticleDao DaoArticle = new ArticleDao();
-                this.ListArticles1 = DaoArticle.GetArticles();
-                this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
-                if (this.listView1 != null)
-                {
-                    this.listView1.Clear();
-                }
-            }
-
-            Console.WriteLine("Je rentre bien dans KeyPressed");
-
-        }
-
-        private void SupprClavier(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-
-                if (SelectedNodeText == "Articles")
-                {
-                    
-                        try
-                        {
-                            SupprimerArticleConfirmation FenetreSuppression = new SupprimerArticleConfirmation(listView1.SelectedItems[0].SubItems[1].Text);
-                            FenetreSuppression.ShowDialog(this);
-                        }
-                        catch (Exception)
-                        {
-                            SupprimerArticle FenetreSuppression = new SupprimerArticle();
-                            FenetreSuppression.ShowDialog(this);
-                        }
-
-                }
-                // Si le noeud selectionné est Marques
-                else if (SelectedNodeText == "Marques")
-                {
-                   try
-                    {
-                        SupprimerMarqueConfirmation FenetreSuppression = new SupprimerMarqueConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
-                        FenetreSuppression.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-                        SupprimerMarque FenetreSuppression = new SupprimerMarque();
-                        FenetreSuppression.ShowDialog(this);
-                    }
-
-                }
-                // Si le noeud selectionné est Familles
-                else if (SelectedNodeText == "Familles")
-                {
-                    try
-                    {
-                        SupprimerFamilleConfirmation FenetreSuppression = new SupprimerFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
-                        FenetreSuppression.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-                        SupprimerFamille FenetreSuppression = new SupprimerFamille();
-                        FenetreSuppression.ShowDialog(this);
-                    }
-
-                }
-                // Si le noeud selectionné est Sous familles
-                else if (SelectedNodeText == "Sous familles")
-                {
-                    try
-                    {
-                        SupprimerSousFamilleConfirmation FenetreSuppression = new SupprimerSousFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
-                        FenetreSuppression.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-                        SupprimerSousFamille FenetreSuppression = new SupprimerSousFamille();
-                        FenetreSuppression.ShowDialog(this);
-                    }
-                }
-            }
-
-        }
-
-        private void EntreeClavier(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-
-                if (SelectedNodeText == "Articles")
-                {
-
-                    try
-                    {
-                        ModifierArticle FenetreModification = new ModifierArticle();
-                        FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-                        
-                    }
-
-                }
-                // Si le noeud selectionné est Marques
-                else if (SelectedNodeText == "Marques")
-                {
-                    try
-                    {
-                        ModifierMarque FenetreModification = new ModifierMarque();
-                        FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Familles
-                else if (SelectedNodeText == "Familles")
-                {
-                    try
-                    {
-                       ModifierFamille FenetreModification = new ModifierFamille();
-                        FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Sous familles
-                else if (SelectedNodeText == "Sous familles")
-                {
-                    try
-                    {
-                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
-                        FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-       
-                    }
-                }
-            }
-
-        }
-
-        private void DoubleCliqueSouris(object sender, MouseEventArgs e)
-        {
-            
-                if (SelectedNodeText == "Articles")
-                {
-
-                    try
-                    {
-                        ModifierArticle FenetreModification = new ModifierArticle();
-                        FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Marques
-                else if (SelectedNodeText == "Marques")
-                {
-                    try
-                    {
-                        ModifierMarque FenetreModification = new ModifierMarque();
-                        FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Familles
-                else if (SelectedNodeText == "Familles")
-                {
-                    try
-                    {
-                        ModifierFamille FenetreModification = new ModifierFamille();
-                        FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Sous familles
-                else if (SelectedNodeText == "Sous familles")
-                {
-                    try
-                    {
-                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
-                        FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-        }
-
-        private void CliqueDroitSouris(object sender, MouseEventArgs e)
-        {
-            if(e.Button == MouseButtons.Right)
-            {
-            
-            }
-
-
-        }
-
-            private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
-        {
-            // Set the ListViewItemSorter property to a new ListViewItemComparer 
-            // object. Setting this property immediately sorts the 
-            // ListView using the ListViewItemComparer object.
-            this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
-        }
-        // Implements the manual sorting of items by columns.
-        class ListViewItemComparer : IComparer
-        {
-            private int col;
-            public ListViewItemComparer()
-            {
-                col = 0;
-            }
-            public ListViewItemComparer(int column)
-            {
-                col = column;
-            }
-            public int Compare(object x, object y)
-            {
-                return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
-            }
-        }
-    
-
-
-    /// <summary>
-    /// Fonction appelé lorsque qu'on on appuie sur exporter
-    /// </summary>
-    private void exporterClicked(object sender, EventArgs e)
+        private void exporterClicked(object sender, EventArgs e)
         {
             FormExporter form = new FormExporter();
             form.ShowDialog(this);
@@ -392,7 +123,7 @@ namespace Bacchus
         {
             // On recupere toutes les marques de la base de données
             MarqueDao DaoMarque = new MarqueDao();
-            this.ListMarques1 = DaoMarque.GetArticles();
+            this.ListMarques1 = DaoMarque.GetMarques();
             this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
 
             // On recupere toutes les familles de la base de données
@@ -408,12 +139,312 @@ namespace Bacchus
             // On recupere toutes les articles de la base de données
             ArticleDao DaoArticle = new ArticleDao();
             this.ListArticles1 = DaoArticle.GetArticles();
+
+            //On actualise le texte du StatusStrip
             this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+
+            //On efface les elements presents dans la listView
             if (this.listView1 != null)
             {
                 this.listView1.Clear();
             }
-         
+
+        }
+        /// <summary>
+        /// La fonction appelé lors de l'evenement de clavier F5
+        /// </summary>
+        private void ActualiserClavier(object sender, KeyEventArgs e)
+        {
+            //On vérifie que la touche est bien F5 si oui on actualise 
+          if(e.KeyCode == Keys.F5)
+            {
+                // On recupere toutes les marques de la base de données
+                MarqueDao DaoMarque = new MarqueDao();
+                this.ListMarques1 = DaoMarque.GetMarques();
+                this.toolStripStatusMarque.Text = ListMarques1.Count() + " Marques ";
+
+                // On recupere toutes les familles de la base de données
+                FamilleDAO DaoFamille = new FamilleDAO();
+                this.ListFamilles1 = DaoFamille.GetFamilles();
+                this.toolStripStatusFamille.Text = ListFamilles1.Count() + " Familles ";
+
+                // On recupere toutes les sous familles de la base de données
+                SousFamilleDAO DaoSousFamille = new SousFamilleDAO();
+                this.ListSousFamilles1 = DaoSousFamille.GetFamilles();
+                this.toolStripStatusSousFamille.Text = ListSousFamilles1.Count() + " SousFamilles ";
+
+                // On recupere toutes les articles de la base de données
+                ArticleDao DaoArticle = new ArticleDao();
+                this.ListArticles1 = DaoArticle.GetArticles();
+
+                //On actualise le texte du StatusStrip
+                this.toolStripStatusArticle.Text = ListArticles1.Count() + " Articles ";
+
+                //On efface les elements presents dans la listView
+                if (this.listView1 != null)
+                {
+                    this.listView1.Clear();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Fonction appelé lors de l'evenement clavier Suppr dans la listView
+        /// </summary>
+        private void SupprClavier(object sender, KeyEventArgs e)
+        {
+            //On verifie l'evenement clavier
+            if (e.KeyCode == Keys.Delete)
+            {
+                //On verifie dans quel Node du treeview on se situe
+                if (SelectedNodeText == "Articles")
+                {
+                    
+                        //On tente de recuperer un item selectionné, s'il n'y en a pas on ouvre le formulaire de suppresion normal
+                        try
+                        {
+                            SupprimerArticleConfirmation FenetreSuppression = new SupprimerArticleConfirmation(listView1.SelectedItems[0].SubItems[1].Text);
+                            FenetreSuppression.ShowDialog(this);
+                        }
+                        catch (Exception)
+                        {
+                            SupprimerArticle FenetreSuppression = new SupprimerArticle();
+                            FenetreSuppression.ShowDialog(this);
+                        }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                    //On tente de recuperer un item selectionné, s'il n'y en a pas on ouvre le formulaire de suppresion normal
+                    try
+                    {
+                        SupprimerMarqueConfirmation FenetreSuppression = new SupprimerMarqueConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerMarque FenetreSuppression = new SupprimerMarque();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    //On tente de recuperer un item selectionné, s'il n'y en a pas on ouvre le formulaire de suppresion normal
+                    try
+                    {
+                        SupprimerFamilleConfirmation FenetreSuppression = new SupprimerFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerFamille FenetreSuppression = new SupprimerFamille();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    //On tente de recuperer un item selectionné, s'il n'y en a pas on ouvre le formulaire de suppresion normal
+                    try
+                    {
+                        SupprimerSousFamilleConfirmation FenetreSuppression = new SupprimerSousFamilleConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerSousFamille FenetreSuppression = new SupprimerSousFamille();
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Fonction appelé lors de l'evenement clavier Entree dans la listView
+        /// </summary>
+        private void EntreeClavier(object sender, KeyEventArgs e)
+        {
+            //On verifie l'evenement
+            if (e.KeyCode == Keys.Enter)
+            {
+                //On verifie dans quel Node du treeview on se situe
+                if (SelectedNodeText == "Articles")
+                {
+                    //On tente de recuperer un item selectionné, le cas echeant on ouvre sa fenetre de modification
+                    try
+                    {
+                        ModifierArticle FenetreModification = new ModifierArticle();
+                        FenetreModification.TextRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                    try
+                    {
+                        ModifierMarque FenetreModification = new ModifierMarque();
+                        FenetreModification.TextRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    try
+                    {
+                       ModifierFamille FenetreModification = new ModifierFamille();
+                        FenetreModification.TextRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    try
+                    {
+                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
+                        FenetreModification.TextRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+       
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// La fonction appelé lors de l'evenement de souris double clique dans la listView
+        /// </summary>
+        private void DoubleCliqueSouris(object sender, MouseEventArgs e)
+        {
+
+                //On verifie dans quel Node du treeview on se situe
+                if (SelectedNodeText == "Articles")
+                {
+                //On tente de recuperer un item selectionné, le cas echeant on ouvre sa fenetre de modification
+                try
+                {
+                        ModifierArticle FenetreModification = new ModifierArticle();
+                        FenetreModification.TextRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Marques
+                else if (SelectedNodeText == "Marques")
+                {
+                    try
+                    {
+                        ModifierMarque FenetreModification = new ModifierMarque();
+                        FenetreModification.TextRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Familles
+                else if (SelectedNodeText == "Familles")
+                {
+                    try
+                    {
+                        ModifierFamille FenetreModification = new ModifierFamille();
+                        FenetreModification.TextRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }
+                // Si le noeud selectionné est Sous familles
+                else if (SelectedNodeText == "Sous familles")
+                {
+                    try
+                    {
+                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
+                        FenetreModification.TextRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                        FenetreModification.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+        }
+
+        /// <summary>
+        /// Fonction appelé lors du clic droit dans la listView
+        /// </summary>
+        private void CliqueDroitSouris(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+
+            }
+
+        }
+
+        /// <summary>
+        /// Régle la propriété ListViewItemSorter sur un nouveau ListViewItemComparer 
+        /// </summary>
+        private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
+        {
+            // La mise en place de cette propriété permet de trier immédiatement l'objet 
+            // ListView en utilisant l'objet ListViewItemComparer.
+            this.listView1.ListViewItemSorter = new ListViewItemComparer(e.Column);
+        }
+
+        /// <summary>
+        /// Met en œuvre le tri manuel des articles par colonnes.
+        /// </summary>
+        class ListViewItemComparer : IComparer
+        {
+            private int col;
+            public ListViewItemComparer()
+            {
+                col = 0;
+            }
+            public ListViewItemComparer(int column)
+            {
+                col = column;
+            }
+            public int Compare(object x, object y)
+            {
+                return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+            }
         }
 
         /// <summary>

@@ -26,7 +26,8 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
-        public TextBox textRefFamille1 { get => this.textRefFamille; set => this.textRefFamille = value; }
+        //Getters & Setters
+        public TextBox TextRefFamille1 { get => this.TextRefFamille; set => this.TextRefFamille = value; }
 
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
@@ -35,7 +36,7 @@ namespace Bacchus.View
         {
 
             //On recupere les champs que l'utilisateur a remplit
-            string RefFamille = this.textRefFamille.Text;
+            string RefFamille = this.TextRefFamille.Text;
             string Nom = this.textNom.Text;
 
             //Si la reference d'une famille a été ecrite on effectue le changement

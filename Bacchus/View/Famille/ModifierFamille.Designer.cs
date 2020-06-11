@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.Nom_Fichier_Label = new System.Windows.Forms.Label();
-            this.textRefFamille = new System.Windows.Forms.TextBox();
+            this.TextRefFamille = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textNom = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,11 +46,11 @@
             // 
             // textBox1
             // 
-            this.textRefFamille.Location = new System.Drawing.Point(210, 72);
-            this.textRefFamille.Multiline = true;
-            this.textRefFamille.Name = "textBox1";
-            this.textRefFamille.Size = new System.Drawing.Size(170, 36);
-            this.textRefFamille.TabIndex = 14;
+            this.TextRefFamille.Location = new System.Drawing.Point(210, 72);
+            this.TextRefFamille.Multiline = true;
+            this.TextRefFamille.Name = "textBox1";
+            this.TextRefFamille.Size = new System.Drawing.Size(170, 36);
+            this.TextRefFamille.TabIndex = 14;
             // 
             // label1
             // 
@@ -87,7 +87,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textNom);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textRefFamille);
+            this.Controls.Add(this.TextRefFamille);
             this.Controls.Add(this.Nom_Fichier_Label);
             this.Name = "ModifierFamille";
             this.Text = "ModifierFamille";
@@ -100,7 +100,7 @@
         #endregion
 
         private System.Windows.Forms.Label Nom_Fichier_Label;
-        private System.Windows.Forms.TextBox textRefFamille;
+        private System.Windows.Forms.TextBox TextRefFamille;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textNom;
         private System.Windows.Forms.Button button1;

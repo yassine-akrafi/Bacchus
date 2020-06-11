@@ -46,6 +46,8 @@ namespace Bacchus.Dao
 
             //On ajoute la liste des articles au Format Csv
             List<ExportCsv> ListeAExporter = new List<ExportCsv>();
+
+            //On ajoute chaque article de la base de données dans la liste à exporter
             foreach (Article article in ListesArticles)
             {
                 //On recupere l'article a importer

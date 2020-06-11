@@ -27,16 +27,16 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
-        public TextBox textRefMarque1 { get => this.textMarque; set => this.textMarque = value; }
+        public TextBox TextRefMarque1 { get => this.TextRefMarque; set => this.TextRefMarque = value; }
 
         /// <summary>
         /// Fonction appelé lorsque le bouton Modifier est cliqué
         /// </summary>
-        private void bouttonModifier_Click(object sender, EventArgs e)
+        private void BouttonModifier_Click(object sender, EventArgs e)
         {
 
             //On recupere les champs que l'utilisateur a remplit
-            string RefMarque = this.textMarque.Text;
+            string RefMarque = this.TextRefMarque.Text;
             string Nom = this.textNom.Text;
 
             //Si la reference d'une marque a été ecrite on effectue le changement

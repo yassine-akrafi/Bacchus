@@ -58,7 +58,7 @@
             this.button1.TabIndex = 18;
             this.button1.Text = "Supprimer";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.bouttonSuppriemr_Click);
+            this.button1.Click += new System.EventHandler(this.BouttonSupprimer_Click);
             // 
             // SupprimerMarque
             // 

@@ -25,8 +25,7 @@ namespace Bacchus.View
             InitializeComponent();
         }
 
-
-        private void boutonAjout_Click(object sender, EventArgs e)
+        private void BouttonAjout_Click(object sender, EventArgs e)
         {
             //On initialise le Dao
             FamilleDAO DaoFamille = new FamilleDAO();
