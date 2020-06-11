@@ -1,4 +1,6 @@
-﻿namespace Bacchus.View
+﻿using System;
+
+namespace Bacchus.View
 {
     partial class AjoutArticle
     {
@@ -167,6 +169,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void AjoutArticle_Load(object sender, EventArgs e)
+        {
+           // throw new NotImplementedException();
         }
 
         #endregion

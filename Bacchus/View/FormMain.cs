@@ -42,27 +42,34 @@ namespace Bacchus
         private List<Marque> ListMarques;
 
         private string SelectedNodeText;
+
+        private ContextMenuStrip ContextMenuStrip;
+
         //Getters && Setters
 
-        public List<Article> ListArticles1 {
+        public List<Article> ListArticles1
+        {
             get { return ListArticles; }
             set { ListArticles = value; }
 
         }
 
-        public List<Famille> ListFamilles1 {
+        public List<Famille> ListFamilles1
+        {
 
             get { return ListFamilles; }
             set { ListFamilles = value; }
         }
 
-        public List<SousFamille> ListSousFamilles1 {
+        public List<SousFamille> ListSousFamilles1
+        {
 
             get { return ListSousFamilles; }
             set { ListSousFamilles = value; }
         }
 
-        public List<Marque> ListMarques1 {
+        public List<Marque> ListMarques1
+        {
 
             get { return ListMarques; }
             set { ListMarques = value; }
@@ -97,7 +104,7 @@ namespace Bacchus
         /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur importer
         /// </summary>
-        private void importerClicked(object sender, EventArgs e)
+        private void ImporterClicked(object sender, EventArgs e)
         {
             FormImporter form = new FormImporter();
             form.ShowDialog(this);
@@ -108,7 +115,7 @@ namespace Bacchus
         /// </summary>
         private void ActualiserClavier(object sender, KeyEventArgs e)
         {
-          if(e.KeyCode == Keys.F5)
+            if (e.KeyCode == Keys.F5)
             {
                 // On recupere toutes les marques de la base de données
                 MarqueDao DaoMarque = new MarqueDao();
@@ -135,8 +142,6 @@ namespace Bacchus
                 }
             }
 
-            Console.WriteLine("Je rentre bien dans KeyPressed");
-
         }
 
         private void SupprClavier(object sender, KeyEventArgs e)
@@ -146,23 +151,23 @@ namespace Bacchus
 
                 if (SelectedNodeText == "Articles")
                 {
-                    
-                        try
-                        {
-                            SupprimerArticleConfirmation FenetreSuppression = new SupprimerArticleConfirmation(listView1.SelectedItems[0].SubItems[1].Text);
-                            FenetreSuppression.ShowDialog(this);
-                        }
-                        catch (Exception)
-                        {
-                            SupprimerArticle FenetreSuppression = new SupprimerArticle();
-                            FenetreSuppression.ShowDialog(this);
-                        }
+
+                    try
+                    {
+                        SupprimerArticleConfirmation FenetreSuppression = new SupprimerArticleConfirmation(listView1.SelectedItems[0].SubItems[1].Text);
+                        FenetreSuppression.ShowDialog(this);
+                    }
+                    catch (Exception)
+                    {
+                        SupprimerArticle FenetreSuppression = new SupprimerArticle();
+                        FenetreSuppression.ShowDialog(this);
+                    }
 
                 }
                 // Si le noeud selectionné est Marques
                 else if (SelectedNodeText == "Marques")
                 {
-                   try
+                    try
                     {
                         SupprimerMarqueConfirmation FenetreSuppression = new SupprimerMarqueConfirmation(listView1.SelectedItems[0].SubItems[0].Text);
                         FenetreSuppression.ShowDialog(this);
@@ -223,72 +228,6 @@ namespace Bacchus
                     }
                     catch (Exception)
                     {
-                        
-                    }
-
-                }
-                // Si le noeud selectionné est Marques
-                else if (SelectedNodeText == "Marques")
-                {
-                    try
-                    {
-                        ModifierMarque FenetreModification = new ModifierMarque();
-                        FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Familles
-                else if (SelectedNodeText == "Familles")
-                {
-                    try
-                    {
-                       ModifierFamille FenetreModification = new ModifierFamille();
-                        FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                // Si le noeud selectionné est Sous familles
-                else if (SelectedNodeText == "Sous familles")
-                {
-                    try
-                    {
-                        ModifierSousFamille FenetreModification = new ModifierSousFamille();
-                        FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
-       
-                    }
-                }
-            }
-
-        }
-
-        private void DoubleCliqueSouris(object sender, MouseEventArgs e)
-        {
-            
-                if (SelectedNodeText == "Articles")
-                {
-
-                    try
-                    {
-                        ModifierArticle FenetreModification = new ModifierArticle();
-                        FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
-                        FenetreModification.ShowDialog(this);
-                    }
-                    catch (Exception)
-                    {
 
                     }
 
@@ -337,19 +276,90 @@ namespace Bacchus
 
                     }
                 }
+            }
+
+        }
+
+        private void DoubleCliqueSouris(object sender, MouseEventArgs e)
+        {
+
+            if (SelectedNodeText == "Articles")
+            {
+
+                try
+                {
+                    ModifierArticle FenetreModification = new ModifierArticle();
+                    FenetreModification.textRefArticle1.Text = listView1.SelectedItems[0].SubItems[1].Text;
+                    FenetreModification.ShowDialog(this);
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+            // Si le noeud selectionné est Marques
+            else if (SelectedNodeText == "Marques")
+            {
+                try
+                {
+                    ModifierMarque FenetreModification = new ModifierMarque();
+                    FenetreModification.textRefMarque1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                    FenetreModification.ShowDialog(this);
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+            // Si le noeud selectionné est Familles
+            else if (SelectedNodeText == "Familles")
+            {
+                try
+                {
+                    ModifierFamille FenetreModification = new ModifierFamille();
+                    FenetreModification.textRefFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                    FenetreModification.ShowDialog(this);
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+            // Si le noeud selectionné est Sous familles
+            else if (SelectedNodeText == "Sous familles")
+            {
+                try
+                {
+                    ModifierSousFamille FenetreModification = new ModifierSousFamille();
+                    FenetreModification.textRefSousFamille1.Text = listView1.SelectedItems[0].SubItems[0].Text;
+                    FenetreModification.ShowDialog(this);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
         private void CliqueDroitSouris(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
-            
+
+                if (listView1.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    contextMenuStrip1.Show(Cursor.Position);
+                }
+
             }
 
 
         }
 
-            private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
+        private void listViewColumn_Click(object sender, ColumnClickEventArgs e)
         {
             // Set the ListViewItemSorter property to a new ListViewItemComparer 
             // object. Setting this property immediately sorts the 
@@ -373,13 +383,13 @@ namespace Bacchus
                 return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
             }
         }
-    
 
 
-    /// <summary>
-    /// Fonction appelé lorsque qu'on on appuie sur exporter
-    /// </summary>
-    private void exporterClicked(object sender, EventArgs e)
+
+        /// <summary>
+        /// Fonction appelé lorsque qu'on on appuie sur exporter
+        /// </summary>
+        private void ExporterClicked(object sender, EventArgs e)
         {
             FormExporter form = new FormExporter();
             form.ShowDialog(this);
@@ -388,7 +398,7 @@ namespace Bacchus
         /// <summary>
         /// Fonction appelé lorsque qu'on on appuie sur actualiser
         /// </summary>
-        private void actualiserToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ActualiserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // On recupere toutes les marques de la base de données
             MarqueDao DaoMarque = new MarqueDao();
@@ -413,7 +423,7 @@ namespace Bacchus
             {
                 this.listView1.Clear();
             }
-         
+
         }
 
         /// <summary>
@@ -421,7 +431,7 @@ namespace Bacchus
         /// </summary>
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-             SelectedNodeText = e.Node.Text;
+            SelectedNodeText = e.Node.Text;
             // Si le noeud selectionné est Articles
             if (SelectedNodeText == "Articles")
             {
@@ -437,7 +447,7 @@ namespace Bacchus
                 this.listView1.Columns.Add("Sous-Famille");
                 this.listView1.Columns.Add("Prix");
 
-                if(ListArticles1 != null)
+                if (ListArticles1 != null)
                 {
                     //On ajoute les items à la listView
                     foreach (Article article in ListArticles1)
@@ -533,7 +543,7 @@ namespace Bacchus
         /// </summary>
         private void ArticleModifier_Click(object sender, EventArgs e)
         {
-           ModifierArticle Form = new ModifierArticle();
+            ModifierArticle Form = new ModifierArticle();
             Form.ShowDialog(this);
         }
 
@@ -632,5 +642,98 @@ namespace Bacchus
 
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// Cette fonction permet de faire l'ajout en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AjouterTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+
+                ArticleAjouter_Click(sender, e);
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                FamilleAjouter_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                MarqueAjouter_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                SousFamilleAjouter_Click(sender, e);
+
+            }
+        }
+        /// <summary>
+        /// Cette fonction permet de modifier en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ModifierTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+
+                ArticleModifier_Click(sender, e);
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                FamilleModifier_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                MarqueModifier_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                SousFamilleModifier_Click(sender, e);
+
+            }
+        }
+        /// <summary>
+        /// Cette fonction permet de supprimer en fonction du type de l'element(articles,familles,sous famille et marque)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SupprimerTout(object sender, EventArgs e)
+        {
+            if (SelectedNodeText == "Articles")
+            {
+
+                ArticleSupprimer_Click(sender, e);
+            }
+            else if (SelectedNodeText == "Familles")
+            {
+                FamilleSupprimer_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Marques")
+            {
+                MarqueSupprimer_Click(sender, e);
+
+            }
+            else if (SelectedNodeText == "Sous familles")
+            {
+                SousFamilleSupprimer_Click(sender, e);
+
+            }
+        }
     }
 }
