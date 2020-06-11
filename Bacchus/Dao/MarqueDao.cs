@@ -14,12 +14,15 @@ namespace Bacchus.Dao
     public class MarqueDao
     {
         //**************A enleverrrrrr
-
+        //**************A enleverrrrrr
+        //**************A enleverrrrrr
+        //**************A enleverrrrrr
 
         /// <summary>
         /// Initialise la connexion avec la Base de données "Bacchus.SQLite"
         /// </summary>
-        private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Leslie Kiav\\source\\repos\\yassine-akrafi\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        //private static SQLiteConnection Connexion = new SQLiteConnection("Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite");
+        String Connexion = "Data Source= C:\\Users\\Lenovo\\Desktop\\Cours\\.Net\\TP\\Bacchus\\Bacchus\\Dao\\Bacchus.SQLite";
 
         /// <summary>
         /// Ajoute une marque à la base de données
@@ -35,27 +38,26 @@ namespace Bacchus.Dao
                 return -1;
             }
 
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
+            // On execute la commande Sql pour ajouter la famille à la base de données
+            String sql = "INSERT INTO Marques (Nom) Values('" + Nom + "')";
+            Console.Write("J'ajoute une Marques avec les parametres " + Nom);
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Connexion.Open();
-            }
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
 
-            try
-            {
-                // On execute la commande Sql pour ajouter la famille à la base de données
-                SQLiteCommand CommandInsert = new SQLiteCommand("INSERT INTO Marques (Nom) VALUES (:Nom)", Connexion);
-                CommandInsert.Parameters.AddWithValue(":Nom", Nom);
-                CommandInsert.ExecuteNonQuery();
-
-                Connexion.Close();
-                return 0;
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            return 0;
+                        }
+                    }
+                }
             }
-            catch (Exception)
-            {
-                Connexion.Close();
-                return -1;
-            }
+            return -1;
+           
         }
 
         /// <summary>
@@ -66,65 +68,58 @@ namespace Bacchus.Dao
         /// <returns>Retourne true si succés</returns>
         public Boolean SupprimerMarque(string RefMarque)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
-
             // On verfie si la marque n'existe pas 
             if (GetMarque(int.Parse(RefMarque)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
             // On execute la commande Sql pour supprimer l'article de la base de données
-            SQLiteCommand Command = new SQLiteCommand("DELETE FROM Marques WHERE RefMarque = :RefMarque", Connexion);
-            Command.Parameters.AddWithValue(":RefMarque", RefMarque);
-            Command.ExecuteNonQuery();
+            String sql = "DELETE FROM Marques WHERE RefMarque ='" + RefMarque + "'";
 
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
+            {
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
 
             // On verfie si la marque n'existe plus 
             if (GetMarque(int.Parse(RefMarque)) == null)
             {
-                Connexion.Close();
                 return true;
             }
-
-            Connexion.Close();
             return false;
         }
 
-        /// <summary>i
+        /// <summary>
         /// Récupere la marque à partir de sa reference ,null si la marque n'existe pas
         /// </summary>
         /// <param name="RefMarque">Reference de la marque</param>
         /// <returns>La marque ou null si elle n'existe pas</returns>
         public Marque GetMarque(int RefMarque)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
+            Marque Marque;
             // On met en place la commande Sql pour récuperer la famille
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Marques WHERE RefMarque = :RefMarque", Connexion);
-            Command.Parameters.AddWithValue(":RefMarque", RefMarque);
+            String sql = "SELECT * FROM Marques WHERE RefMarque = '" + RefMarque + "'";
 
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on crée la marque à retourner et on la retourne
-            if (Reader.Read())
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                Marque Marque = new Marque(Reader.GetInt32(0), Reader.GetString(1));
-                Connexion.Close();
-                return Marque;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            Marque = new Marque(rdr.GetInt32(0), rdr.GetString(1));
+                            return Marque;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
             return null;
         }
 
@@ -137,29 +132,23 @@ namespace Bacchus.Dao
         public int GetRefMarque(String Nom)
         {
 
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
             // On met en place la commande Sql pour récuperer la famille 
-            SQLiteCommand Command = new SQLiteCommand("SELECT RefMarque FROM Marques WHERE Nom = :Nom", Connexion);
-            Command.Parameters.AddWithValue(":Nom", Nom);
-
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On vérifie que le résultat existe, si oui on retourne la reference de la marque
-            if (Reader.Read())
+            String sql = "SELECT RefMarque FROM Marques WHERE Nom = '" + Nom + "'";
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                int Ref = Reader.GetInt32(0);
-                Reader.Close();
-                Connexion.Close();
-                return Ref;
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            int Ref = rdr.GetInt32(0);
+                            return Ref;
+                        }
+                    }
+                }
             }
-
-            Connexion.Close();
             return -1;
         }
 
@@ -169,26 +158,34 @@ namespace Bacchus.Dao
         /// <returns>Une liste de marques</returns>
         public List<Marque> GetArticles()
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
+            List<Marque> ListeMarque = new List<Marque>();
 
             // On met en place la commande Sql pour récuperer toutes les familles 
-            SQLiteCommand Command = new SQLiteCommand("SELECT * FROM Marques", Connexion);
+            String sql = "SELECT * FROM Marques";
 
-            // On execute et recupere le résultat de la commande Sql dans un lecteur
-            SQLiteDataReader Reader = Command.ExecuteReader();
-
-            // On crée une listes de marques et on lui ajoute toutes les marques recupérés à partir de la commande sql
-            List<Marque> ListeMarque = new List<Marque>();
-            while (Reader.Read())
+            using (SQLiteConnection c = new SQLiteConnection(Connexion))
             {
-                ListeMarque.Add(new Marque(Reader.GetInt32(0), Reader.GetString(1)));
+                c.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        if (rdr.Read())
+                        {
+                            ListeMarque.Add(new Marque(rdr.GetInt32(0), rdr.GetString(1)));
+                            while (rdr.Read())
+                            {
+                                ListeMarque.Add(new Marque(rdr.GetInt32(0), rdr.GetString(1)));
+                            }
+                            return ListeMarque;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
             }
-            Connexion.Close();
-            return ListeMarque;
         }
 
         /// <summary>
@@ -199,31 +196,27 @@ namespace Bacchus.Dao
         /// <returns>Retourne true si succés</returns>
         public Boolean ModifierMarque(string RefMarque, string Nom)
         {
-            // Si l'état de la connexion est fermé, on l'ouvre pour pouvoir effectuer ajouter l'article
-            if ((ConnectionState.Closed == Connexion.State))
-            {
-                Connexion.Open();
-            }
-
 
             // On verfie si la famille n'existe pas 
-            if (GetMarque(int.Parse(RefMarque)) == null)
+            if (RefMarque == null || GetMarque(int.Parse(RefMarque)) == null)
             {
-                Connexion.Close();
                 return false;
             }
 
+            
             // Si un nom est passé en paramètre on modifie le nom de la famille
             if (Nom != null)
             {
-                SQLiteCommand Command = new SQLiteCommand("UPDATE Marques SET Nom = :Nom WHERE RefMarque = :RefMarque", Connexion);
-                Command.Parameters.AddWithValue(":RefMarque", RefMarque);
-                Command.Parameters.AddWithValue(":Nom", Nom);
-                Command.ExecuteNonQuery();
+                String sql = "UPDATE Marques SET Nom ='" + Nom + "' WHERE RefMarque ='" + RefMarque + "'";
+                using (SQLiteConnection c = new SQLiteConnection(Connexion))
+                {
+                    c.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(sql, c))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
-
-
-            Connexion.Close();
             return true;
 
         }
